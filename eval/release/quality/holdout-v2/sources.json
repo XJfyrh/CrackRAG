@@ -1,0 +1,128 @@
+{
+  "schema": "crackrag-release-quality-sources-v1",
+  "dataset_id": "holdout-v2",
+  "prepared_on": "2026-09-16",
+  "status": "PREPARED_NOT_EXECUTED",
+  "no_api_calls": true,
+  "max_original_bytes": 20971520,
+  "max_selected_pages_per_scope": 32,
+  "page_numbering": "physical_pages are one-based in original PDFs; each selected scope has a recorded original-to-selected page_map",
+  "render_review": "Four original pages visually inspected after 140-DPI Poppler rendering. No source modification, reconstructed headers, OCR, table reformatting or cross-page inference.",
+  "independence_check": "Semantic freeze was recorded before these issuers were selected. No matches for selected short issuer names or stock codes were found in original repository eval/docs/scripts. Selection used plain pypdf text and original-page visual review only, never production parser/validator/model outputs. These are deliberately eligible source holdouts, not a blinded population sample.",
+  "sources": [
+    {
+      "id": "longsheng-2024",
+      "entity_id": "cn:600352",
+      "entity_scope": "issuer:600352",
+      "entity_name": "浙江龙盛集团股份有限公司",
+      "aliases": [
+        "浙江龙盛集团股份有限公司",
+        "浙江龙盛"
+      ],
+      "title": "2024年年度报告",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-15/1223093600.PDF",
+      "bytes": 4675529,
+      "sha256": "e100be83c9509aaeb10a3dd634152fb0669b14513ac4d69ed17bc7cf80eb4588",
+      "page_count": 205,
+      "publisher": "Issuer disclosure on CNINFO",
+      "scopes": [
+        {
+          "id": "longsheng-positive",
+          "physical_pages": [
+            80
+          ],
+          "printed_page_labels": [
+            "80 / 205"
+          ],
+          "role": "supported_same_page",
+          "table_title": "合并利润表",
+          "section": "财务报告",
+          "same_page_evidence": [
+            "entity",
+            "consolidated_table_title",
+            "2024_and_2023_columns",
+            "CNY_yuan",
+            "revenue",
+            "cost_of_revenue",
+            "total_net_profit"
+          ],
+          "note": "The entire target row and its original year-column header, entity, consolidated title and currency/unit declaration are on this page. An intervening footnote column is not a monetary value."
+        },
+        {
+          "id": "longsheng-missing-revenue",
+          "physical_pages": [
+            81
+          ],
+          "printed_page_labels": [
+            "81 / 205"
+          ],
+          "role": "negative_original_continuation",
+          "missing_evidence": [
+            "consolidated_revenue_row",
+            "consolidated_column_year_labels",
+            "consolidated_table_unit_header",
+            "consolidated_table_title"
+          ],
+          "note": "Only original continuation page 81 is authorized. It contains no revenue row; a prose note about pre-merger net profit does not establish consolidated revenue. Page 80 is outside this scope."
+        }
+      ]
+    },
+    {
+      "id": "hengli-2024",
+      "entity_id": "cn:601100",
+      "entity_scope": "issuer:601100",
+      "entity_name": "江苏恒立液压股份有限公司",
+      "aliases": [
+        "江苏恒立液压股份有限公司",
+        "恒立液压"
+      ],
+      "title": "2024年年度报告",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-29/1223384610.PDF",
+      "bytes": 1224476,
+      "sha256": "a3f59f923d7085790496d534cadc91565d58c0f665fec7b54146cbe42240bde6",
+      "page_count": 174,
+      "publisher": "Issuer disclosure on CNINFO",
+      "scopes": [
+        {
+          "id": "hengli-positive",
+          "physical_pages": [
+            68
+          ],
+          "printed_page_labels": [
+            "68 / 174"
+          ],
+          "role": "supported_same_page",
+          "table_title": "合并利润表",
+          "section": "财务报告",
+          "same_page_evidence": [
+            "entity",
+            "consolidated_table_title",
+            "2024_and_2023_columns",
+            "CNY_yuan",
+            "revenue",
+            "cost_of_revenue",
+            "total_net_profit"
+          ],
+          "note": "The entire target row and its original year-column header, entity, consolidated title and currency/unit declaration are on this page. An intervening footnote column is not a monetary value."
+        },
+        {
+          "id": "hengli-missing-consolidated-revenue",
+          "physical_pages": [
+            69
+          ],
+          "printed_page_labels": [
+            "69 / 174"
+          ],
+          "role": "negative_original_continuation",
+          "missing_evidence": [
+            "consolidated_revenue_row",
+            "consolidated_column_year_labels",
+            "consolidated_table_unit_header",
+            "consolidated_table_title"
+          ],
+          "note": "Only original page 69 is authorized. The upper continuation has no revenue or original consolidated header; the lower NEW table is explicitly 母公司利润表. Its revenue and headers cannot substitute for consolidated revenue. Page 68 is outside this scope."
+        }
+      ]
+    }
+  ]
+}

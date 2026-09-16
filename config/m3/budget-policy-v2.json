@@ -1,7 +1,9 @@
 {
   "version": "m3-budget-policy-v2",
+  "operator_authorization": "The operator must explicitly initialize a project opening balance and prepare a bounded live session. This public policy is not authorization to spend on any account.",
   "cumulative_experiment_id": "m3-live-v1",
   "user_hard_cap_cny": "100",
+  "historical_balance_source": "Private immutable release-opening-balance-v1; no maintainer account balance is supplied in the public configuration.",
   "internal_safeguards": {
     "maximum_requests": 2000,
     "default_max_output_tokens": 2048,

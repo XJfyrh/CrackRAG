@@ -1,0 +1,362 @@
+{
+  "schema": "crackrag-release-quality-requests-v1",
+  "contains_gold": false,
+  "notice": "Runner sends only question and request fields plus dynamically bound authorized document IDs. IDs/context_group/scope_id select isolation and files; never send gold/plan verdicts/values to the agent.",
+  "quality": [
+    {
+      "id": "q-longsheng-revenue",
+      "scope_id": "longsheng-positive",
+      "context_group": "q-longsheng-revenue",
+      "question": "浙江龙盛2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "q-longsheng-cost",
+      "scope_id": "longsheng-positive",
+      "context_group": "q-longsheng-cost",
+      "question": "浙江龙盛2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-longsheng-net-profit",
+      "scope_id": "longsheng-positive",
+      "context_group": "q-longsheng-net-profit",
+      "question": "浙江龙盛2024年合并口径净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-hengli-revenue",
+      "scope_id": "hengli-positive",
+      "context_group": "q-hengli-revenue",
+      "question": "恒立液压2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "q-hengli-cost",
+      "scope_id": "hengli-positive",
+      "context_group": "q-hengli-cost",
+      "question": "恒立液压2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-hengli-net-profit",
+      "scope_id": "hengli-positive",
+      "context_group": "q-hengli-net-profit",
+      "question": "恒立液压2024年合并口径净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-longsheng-missing-revenue",
+      "scope_id": "longsheng-missing-revenue",
+      "context_group": "q-longsheng-missing-revenue",
+      "question": "浙江龙盛2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-hengli-missing-consolidated-revenue",
+      "scope_id": "hengli-missing-consolidated-revenue",
+      "context_group": "q-hengli-missing-consolidated-revenue",
+      "question": "恒立液压2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-longsheng-adjusted-revenue",
+      "scope_id": "longsheng-positive",
+      "context_group": "q-longsheng-adjusted-revenue",
+      "question": "浙江龙盛2024年调整后营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-hengli-parent-profit",
+      "scope_id": "hengli-positive",
+      "context_group": "q-hengli-parent-profit",
+      "question": "恒立液压2024年归属于母公司股东的净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-longsheng-reuse",
+      "scope_id": "longsheng-positive",
+      "context_group": "q-longsheng-revenue",
+      "question": "浙江龙盛2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "HOT_ONLY",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-hengli-reuse",
+      "scope_id": "hengli-positive",
+      "context_group": "q-hengli-revenue",
+      "question": "请给出恒立液压2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "HOT_ONLY",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "id": "s-longsheng-baseline-1",
+      "scope_id": "longsheng-positive",
+      "context_group": "s-longsheng-baseline",
+      "step": 1,
+      "question": "浙江龙盛2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-longsheng-baseline-2",
+      "scope_id": "longsheng-positive",
+      "context_group": "s-longsheng-baseline",
+      "step": 2,
+      "question": "浙江龙盛2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-longsheng-baseline-3",
+      "scope_id": "longsheng-positive",
+      "context_group": "s-longsheng-baseline",
+      "step": 3,
+      "question": "浙江龙盛2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-longsheng-baseline-4",
+      "scope_id": "longsheng-positive",
+      "context_group": "s-longsheng-baseline",
+      "step": 4,
+      "question": "请给出浙江龙盛2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-longsheng-build-1",
+      "scope_id": "longsheng-positive",
+      "context_group": "s-longsheng-build",
+      "step": 1,
+      "question": "浙江龙盛2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-longsheng-build-2",
+      "scope_id": "longsheng-positive",
+      "context_group": "s-longsheng-build",
+      "step": 2,
+      "question": "浙江龙盛2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-longsheng-build-3",
+      "scope_id": "longsheng-positive",
+      "context_group": "s-longsheng-build",
+      "step": 3,
+      "question": "浙江龙盛2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-longsheng-build-4",
+      "scope_id": "longsheng-positive",
+      "context_group": "s-longsheng-build",
+      "step": 4,
+      "question": "请给出浙江龙盛2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-hengli-build-1",
+      "scope_id": "hengli-positive",
+      "context_group": "s-hengli-build",
+      "step": 1,
+      "question": "恒立液压2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-hengli-build-2",
+      "scope_id": "hengli-positive",
+      "context_group": "s-hengli-build",
+      "step": 2,
+      "question": "恒立液压2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-hengli-build-3",
+      "scope_id": "hengli-positive",
+      "context_group": "s-hengli-build",
+      "step": 3,
+      "question": "恒立液压2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-hengli-build-4",
+      "scope_id": "hengli-positive",
+      "context_group": "s-hengli-build",
+      "step": 4,
+      "question": "请给出恒立液压2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-hengli-baseline-1",
+      "scope_id": "hengli-positive",
+      "context_group": "s-hengli-baseline",
+      "step": 1,
+      "question": "恒立液压2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-hengli-baseline-2",
+      "scope_id": "hengli-positive",
+      "context_group": "s-hengli-baseline",
+      "step": 2,
+      "question": "恒立液压2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-hengli-baseline-3",
+      "scope_id": "hengli-positive",
+      "context_group": "s-hengli-baseline",
+      "step": 3,
+      "question": "恒立液压2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-hengli-baseline-4",
+      "scope_id": "hengli-positive",
+      "context_group": "s-hengli-baseline",
+      "step": 4,
+      "question": "请给出恒立液压2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    }
+  ],
+  "dataset_id": "holdout-v2"
+}

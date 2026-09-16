@@ -1,0 +1,119 @@
+{
+  "schema": "crackrag-source-selection-v2",
+  "classification": "PREPARATION_SCREENING_NOT_RUNTIME_VALIDATION",
+  "no_api_calls": true,
+  "production_parser_calls": 0,
+  "validator_calls": 0,
+  "model_calls": 0,
+  "rule": "Selected for original same-page support by reading/rendering official reports after semantic freeze; no runtime pass/fail used to select sources.",
+  "candidates": [
+    {
+      "id": "longsheng-2024",
+      "issuer": "浙江龙盛",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-15/1223093600.PDF",
+      "bytes": 4675529,
+      "sha256": "e100be83c9509aaeb10a3dd634152fb0669b14513ac4d69ed17bc7cf80eb4588",
+      "page_count": 205,
+      "screening": "plain text plus original-page Poppler visual review",
+      "physical_pages_reviewed": [
+        80,
+        81
+      ],
+      "decision": "SELECTED",
+      "reason": "All three positive target rows and their own evidence declarations are on the same original page; genuine continuation supplies a negative scope."
+    },
+    {
+      "id": "hengli-2024",
+      "issuer": "恒立液压",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-29/1223384610.PDF",
+      "bytes": 1224476,
+      "sha256": "a3f59f923d7085790496d534cadc91565d58c0f665fec7b54146cbe42240bde6",
+      "page_count": 174,
+      "screening": "plain text plus original-page Poppler visual review",
+      "physical_pages_reviewed": [
+        68,
+        69
+      ],
+      "decision": "SELECTED",
+      "reason": "All three positive target rows and their own evidence declarations are on the same original page; genuine continuation supplies a negative scope."
+    },
+    {
+      "id": "jushi-2024",
+      "issuer": "中国巨石",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-20/1222847583.pdf",
+      "physical_pages_screened": [
+        86,
+        87
+      ],
+      "screening": "plain text and original-page visual review",
+      "decision": "NOT_SELECTED",
+      "reason": "The consolidated income table starts on a page before one or more required positive rows; the three target rows do not share their original same-page declarations.",
+      "bytes": 1626826,
+      "sha256": "6a70135e3651e1c5aac041ed072d4a8182d54ea459a9321d521de9731c983284"
+    },
+    {
+      "id": "haitian-precision-2024",
+      "issuer": "海天精工",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222881136.PDF",
+      "physical_pages_screened": [
+        83,
+        84
+      ],
+      "screening": "official web PDF text screening only",
+      "decision": "NOT_SELECTED",
+      "reason": "The consolidated income table starts on a page before one or more required positive rows; the three target rows do not share their original same-page declarations."
+    },
+    {
+      "id": "sany-2024",
+      "issuer": "三一重工",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-18/1223129214.PDF",
+      "physical_pages_screened": [
+        94,
+        95
+      ],
+      "screening": "plain pypdf text screening only",
+      "decision": "NOT_SELECTED",
+      "reason": "The consolidated income table starts on a page before one or more required positive rows; the three target rows do not share their original same-page declarations.",
+      "bytes": 5378376,
+      "sha256": "09b21df2cef24fd85b4efa625579138241ae1de4fa7ad4f2c9fcef0c694a0d1a"
+    },
+    {
+      "id": "dingli-2024",
+      "issuer": "浙江鼎力",
+      "url": "https://www.cndingli.com/upload/file/2025/06/02/4476bf931b584dae866dd1b446de2a84.pdf",
+      "physical_pages_screened": [
+        77,
+        78
+      ],
+      "screening": "plain pypdf text screening only",
+      "decision": "NOT_SELECTED",
+      "reason": "The consolidated income table starts on a page before one or more required positive rows; the three target rows do not share their original same-page declarations.",
+      "bytes": 4371988,
+      "sha256": "1fad57da307869caf9cf98b619f0d3a61dd0c53860490c859446637fd7902ca9"
+    },
+    {
+      "id": "ecovacs-2024",
+      "issuer": "科沃斯",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-26/1223323879.PDF",
+      "physical_pages_screened": [
+        98,
+        99
+      ],
+      "screening": "official web PDF text screening only",
+      "decision": "NOT_SELECTED",
+      "reason": "The consolidated income table starts on a page before one or more required positive rows; the three target rows do not share their original same-page declarations."
+    },
+    {
+      "id": "linglong-2024",
+      "issuer": "玲珑轮胎",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-25/1223285950.PDF",
+      "physical_pages_screened": [
+        100,
+        101
+      ],
+      "screening": "official web PDF text screening only",
+      "decision": "NOT_SELECTED_BACKUP",
+      "reason": "Text suggests eligible same-page targets, but two other issuers were already selected. Not downloaded, visually confirmed, gold-frozen or runtime-tested."
+    }
+  ]
+}

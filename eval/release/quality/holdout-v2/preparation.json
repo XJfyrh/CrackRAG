@@ -1,0 +1,185 @@
+{
+  "schema": "crackrag-release-quality-preparation-v1",
+  "dataset_id": "holdout-v2",
+  "prepared_on": "2026-09-16",
+  "frozen_at": "2026-09-16T11:18:12.965170+00:00",
+  "status": "PREPARED_NOT_EXECUTED",
+  "classification": "INDEPENDENT_SOURCE_HOLDOUT_PREPARED_NOT_EXECUTED",
+  "no_api_calls": true,
+  "model_api_calls": 0,
+  "production_parser_calls": 0,
+  "production_validator_calls": 0,
+  "runtime_commit_binding": "REQUIRED_BEFORE_EXECUTION",
+  "checks": {
+    "public_json_cross_references": "PASS",
+    "quality_12_cases_and_sequence_16_queries": "PASS",
+    "fourteen_isolated_context_groups": "PASS",
+    "offline_original_size_hash_page_count": "PASS",
+    "official_fetch_repeat_hash_check": "PASS",
+    "selected_page_stream_text_bounds_equivalence": "PASS",
+    "four_selected_renders_identical_to_visually_inspected_originals": "PASS",
+    "gold_literal_values_match_original_source_pages": "PASS",
+    "gold_not_present_in_question_values": "PASS",
+    "previous_v1_nine_frozen_files_unchanged": "PASS",
+    "semantic_freeze": "8 semantic/prompt/parser files unchanged; catalog changed only by root-authorized issuer alias metadata update",
+    "actual_input_order_matches_sequence_plan": "PASS"
+  },
+  "postfreeze_metadata_changes": [
+    "Root added cn:600352 / issuer:600352 浙江龙盛 aliases",
+    "Root added cn:601100 / issuer:601100 恒立液压 aliases"
+  ],
+  "catalog_at_preparation_sha256": "b4a3e3d30306d5190ab99b9b89ad027b08bb904fa4630769fd0915d2f65eb9e7",
+  "private_provenance_report": "prepared-reproduction.json",
+  "private_provenance_sha256": "e8cff04b19970a1b77463abf4baea63a31252a76a9f513d071ad53777e5b27f0",
+  "private_static_check_report": "preparation-static-checks.json",
+  "private_static_check_sha256": "494d9bdf51aa7cc328ddf9d8de0192634b1756b1784ad084e044306f7d5c178d",
+  "private_sources": [
+    {
+      "id": "longsheng-2024",
+      "sha256": "e100be83c9509aaeb10a3dd634152fb0669b14513ac4d69ed17bc7cf80eb4588",
+      "bytes": 4675529,
+      "page_count": 205,
+      "scopes": [
+        {
+          "id": "longsheng-positive",
+          "relative_path": "selected/longsheng-positive.pdf",
+          "sha256": "c3fdfc9e68b626c5a3126c812e4148a90f5dcc5292a20f3d135bd1ce5d99eff2",
+          "bytes": 632183,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 80,
+              "content_stream_sha256": "ae38e89978a7d4269375f6f5df27f0be8c96c5b69fa58bac197ea7496e389352"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/longsheng-positive-1.png",
+              "sha256": "e9c7637312cbc9e9c4af001dc5f7b32e51527419a58c5a9e222eccd31dcc920b"
+            }
+          ]
+        },
+        {
+          "id": "longsheng-missing-revenue",
+          "relative_path": "selected/longsheng-missing-revenue.pdf",
+          "sha256": "73ca7bb3abe1b3686c0690894fa62e6cec116e4ffff5c6bac20bc570fd9ee472",
+          "bytes": 625045,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 81,
+              "content_stream_sha256": "9fd9ae8a50f311448ee2ac35374573efe2f79ff885e8daf04f33db5a38f1f587"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/longsheng-missing-revenue-1.png",
+              "sha256": "d6c64dc61a88d67131cf1276c9efa8f008c28d2be1987fa2c1f402fd677d6b64"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hengli-2024",
+      "sha256": "a3f59f923d7085790496d534cadc91565d58c0f665fec7b54146cbe42240bde6",
+      "bytes": 1224476,
+      "page_count": 174,
+      "scopes": [
+        {
+          "id": "hengli-positive",
+          "relative_path": "selected/hengli-positive.pdf",
+          "sha256": "287ce383abd0b7bd2d309831dfc19cd8fabe9f459f96c13d3cecf4ab72828854",
+          "bytes": 244149,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 68,
+              "content_stream_sha256": "3f408b5e37cd25f98fe1d62bd97752f238a67c8ca8c7efc2448bed6a326b1005"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/hengli-positive-1.png",
+              "sha256": "205c332339614e864d8fe6b8316a4455c7ce21378d614d01a7b83c36d4b5ca0b"
+            }
+          ]
+        },
+        {
+          "id": "hengli-missing-consolidated-revenue",
+          "relative_path": "selected/hengli-missing-consolidated-revenue.pdf",
+          "sha256": "24deb29580144a200a3da8f143fc0730724b4410d686a7b8be0a727751ede044",
+          "bytes": 244437,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 69,
+              "content_stream_sha256": "6dc8fe280ddd23be918d94578e509c862a58ec7e364b9184e046cd6f560449d3"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/hengli-missing-consolidated-revenue-1.png",
+              "sha256": "1c6060cbf3b07ba94dfd9c4e19f57418618158b83edc9e2f87d4713b0973c365"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "frozen_files": [
+    {
+      "path": "eval/release/quality/holdout-v2/code-freeze.json",
+      "bytes": 2079,
+      "sha256": "a7a4d7ea98b50e5d88daef240f01498206739a9f00a46e55ae092d9dbc3ed543"
+    },
+    {
+      "path": "eval/release/quality/holdout-v2/gold.json",
+      "bytes": 6036,
+      "sha256": "57d73f6166e76ec8eaf04195d94645cd06cf154f03fc33f46a421d969bb7185e"
+    },
+    {
+      "path": "eval/release/quality/holdout-v2/model-inputs.json",
+      "bytes": 11714,
+      "sha256": "cb3b1c50fb55d516c1a1a29e052acae2c1742eb5a6c14a773cdba6c6ed9bfaaa"
+    },
+    {
+      "path": "eval/release/quality/holdout-v2/preparation-candidates.json",
+      "bytes": 5077,
+      "sha256": "50b2348cc3bfe9f724d0c6a85fb90a2d4ad3888a58f2126c1970650ca2e68050"
+    },
+    {
+      "path": "eval/release/quality/holdout-v2/quality-plan.json",
+      "bytes": 7152,
+      "sha256": "a387bb91a497eae1f39425d5c9bc4589569a6afb738fdeb874846e3e5ded10ab"
+    },
+    {
+      "path": "eval/release/quality/holdout-v2/README.md",
+      "bytes": 5210,
+      "sha256": "a15973be47c95acb51a39d5971352ecfa145fc309ae606befa18936038dcf4ad"
+    },
+    {
+      "path": "eval/release/quality/holdout-v2/sequence-plan.json",
+      "bytes": 3895,
+      "sha256": "84b3a9cdf1d791600d0075e9a3341ddef92145867ecaa5ebbb2e9e11bce05dc0"
+    },
+    {
+      "path": "eval/release/quality/holdout-v2/sources.json",
+      "bytes": 5300,
+      "sha256": "99e7f3258d6fec6a08b1bdfed1f3a57737d000063b9c91c1c06a07b651faf7cb"
+    },
+    {
+      "path": "scripts/release_prepare_quality.py",
+      "bytes": 9615,
+      "sha256": "8590d872668ef63b0cbee97a81cf6af2d217c61006858ebec18ad2852788f338"
+    }
+  ],
+  "pre_execution_structure_review": {
+    "reviewer": "independent quality agent, plans/input structure only",
+    "finding": "Hengli input row order originally baseline then build despite planned reverse counterbalancing. Corrected before any production parsing/model execution.",
+    "resolution": "Model-inputs.sequence reordered to longsheng baseline/build then hengli build/baseline. No question, scope, request, gold, semantic code or source changed.",
+    "superseded_unexecuted_preparation_sha256": "e48aadc8fce3af6bc530c99d496fb9dd175b8940feb364112ee806061c6ed152",
+    "superseded_inputs_sha256": "146b8fede91c52d87fc196d1cdd8f453e10a7e41dee996355f68dab00aff868c",
+    "private_revision": "revisions/before-structure-review/"
+  }
+}
