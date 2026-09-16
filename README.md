@@ -2,7 +2,7 @@
 
 CrackRAG 是一个有证据约束的财务文档问答项目。首问查阅 PDF，独立后台流程抽取并验证候选；后续精确需求命中有效事实时，直接复用，不再调用模型。
 
-**v0.1.0** 提供可复现的本机演示与小规模真实验证。[正式发行与视频](https://github.com/XJfyrh/CrackRAG/releases/tag/v0.1.0) · [验收记录](docs/release-validation.md) · [简历项目说明](docs/resume-project.md)
+**v0.1.0** 提供可复现的本机演示与小规模真实验证。[正式发行与视频](https://github.com/XJfyrh/CrackRAG/releases/tag/v0.1.0) · [验收记录](docs/release-validation.md)
 
 ## 支持范围
 
