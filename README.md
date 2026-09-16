@@ -40,7 +40,9 @@ Windows PowerShell 使用 `./crackrag.ps1` 执行相同子命令。需要已启�
 6. 从“最近查询”切换历史、刷新页面，确认沿用原查询，无新收费请求。
 7. 单独询问营业成本并开启构建，将后台策略改为“预计缓存可复用时构建”（`HOT_ONLY`）。观察实际后台终态；经验依据不足时可以跳过，不要求供应商缓存必然命中。默认 mock 的这一步仅演示策略流程。
 
-受控恢复、备份和真实模式步骤见 [运行手册](docs/operations.md)。[4 分 21 秒演示视频](https://github.com/XJfyrh/CrackRAG/releases/tag/v0.1.0) 使用 mock；真实模型的 [质量](docs/quality-results-v3.md) 与 [费用](docs/cost-results-v3.md) 另有可核对报告。
+推荐先看 [5 分 13 秒真实演示](https://github.com/XJfyrh/CrackRAG/releases/download/v0.1.0/demo-v0.1.0-live.webm)：官方年报 → DeepSeek 首问 → 显式构建 → 重复与改写查询均零模型调用 → 原 PDF 核对与刷新恢复。本次共 3 次真实模型调用，费用估算 0.00989692 元，详见 [演示说明与记录](docs/live-demo.md)。这是既有样本上的功能展示，独立的 [质量](docs/quality-results-v3.md) 与 [费用](docs/cost-results-v3.md) 评测另有报告。
+
+原 [4 分 21 秒 mock 演示](https://github.com/XJfyrh/CrackRAG/releases/download/v0.1.0/demo-v0.1.0.webm) 保留，方便无密钥体验完整流程。受控恢复、备份和真实模式步骤见 [运行手册](docs/operations.md)。
 
 ## 实现
 

@@ -1,0 +1,204 @@
+{
+  "schema": "release-live-demo-summary-v1",
+  "date": "2026-09-16",
+  "status": "PASSED",
+  "purpose": "Previously evaluated source used for a real functional demonstration, not a new independent quality sample.",
+  "release_tag": "v0.1.0",
+  "release_source_commit": "c1d4f3ae2efcdb871e24e5662367dff4b0e17db2",
+  "release_manifest_sha256": "37f2a29509b2e5fd14f70659036009619c83cf3dbec1116d9b1638789601478d",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "embedding_version": "bge-m3:5617a9f61b028005a4858fdac845db406aefb181:dense-cls-l2:512:overlap64:v1",
+  "answer_policy": "financial-supported-v1",
+  "source": {
+    "url": "https://static.cninfo.com.cn/finalpage/2025-03-31/1222962236.PDF",
+    "sha256": "e3fa31c2e40941bb0ecc0f921deddc01d3e0ff3dbeed7a4a4434492330a4902e",
+    "physical_page": 86,
+    "uploaded_full_pdf": true,
+    "indexed_pages": [
+      86
+    ]
+  },
+  "empty_workspace_before_upload": true,
+  "preseeded_facts": false,
+  "automatic_retries": 0,
+  "video": {
+    "filename": "demo-v0.1.0-live.webm",
+    "bytes": 26972581,
+    "sha256": "c47f9fff96a22bfc583ed5bad5e2eb5cccd7fa6f5014711190a327c7c936aeec",
+    "duration_seconds": "312.92",
+    "width": 1440,
+    "height": 1000,
+    "audio": false,
+    "continuous_capture": true,
+    "cuts": 0,
+    "time_acceleration": false,
+    "captions": "Editorial overlay; application results unmodified."
+  },
+  "steps": [
+    {
+      "step": "first_answer",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "answer": "厦门松霖科技股份有限公司 · FY2024 · Revenue：3014989619.04 CNY（合并口径）。",
+      "status": "SUPPORTED",
+      "coverage": "MISSING",
+      "reused_facts": 0,
+      "model_calls": 1,
+      "estimated_cny": "0.00811900",
+      "background_states": [],
+      "calls": [
+        {
+          "stage": "answer",
+          "state": "SETTLED",
+          "estimated_cny": "0.00811900",
+          "usage": {
+            "issues": [],
+            "output": 140,
+            "cache_read": 0,
+            "cache_write": 0,
+            "input_fresh": 7559,
+            "input_total": 7559,
+            "inferred_fields": [],
+            "total_tokens_reported": 7699,
+            "reasoning_tokens_in_output": null
+          },
+          "rates_per_million": {
+            "output_per_million": "4",
+            "input_hit_per_million": "0.02",
+            "input_miss_per_million": "1"
+          }
+        }
+      ]
+    },
+    {
+      "step": "explicit_cold_build",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "answer": "厦门松霖科技股份有限公司 · FY2024 · Revenue：3014989619.04 CNY（合并口径）。",
+      "status": "SUPPORTED",
+      "coverage": "MISSING",
+      "reused_facts": 0,
+      "model_calls": 2,
+      "estimated_cny": "0.00177792",
+      "background_states": [
+        "COMMITTED"
+      ],
+      "calls": [
+        {
+          "stage": "answer",
+          "state": "SETTLED",
+          "estimated_cny": "0.00084348",
+          "usage": {
+            "issues": [],
+            "output": 140,
+            "cache_read": 7424,
+            "cache_write": 0,
+            "input_fresh": 135,
+            "input_total": 7559,
+            "inferred_fields": [],
+            "total_tokens_reported": 7699,
+            "reasoning_tokens_in_output": null
+          },
+          "rates_per_million": {
+            "output_per_million": "4",
+            "input_hit_per_million": "0.02",
+            "input_miss_per_million": "1"
+          }
+        },
+        {
+          "stage": "extraction",
+          "state": "SETTLED",
+          "estimated_cny": "0.00093444",
+          "usage": {
+            "issues": [],
+            "output": 126,
+            "cache_read": 6272,
+            "cache_write": 0,
+            "input_fresh": 305,
+            "input_total": 6577,
+            "inferred_fields": [],
+            "total_tokens_reported": 6703,
+            "reasoning_tokens_in_output": null
+          },
+          "rates_per_million": {
+            "output_per_million": "4",
+            "input_hit_per_million": "0.02",
+            "input_miss_per_million": "1"
+          }
+        }
+      ]
+    },
+    {
+      "step": "repeat",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "answer": "厦门松霖科技股份有限公司 · FY2024 · Revenue：3014989619.04 CNY（合并口径）。",
+      "status": "SUPPORTED",
+      "coverage": "FULL",
+      "reused_facts": 1,
+      "model_calls": 0,
+      "estimated_cny": "0",
+      "background_states": [],
+      "calls": []
+    },
+    {
+      "step": "paraphrase",
+      "question": "请给出松霖科技2024年度合并营业收入，单位为人民币元。",
+      "answer": "厦门松霖科技股份有限公司 · FY2024 · Revenue：3014989619.04 CNY（合并口径）。",
+      "status": "SUPPORTED",
+      "coverage": "FULL",
+      "reused_facts": 1,
+      "model_calls": 0,
+      "estimated_cny": "0",
+      "background_states": [],
+      "calls": []
+    }
+  ],
+  "totals": {
+    "model_calls": 3,
+    "known_estimated_cny": "0.00989692",
+    "unknown_calls": 0,
+    "unsettled_calls": 0,
+    "billing_confirmed": false,
+    "local_compute_and_storage_included": false
+  },
+  "refresh": {
+    "same_query": true,
+    "same_history": true,
+    "new_model_calls": 0,
+    "new_queries": 0
+  },
+  "pricing": {
+    "billing_confirmed": false,
+    "pricing": {
+      "currency": "CNY",
+      "input_hit_per_million": "0.02",
+      "input_miss_per_million": "1",
+      "model": "deepseek-flash",
+      "output_per_million": "4",
+      "schedule": "deepseek-cn-peak-v1",
+      "source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+      "version": "release-deepseek-flash-20260916T132435431193Z"
+    },
+    "source_sha256": "a1602748f50a9baacd416f4b831438896ba1351160f1f9afe89a9423c4b76cf3",
+    "verification": {
+      "flash_idle": [
+        "1",
+        "0.02",
+        "4"
+      ],
+      "flash_peak": [
+        "2",
+        "0.04",
+        "8"
+      ],
+      "official_column_verified": true,
+      "schedule": "deepseek-cn-peak-v1"
+    },
+    "verified": true,
+    "verified_at": "2026-09-16T13:24:35.431193Z"
+  },
+  "limits": [
+    "One existing issuer source and one financial requirement; not a new independent quality assessment.",
+    "No claim about general accuracy, cost savings, supplier cache lifetime, or latency.",
+    "No OCR, arbitrary calculations, failure recovery, or missing-evidence path demonstrated in this recording."
+  ]
+}
