@@ -75,6 +75,14 @@ export CRACKRAG_PORT=18088
 
 Windows 对应 `$env:CRACKRAG_PROJECT`、`$env:CRACKRAG_STATE`、`$env:CRACKRAG_PORT`。恢复拒绝非空数据库、非空 PDF 目标、哈希不符或不同发布身份。恢复后保持 mock/暂停，核对文档、来源、事实、任务终态、UNKNOWN 和累计费用后，才重新准备真实会话。模型权重不包含在备份中，真实运行前需执行 `models` 重新准备与校验。重新准备会话时用 `--opening /release/state/opening-balance.json` 延续恢复的期初记录，不能创建新的零余额起点。不能同时启用恢复副本与原付费实例。
 
+Linux 可在完成源码镜像构建后运行独立的零付费备份恢复检查：
+
+```sh
+sh scripts/check_restore_mock.sh
+```
+
+检查创建两个新的 mock Compose 项目及 `.release/restore-check-*` 私有目录，通过正常 HTTP 上传、查询和构建事实，然后使用统一 CLI 备份、恢复到新空卷。恢复应用启动前，它核对 29 张文档、证据、事实、候选、验证报告、后台任务、投递审计及账本相关表的行数和全行内容摘要；启动后核对来源 PDF 原字节、历史答案和 FULL 零调用复用。默认只用 localhost 19286 / 19287；端口占用时可传 `--source-port` 和 `--target-port`。结束后停止两个新项目，保留私有备份和卷；摘要写入 `tmp/restore-mock-acceptance.json`。脚本拒绝在 Windows 运行，也不会操作已有部署。此检查使用 mock 数据，不制造或结算真实 UNKNOWN 请求。
+
 ## 演示恢复的边界
 
 普通页面可以重新打开后台任务并继续验证已保存候选；刷新与历史切换都读取同一个 Run。候选保存后中断、重启、Redis 通知丢失的专项检查使用隔离测试环境，并记录是否重复抽取/发布或丢失费用。生产真实模式禁止 mock 故障注入，不依赖手工修改数据库演示。

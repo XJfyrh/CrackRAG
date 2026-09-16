@@ -50,6 +50,8 @@ jobs:
           npm run test:e2e --prefix web
       - name: Resume saved candidates after primary and Redis interruption
         run: ./crackrag demo-recovery
+      - name: Restore a normal mock backup into a new state and project
+        run: sh scripts/check_restore_mock.sh
       - name: Save sanitized check summaries
         if: always()
         uses: actions/upload-artifact@v4
@@ -58,6 +60,7 @@ jobs:
           path: |
             tmp/go-tests.jsonl
             tmp/mock-acceptance.json
+            tmp/restore-mock-acceptance.json
             output/playwright/browser-acceptance.json
             output/playwright/*.png
           retention-days: 7
