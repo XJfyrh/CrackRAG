@@ -4,6 +4,7 @@ import importlib.util
 import io
 import json
 from pathlib import Path
+import shutil
 import subprocess
 import tarfile
 import tempfile
@@ -151,6 +152,7 @@ class PackageReleaseTest(unittest.TestCase):
         for raw in ('{"a":1,"a":2}', '{"a":NaN}'):
             with self.assertRaises(ValueError): pack.load_json(raw)
 
+    @unittest.skipUnless(shutil.which('git'), 'requires Git; the complete packaging suite runs on the CI host')
     def test_real_local_git_packaging_and_checksum_outputs(self):
         root = self.folder / 'repo'
         root.mkdir()

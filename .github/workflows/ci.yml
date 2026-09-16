@@ -30,6 +30,10 @@ jobs:
           python scripts/release_entrypoints_test.py
       - name: PostgreSQL and Redis integration
         run: python scripts/check_go.py
+      - name: Complete source packaging checks on the host with Git
+        run: |
+          git --version
+          python -m unittest discover -s eval/release/tests -p test_package_release.py -v
       - name: Build and start a fresh default mock deployment
         run: |
           ./crackrag init
