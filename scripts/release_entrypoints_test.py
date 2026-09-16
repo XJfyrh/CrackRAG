@@ -1,6 +1,7 @@
 """Capture management commands without Docker, databases, or provider requests."""
 from contextlib import redirect_stdout
 import io
+import importlib.util
 import json
 import os
 from pathlib import Path
@@ -93,7 +94,12 @@ class ReleaseEntrypointsTest(unittest.TestCase):
             return subprocess.CompletedProcess(command, 0)
 
         class FinishedGo:
-            stdout = []
+            def __init__(self, command):
+                self.stdout = []
+                if '-run' in command:
+                    pattern = command[command.index('-run') + 1]
+                    name = pattern.replace('^', '').replace('$', '')
+                    self.stdout = [json.dumps({'Action': 'pass', 'Package': 'crackrag/api/internal/app', 'Test': name}) + '\n']
 
             def wait(self):
                 return 0
@@ -101,17 +107,46 @@ class ReleaseEntrypointsTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             # Execute an isolated copy: even the test log goes to this temp root.
             target = Path(folder) / 'scripts/check_go.py'
+            fixture = Path(folder) / 'api/internal/app/lifecycle_test.go'
+            fixture.parent.mkdir(parents=True)
+            shutil.copyfile(ROOT / 'api/internal/app/lifecycle_test.go', fixture)
             env = {'COMPOSE_PROJECT_NAME': 'unrelated-host-project',
                    'CRACKRAG_PROJECT': 'crackrag-release-not-tests'}
             with patch.dict(os.environ, env), patch('subprocess.run', capture_run), \
-                    patch('subprocess.Popen', return_value=FinishedGo()) as go, \
+                    patch('subprocess.Popen', side_effect=lambda command, **kwargs: FinishedGo(command)) as go, \
                     redirect_stdout(io.StringIO()), self.assertRaises(SystemExit) as exit_result:
                 exec(compile((ROOT / 'scripts/check_go.py').read_text(), str(target), 'exec'),
                      {'__file__': str(target), '__name__': '__main__'})
             self.assertEqual(exit_result.exception.code, 0)
             self.assertTrue(any('DROP DATABASE' in part for call in calls for part in call))
             self.assert_project([call[1:] for call in calls], 'crackrag-release-tests')
-            go.assert_called_once()
+            self.assertEqual(go.call_count, 8)
+            self.assertIn('-skip', go.call_args_list[0].args[0])
+            self.assertTrue(all('-run' in call.args[0] for call in go.call_args_list[1:]))
+            self.assertEqual(sum('DROP DATABASE IF EXISTS crackrag_m1_test WITH (FORCE)' in call for call in calls), 8)
+
+    def test_go_isolation_coverage_fails_closed(self):
+        spec = importlib.util.spec_from_file_location('check_go', ROOT / 'scripts/check_go.py')
+        runner = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(runner)
+        source = (ROOT / 'api/internal/app/lifecycle_test.go').read_text(encoding='utf-8')
+        self.assertEqual(runner.strict_cases(source), runner.STRICT_CASES)
+        for replacement in ('future_negative_case', 'in_flight_request'):
+            with self.assertRaises(ValueError):
+                runner.strict_cases(source.replace('"usage_present", func(', f'"{replacement}", func('))
+        for extra in ('future_case_2', 'FutureCase', 'future-case'):
+            with self.assertRaises(ValueError):
+                runner.strict_cases(source.replace('{"usage_present", func(',
+                    '{"' + extra + '", func(map[string]any) {}, false},\n{"usage_present", func('))
+        leaf = runner.STRICT_CASES[-1]
+        event = {'Package': 'crackrag/api/internal/app', 'Test': runner.STRICT_PARENT + '/' + leaf, 'Action': 'pass'}
+        runner.require_leaf_pass([event], leaf)
+        for events in ([], [event, event], [{**event, 'Action': 'skip'}], [{**event, 'Action': 'fail'}],
+                       [event, {**event, 'Test': runner.STRICT_PARENT + '/in_flight_request'}]):
+            with self.assertRaises(ValueError):
+                runner.require_leaf_pass(events, leaf)
+        summary = runner.summarize([event, {**event, 'Action': 'fail'}, event])
+        self.assertEqual(summary['unique_tests_including_subtests'], {'pass': 0, 'skip': 0, 'fail': 1})
 
 
 if __name__ == '__main__':
