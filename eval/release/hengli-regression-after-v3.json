@@ -1,0 +1,19 @@
+{
+  "schema": "crackrag-used-source-regression-v1",
+  "classification": "REGRESSION_NOT_INDEPENDENT",
+  "case_id": "q-hengli-net-profit",
+  "release_manifest_sha256": "37f2a29509b2e5fd14f70659036009619c83cf3dbec1116d9b1638789601478d",
+  "first_failed_result": "quality/holdout-v2/first-run-quality-result.json",
+  "status": "SUPPORTED",
+  "expected_value": "2512380605.82",
+  "observed_values": [
+    "2512380605.82"
+  ],
+  "publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+  "model_attempts": 1,
+  "known_estimated_cny": "0.00699380",
+  "billing_confirmed": false,
+  "unknown_calls": 0,
+  "private_result_sha256": "f566509c4e50ee680995fa7258a63a24d44b96aecc46eee62cbab2d5519e20aa",
+  "method": "Root compared the post-fix live result against the already reviewed original page. This source informed the fix and is not an independent acceptance sample."
+}

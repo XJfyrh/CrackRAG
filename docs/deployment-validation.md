@@ -1,5 +1,15 @@
 # 部署与恢复验证
 
+## 最终 v0.1.0 构建
+
+最终产品为 `37f2a29509b2e5fd14f70659036009619c83cf3dbec1116d9b1638789601478d`（404 文件）。它在独立新目录、新凭证和新持久卷中通过完整 mock HTTP 闭环、候选保存后主实例中断与 Redis 重启恢复、浏览器流程及 4 分 21.44 秒录像。恢复保持同一任务和候选摘要，调用 2→2，后续 FULL 零调用。
+
+[最终 Linux CI](https://github.com/XJfyrh/CrackRAG/actions/runs/35093771333) 全部通过，包括 29 张表的新空卷恢复、原 PDF、历史答案、完整行摘要与费用账本核对；恢复摘要 SHA-256 为 `71d7f5917f62079c02f12a820de922c45504683adbf98621b223e842817a22fc`。另将最终 API 与旧 `2197316e…` runtime 的完整只读文件包实际混装：旧 runtime 自检通过，但 API HTTP 503 返回 `RELEASE_INTEGRITY_FAILED`。恢复一致组件后 HTTP 200；前后查询 12→12、调用 12→12、付费 0→0。
+
+当前 v3 Go 源码还对原合成 UNKNOWN 恢复库补跑只读准入检查，仍以 `GLOBAL_COST_UNKNOWN` 拒绝新派发；7 条调用以及任务、候选、batch、预算完整行在测试前后不变，原 0.01836000 CNY 合成占用保留。没有为此发起真实调用，也没有重造或清除 UNKNOWN。
+
+真实 DeepSeek 与 BGE-M3 运行记录、费用和支持边界见 [最终验收记录](release-validation.md)。下面保留原构建证据及其原有范围，不把历史检查冒称最终构建实跑。
+
 本文记录 2026-09-16 的部署验证。修复前候选发布清单为 `d183620ebaebeba6e1cb7994faed9dc78c047017c47fad598b42f754aa4e00d6`，包含 402 个文件。后续真实质量检查发现同表换行的正例被拒绝，该候选不能作为最终发行身份。本文保留它已通过的部署检查与此前预发行构建的专项证据，不代替修复后的真实质量结论。故障演示均使用 mock；模型资产校验和 BGE CPU 推理不调用付费 API。
 
 ## 修复前候选构建已实测结果
@@ -14,13 +24,13 @@
 
 两组 API/runtime 的恢复演示共享 PostgreSQL、Redis、PDF 和账本；默认仍只启动一组。混组件检查证明实际运行组件不一致时健康门禁拒绝，不将普通连接超时算作版本校验成功。
 
-修复前提交 `ef18357` 的 Linux 宿主完整 shell 流程及 29 张表的新空卷恢复已在 [GitHub Actions](https://github.com/XJfyrh/CrackRAG/actions/runs/35090376246) 全部通过，恢复摘要 SHA-256 为 `ffffdee3d2ae292d7f346eb8d43a7463834df18ab97d5480c6eea07b52eedbaa`。修复后的最终构建仍需重新验证。最终视频、独立真实质量评分和成本序列结论由 [发布验收记录](release-validation.md) 汇总；本文不将尚未完成的检查标为通过。
+修复前提交 `ef18357` 的 Linux 宿主完整 shell 流程及 29 张表的新空卷恢复已在 [GitHub Actions](https://github.com/XJfyrh/CrackRAG/actions/runs/35090376246) 全部通过，恢复摘要 SHA-256 为 `ffffdee3d2ae292d7f346eb8d43a7463834df18ab97d5480c6eea07b52eedbaa`。当时修复后构建尚待验证；已完成的最终结果见本文顶部。最终视频、独立真实质量评分和成本序列结论由 [发布验收记录](release-validation.md) 汇总；本文不将尚未完成的检查标为通过。
 
 ## 后续修复的入口隔离
 
 Shell 与 PowerShell 管理入口均显式传入 `--project-name "$CRACKRAG_PROJECT"`，Go 集成检查固定传入 `--project-name crackrag-release-tests`。这修复了修复前候选只依赖 YAML `name` 时，宿主残留 `COMPOSE_PROJECT_NAME` 可以覆盖目标项目的问题，避免停止服务或测试清库操作选错项目。
 
-`python scripts/release_entrypoints_test.py -v` 在 Windows 上 3 项全部通过：实际执行两种入口并捕获替代 Docker 的参数，覆盖默认/自定义项目与有/无 `compose.env` 共 8 种组合；另在替代 subprocess 中执行 Go 检查脚本，确认启动和全部测试库 DROP/CREATE 命令均绑定专用项目。测试没有连接 Docker daemon 或修改数据库。再在故意设置不同 `COMPOSE_PROJECT_NAME` 的环境执行实际 `docker compose config`，发布项目与测试项目仍分别解析为指定名称，发布 HTTP 仍只绑定 `127.0.0.1`。该配置检查没有创建或停止容器，也没有模型调用。修复后的完整发行构建及 CI 结果需另行记录。
+`python scripts/release_entrypoints_test.py -v` 在 Windows 上 3 项全部通过：实际执行两种入口并捕获替代 Docker 的参数，覆盖默认/自定义项目与有/无 `compose.env` 共 8 种组合；另在替代 subprocess 中执行 Go 检查脚本，确认启动和全部测试库 DROP/CREATE 命令均绑定专用项目。测试没有连接 Docker daemon 或修改数据库。再在故意设置不同 `COMPOSE_PROJECT_NAME` 的环境执行实际 `docker compose config`，发布项目与测试项目仍分别解析为指定名称，发布 HTTP 仍只绑定 `127.0.0.1`。该配置检查没有创建或停止容器，也没有模型调用。修复后的完整发行构建及 CI 结果已另行记录于本文顶部。
 
 ## 此前预发行构建的专项证据
 
@@ -52,7 +62,7 @@ Shell 与 PowerShell 管理入口均显式传入 `--project-name "$CRACKRAG_PROJ
 
 备份命令保存整个数据库，没有筛掉 UNKNOWN、预留、候选或待处理任务。恢复不会把未知费用改成零，也不会清除任务期限。启动后的任务能否继续，仍由原有租约、期限、配置、文档权限及费用状态决定；过期或撤权的任务可以保留为终态而不发布事实。Redis 不作为账本备份来源，持久权威状态保存在 PostgreSQL。
 
-Linux 与 PowerShell 调用相同的 Compose、容器管理代码和服务端校验。PowerShell 使用 `docker cp` 传输数据库二进制备份，Linux 使用 shell 字节流。Windows PowerShell 完整管理流程及修复前候选干净克隆的 mock/恢复演示已实跑；此前 Linux 镜像测试也已通过。修复前提交的 Linux 完整 CLI 与 29 表恢复另有上述 CI 实测；修复后的最终构建需要自己的结果，不能由历史或 Windows 测试代替。
+Linux 与 PowerShell 调用相同的 Compose、容器管理代码和服务端校验。PowerShell 使用 `docker cp` 传输数据库二进制备份，Linux 使用 shell 字节流。Windows PowerShell 完整管理流程及修复前候选干净克隆的 mock/恢复演示已实跑；此前 Linux 镜像测试也已通过。修复前提交的 Linux 完整 CLI 与 29 表恢复另有上述 CI 实测；修复后的最终构建已有本文顶部的独立结果，没有用历史或 Windows 测试代替 Linux 检查。
 
 ## 合成故障专项的复核边界
 

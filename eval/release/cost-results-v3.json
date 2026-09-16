@@ -1,0 +1,2676 @@
+{
+  "schema": "crackrag-public-sequence-cost-v1",
+  "accounting_status": "COMPLETE_KNOWN_ESTIMATED_MODEL_COST",
+  "release_manifest_sha256": "37f2a29509b2e5fd14f70659036009619c83cf3dbec1116d9b1638789601478d",
+  "model_inputs_sha256": "81edf8885feadc46e7cbf750acb619cb44ffc341404c78db2d143faf4c74f060",
+  "summarizer_sha256": "bc77d50b0f0027eb5a28078e9806faef2606a9c904cc6180b9ad0f013dc9e387",
+  "currency": "CNY",
+  "billing_confirmed": false,
+  "independent_answer_quality_verified": false,
+  "cost_basis": "Authoritative amount_cny for every settled attempt, including failures; usage-price estimates, not a supplier-confirmed bill.",
+  "calls_meaning": "All recorded model attempts, including failed and explicitly undispatched attempts; not only successful HTTP responses.",
+  "limitations": [
+    "No gold was read; supported status is not independent answer correctness.",
+    "Signed cost difference is descriptive, not a quality-adjusted or general savings claim.",
+    "Ingestion, local compute and storage cost are excluded and remain unmetered.",
+    "Only this frozen sequence is totaled; project opening balances and other historical costs require separate ledger reconciliation.",
+    "Missing usage fields remain missing; reported totals are not inferred.",
+    "Latency starts at driver polling, not request dispatch or token generation."
+  ],
+  "pairs": [
+    {
+      "pair": 1,
+      "baseline": {
+        "cases": [
+          {
+            "case_id": "s-songlin-baseline-1",
+            "step": 1,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00809300",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7533,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 140,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7673,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 7533,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 1,
+            "amount_cny": "0.00809300",
+            "first_answer_seconds_from_poll_start": "2.062000000005355",
+            "settled_seconds_from_poll_start": "2.062000000005355"
+          },
+          {
+            "case_id": "s-songlin-baseline-2",
+            "step": 2,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00198944",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7544,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 148,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7692,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 1272,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 1,
+            "amount_cny": "0.00198944",
+            "first_answer_seconds_from_poll_start": "2.063000000001921",
+            "settled_seconds_from_poll_start": "2.063000000001921"
+          },
+          {
+            "case_id": "s-songlin-baseline-3",
+            "step": 3,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00094292",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7533,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 140,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7673,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 7296,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 237,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 1,
+            "amount_cny": "0.00094292",
+            "first_answer_seconds_from_poll_start": "2.562999999994645",
+            "settled_seconds_from_poll_start": "2.562999999994645"
+          },
+          {
+            "case_id": "s-songlin-baseline-4",
+            "step": 4,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00195044",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7537,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 140,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7677,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 1265,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 1,
+            "amount_cny": "0.00195044",
+            "first_answer_seconds_from_poll_start": "2.047000000005937",
+            "settled_seconds_from_poll_start": "2.047000000005937"
+          }
+        ],
+        "stages": {
+          "answer": {
+            "calls": 4,
+            "amount_cny": "0.01297580",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 30147,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 568,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 30715,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 19840,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 10307,
+                "missing_calls": 0
+              }
+            }
+          },
+          "extraction": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          },
+          "probe": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          },
+          "other": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          }
+        },
+        "calls": 4,
+        "amount_cny": "0.01297580",
+        "all_answers_supported": true
+      },
+      "build": {
+        "cases": [
+          {
+            "case_id": "s-songlin-build-1",
+            "step": 1,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {
+              "COMMITTED": 1
+            },
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00807700",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7525,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 138,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7663,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 7525,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 1,
+                "amount_cny": "0.00090444",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 6555,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 124,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 6679,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 283,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 2,
+            "amount_cny": "0.00898144",
+            "first_answer_seconds_from_poll_start": "2.0460000000020955",
+            "settled_seconds_from_poll_start": "3.0930000000007567"
+          },
+          {
+            "case_id": "s-songlin-build-2",
+            "step": 2,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {
+              "COMMITTED": 1
+            },
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00197344",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7536,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 146,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7682,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 1264,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 1,
+                "amount_cny": "0.00092244",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 6557,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 128,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 6685,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 285,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 2,
+            "amount_cny": "0.00289588",
+            "first_answer_seconds_from_poll_start": "2.062000000005355",
+            "settled_seconds_from_poll_start": "3.0940000000045984"
+          },
+          {
+            "case_id": "s-songlin-build-3",
+            "step": 3,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "FULL",
+            "reused_fact_evidence_present": true,
+            "zero_model_validated_reuse": true,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 0,
+            "amount_cny": "0",
+            "first_answer_seconds_from_poll_start": "0.5160000000032596",
+            "settled_seconds_from_poll_start": "0.5310000000026776"
+          },
+          {
+            "case_id": "s-songlin-build-4",
+            "step": 4,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "FULL",
+            "reused_fact_evidence_present": true,
+            "zero_model_validated_reuse": true,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 0,
+            "amount_cny": "0",
+            "first_answer_seconds_from_poll_start": "0.5160000000032596",
+            "settled_seconds_from_poll_start": "0.5160000000032596"
+          }
+        ],
+        "stages": {
+          "answer": {
+            "calls": 2,
+            "amount_cny": "0.01005044",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 15061,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 284,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 15345,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 6272,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 8789,
+                "missing_calls": 0
+              }
+            }
+          },
+          "extraction": {
+            "calls": 2,
+            "amount_cny": "0.00182688",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 13112,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 252,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 13364,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 12544,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 568,
+                "missing_calls": 0
+              }
+            }
+          },
+          "probe": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          },
+          "other": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          }
+        },
+        "calls": 4,
+        "amount_cny": "0.01187732",
+        "all_answers_supported": true
+      },
+      "comparison": {
+        "baseline_amount_cny": "0.01297580",
+        "build_amount_cny": "0.01187732",
+        "difference_cny": "0.00109848",
+        "signed_savings_percent": "8.465605",
+        "percent_available": true,
+        "interpretation": "DESCRIPTIVE_COST_ONLY_NOT_QUALITY_ADJUSTED"
+      },
+      "build_repeated_steps_zero_model_validated_reuse": true
+    },
+    {
+      "pair": 2,
+      "build": {
+        "cases": [
+          {
+            "case_id": "s-linglong-build-1",
+            "step": 1,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {
+              "COMMITTED": 1
+            },
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00804200",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7526,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 129,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7655,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 7526,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 1,
+                "amount_cny": "0.00085144",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 6546,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 113,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 6659,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 274,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 2,
+            "amount_cny": "0.00889344",
+            "first_answer_seconds_from_poll_start": "2.0469999999986612",
+            "settled_seconds_from_poll_start": "2.5469999999986612"
+          },
+          {
+            "case_id": "s-linglong-build-2",
+            "step": 2,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {
+              "COMMITTED": 1
+            },
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00190844",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7531,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 131,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7662,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 1259,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 1,
+                "amount_cny": "0.00086144",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 6548,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 115,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 6663,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 276,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 2,
+            "amount_cny": "0.00276988",
+            "first_answer_seconds_from_poll_start": "2.0160000000032596",
+            "settled_seconds_from_poll_start": "2.547000000005937"
+          },
+          {
+            "case_id": "s-linglong-build-3",
+            "step": 3,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "FULL",
+            "reused_fact_evidence_present": true,
+            "zero_model_validated_reuse": true,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 0,
+            "amount_cny": "0",
+            "first_answer_seconds_from_poll_start": "0.5",
+            "settled_seconds_from_poll_start": "0.5"
+          },
+          {
+            "case_id": "s-linglong-build-4",
+            "step": 4,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "FULL",
+            "reused_fact_evidence_present": true,
+            "zero_model_validated_reuse": true,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 0,
+            "amount_cny": "0",
+            "first_answer_seconds_from_poll_start": "0.5149999999994179",
+            "settled_seconds_from_poll_start": "0.5149999999994179"
+          }
+        ],
+        "stages": {
+          "answer": {
+            "calls": 2,
+            "amount_cny": "0.00995044",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 15057,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 260,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 15317,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 6272,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 8785,
+                "missing_calls": 0
+              }
+            }
+          },
+          "extraction": {
+            "calls": 2,
+            "amount_cny": "0.00171288",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 13094,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 228,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 13322,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 12544,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 550,
+                "missing_calls": 0
+              }
+            }
+          },
+          "probe": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          },
+          "other": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          }
+        },
+        "calls": 4,
+        "amount_cny": "0.01166332",
+        "all_answers_supported": true
+      },
+      "baseline": {
+        "cases": [
+          {
+            "case_id": "s-linglong-baseline-1",
+            "step": 1,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00808200",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7558,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 131,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7689,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 7558,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 1,
+            "amount_cny": "0.00808200",
+            "first_answer_seconds_from_poll_start": "2.0780000000013388",
+            "settled_seconds_from_poll_start": "2.0780000000013388"
+          },
+          {
+            "case_id": "s-linglong-baseline-2",
+            "step": 2,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00194844",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7563,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 133,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7696,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 1291,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 1,
+            "amount_cny": "0.00194844",
+            "first_answer_seconds_from_poll_start": "2.0469999999986612",
+            "settled_seconds_from_poll_start": "2.063000000001921"
+          },
+          {
+            "case_id": "s-linglong-baseline-3",
+            "step": 3,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00080648",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7558,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 131,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7689,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 7424,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 134,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 1,
+            "amount_cny": "0.00080648",
+            "first_answer_seconds_from_poll_start": "2.0310000000026776",
+            "settled_seconds_from_poll_start": "2.0310000000026776"
+          },
+          {
+            "case_id": "s-linglong-baseline-4",
+            "step": 4,
+            "run_state": "COMPLETED",
+            "answer_validation": "SUPPORTED",
+            "coverage": "MISSING",
+            "reused_fact_evidence_present": false,
+            "zero_model_validated_reuse": false,
+            "background_terminal_counts": {},
+            "stages": {
+              "answer": {
+                "calls": 1,
+                "amount_cny": "0.00193944",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 7562,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 131,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 7693,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 6272,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 1290,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "extraction": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "probe": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              },
+              "other": {
+                "calls": 0,
+                "amount_cny": "0",
+                "failed_http_calls": 0,
+                "http_status_missing_calls": 0,
+                "not_dispatched_calls": 0,
+                "usage": {
+                  "prompt_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "completion_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "total_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_hit_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  },
+                  "prompt_cache_miss_tokens": {
+                    "reported_total": 0,
+                    "missing_calls": 0
+                  }
+                }
+              }
+            },
+            "calls": 1,
+            "amount_cny": "0.00193944",
+            "first_answer_seconds_from_poll_start": "2.063000000001921",
+            "settled_seconds_from_poll_start": "2.063000000001921"
+          }
+        ],
+        "stages": {
+          "answer": {
+            "calls": 4,
+            "amount_cny": "0.01277636",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 30241,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 526,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 30767,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 19968,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 10273,
+                "missing_calls": 0
+              }
+            }
+          },
+          "extraction": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          },
+          "probe": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          },
+          "other": {
+            "calls": 0,
+            "amount_cny": "0",
+            "failed_http_calls": 0,
+            "http_status_missing_calls": 0,
+            "not_dispatched_calls": 0,
+            "usage": {
+              "prompt_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "completion_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "total_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_hit_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              },
+              "prompt_cache_miss_tokens": {
+                "reported_total": 0,
+                "missing_calls": 0
+              }
+            }
+          }
+        },
+        "calls": 4,
+        "amount_cny": "0.01277636",
+        "all_answers_supported": true
+      },
+      "comparison": {
+        "baseline_amount_cny": "0.01277636",
+        "build_amount_cny": "0.01166332",
+        "difference_cny": "0.00111304",
+        "signed_savings_percent": "8.711714",
+        "percent_available": true,
+        "interpretation": "DESCRIPTIVE_COST_ONLY_NOT_QUALITY_ADJUSTED"
+      },
+      "build_repeated_steps_zero_model_validated_reuse": true
+    }
+  ],
+  "total_model_attempts": 16,
+  "total_amount_cny": "0.04929280",
+  "comparison": {
+    "baseline_amount_cny": "0.02575216",
+    "build_amount_cny": "0.02354064",
+    "difference_cny": "0.00221152",
+    "signed_savings_percent": "8.587707",
+    "percent_available": true,
+    "interpretation": "DESCRIPTIVE_COST_ONLY_NOT_QUALITY_ADJUSTED"
+  }
+}

@@ -2,7 +2,7 @@
 
 CrackRAG 是一个有证据约束的财务文档问答项目。首问查阅 PDF，独立后台流程抽取并验证候选；后续精确需求命中有效事实时，直接复用，不再调用模型。
 
-首发目标为 **v0.1.0**。本分支仍在验收，最终结果以 [发布验收记录](docs/release-validation.md) 为准。
+**v0.1.0** 提供可复现的本机演示与小规模真实验证。[正式发行与视频](https://github.com/XJfyrh/CrackRAG/releases/tag/v0.1.0) · [验收记录](docs/release-validation.md) · [简历项目说明](docs/resume-project.md)
 
 ## 支持范围
 
@@ -19,9 +19,12 @@ CrackRAG 是一个有证据约束的财务文档问答项目。首问查阅 PDF�
 ```sh
 git clone https://github.com/XJfyrh/CrackRAG.git
 cd CrackRAG
+git checkout v0.1.0
 ./crackrag init
 ./crackrag up
 ```
+
+使用发行源码 ZIP/tar.gz 时，解压并进入其中的目录，直接从 `./crackrag init` 开始，不需要 Git。
 
 打开 <http://localhost:18086>，使用 `.release/secrets/access_token` 内本机随机令牌登录。初始化生成的 `.release/` 是私有目录，不提交、不复制到公开发行包。
 
@@ -37,7 +40,7 @@ Windows PowerShell 使用 `./crackrag.ps1` 执行相同子命令。需要已启�
 6. 从“最近查询”切换历史、刷新页面，确认沿用原查询，无新收费请求。
 7. 单独询问营业成本并开启构建，将后台策略改为“预计缓存可复用时构建”（`HOT_ONLY`）。观察实际后台终态；经验依据不足时可以跳过，不要求供应商缓存必然命中。默认 mock 的这一步仅演示策略流程。
 
-受控恢复、备份和真实模式步骤见 [运行手册](docs/operations.md)。实际浏览器验收和演示视频将在发布记录中给出。
+受控恢复、备份和真实模式步骤见 [运行手册](docs/operations.md)。[4 分 21 秒演示视频](https://github.com/XJfyrh/CrackRAG/releases/tag/v0.1.0) 使用 mock；真实模型的 [质量](docs/quality-results-v3.md) 与 [费用](docs/cost-results-v3.md) 另有可核对报告。
 
 ## 实现
 
