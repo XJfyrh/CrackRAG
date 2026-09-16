@@ -1,0 +1,22 @@
+name: crackrag-release-tests
+services:
+  postgres:
+    image: pgvector/pgvector@sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: crackrag
+      POSTGRES_PASSWORD: local-release-tests
+    ports: ["127.0.0.1:55446:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crackrag -d postgres"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  redis:
+    image: redis@sha256:e7723ff73d963f5cc6d9c4643ea3d989527a402a319239054e9472a7fb9219a2
+    ports: ["127.0.0.1:56396:6379"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 30

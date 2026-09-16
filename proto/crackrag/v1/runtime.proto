@@ -1,0 +1,158 @@
+syntax = "proto3";
+package crackrag.v1;
+option go_package = "crackrag/api/gen/crackrag/v1;crackragv1";
+
+message RequestContext {
+  string service_id = 1;
+  string tenant_id = 2;
+  string run_id = 3;
+  string trace_id = 4;
+  string scope_token = 5;
+  string config_version = 6;
+  string job_id = 7;
+  string lease_owner = 8;
+  uint64 fencing_token = 9;
+}
+message Empty {}
+message HealthReply { string status = 1; string protocol_version = 2; string config_version = 3; string embedding_version = 4; string release_manifest_sha256 = 5; }
+message ExecutionContract {
+  string version = 1;
+  string deadline_at = 2;
+  repeated string document_version_ids = 3;
+  uint32 max_steps = 4;
+  uint32 max_tool_calls = 5;
+  uint32 max_model_calls = 6;
+  uint32 max_context_chars = 7;
+  uint32 max_output_tokens = 8;
+  uint32 max_snapshot_age_ms = 9;
+  string cost_budget = 10;
+  string currency = 11;
+  string execution_policy = 12;
+  string configuration_json = 13;
+  bool historical = 14;
+}
+message RuntimeSnapshot {
+  string snapshot_id = 1;
+  string observed_at = 2;
+  string remaining_budget = 3;
+  uint32 remaining_requests = 4;
+  uint32 model_slots = 5;
+  string cache_state = 6;
+  string gpu_location = 7;
+  uint32 refresh_count = 8;
+  string refresh_reason = 9;
+  string config_version = 10;
+  string available_tools = 11;
+}
+message Region {
+  string id = 1;
+  string document_version_id = 2;
+  uint32 page = 3;
+  repeated double bbox = 4;
+  double page_width = 5;
+  double page_height = 6;
+  string kind = 7;
+  string text = 8;
+  string text_sha256 = 9;
+  string context_json = 10;
+  string parser_version = 11;
+  repeated float embedding = 12;
+  string embedding_version = 13;
+  string fts_terms = 14;
+  string document_title = 15;
+  string document_id = 16;
+  double score = 17;
+}
+message ParseRequest {
+  RequestContext context = 1;
+  bytes pdf = 2;
+  string pdf_sha256 = 3;
+  string document_version_id = 4;
+  string title = 5;
+  repeated uint32 pages = 6;
+}
+message ParseReply {
+  repeated Region regions = 1;
+  repeated uint32 indexed_pages = 2;
+  uint32 total_pages = 3;
+  string parser_version = 4;
+  string embedding_version = 5;
+  string build_usage_json = 6;
+}
+message EmbedRequest { RequestContext context = 1; repeated string texts = 2; }
+message Vector { repeated float values = 1; }
+message EmbedReply { repeated Vector vectors = 1; string embedding_version = 2; string usage_json = 3; }
+message QueryRequest { RequestContext context = 1; string question = 2; ExecutionContract contract = 3; string provider = 4; RuntimeSnapshot runtime_snapshot = 5; }
+message RuntimeEvent { string type = 1; string payload_json = 2; string occurred_at = 3; }
+message SearchRequest {
+  RequestContext context = 1;
+  string query = 2;
+  repeated float vector = 3;
+  uint32 top_k = 4;
+  int32 year = 5;
+  uint32 page = 6;
+  string embedding_version = 7;
+}
+message SearchReply { repeated Region regions = 1; bool truncated = 2; string method = 3; }
+message OpenRequest { RequestContext context = 1; repeated string region_ids = 2; }
+message OpenReply { repeated Region regions = 1; }
+message ReserveRequest { RequestContext context = 1; string attempt_id = 2; string payload_json = 3; string provider = 4; string stage = 5; string batch_id = 6; string probe_token = 7; string prefix_manifest_id = 8; string cache_evidence_id = 9; string subexperiment = 10; string snapshot_json = 11; uint32 snapshot_refreshes = 12; }
+message ReserveReply {
+  RuntimeSnapshot snapshot = 1;
+  string reserved_upper_cny = 2;
+  string cache_decision_json = 3;
+  uint32 cache_remaining_window_ms = 4;
+}
+message SettleRequest { RequestContext context = 1; string attempt_id = 2; string call_json = 3; }
+
+service AIRuntime {
+  rpc Health(Empty) returns (HealthReply);
+  rpc Parse(ParseRequest) returns (ParseReply);
+  rpc Embed(EmbedRequest) returns (EmbedReply);
+  rpc RunQuery(QueryRequest) returns (stream RuntimeEvent);
+  rpc CancelRun(M3Request) returns (JsonReply);
+  rpc ResumeJob(M3Request) returns (JsonReply);
+}
+service DataTools {
+  rpc SearchDocuments(SearchRequest) returns (SearchReply);
+  rpc OpenDocument(OpenRequest) returns (OpenReply);
+  rpc ReserveCall(ReserveRequest) returns (ReserveReply);
+  rpc SettleCall(SettleRequest) returns (Empty);
+  rpc ResolveConcepts(ResolveRequest) returns (JsonReply);
+  rpc GetCoverage(FactsRequest) returns (JsonReply);
+  rpc ReadFacts(FactsRequest) returns (JsonReply);
+}
+
+// M2 additions are wire-compatible with the M1 messages. Decimal values inside
+// the versioned JSON schemas MUST be strings; JSON numbers are rejected.
+message JsonReply { string payload_json = 1; }
+message ResolveRequest { RequestContext context = 1; string question = 2; }
+message FactsRequest { RequestContext context = 1; string requirements_json = 2; uint32 limit = 3; string cursor = 4; }
+message BeginExtractionRequest { RequestContext context = 1; repeated string region_ids = 2; string logical_key = 3; }
+message BatchRequest { RequestContext context = 1; string batch_id = 2; string stop_reason = 3; }
+message CandidateRequest { RequestContext context = 1; string batch_id = 2; string raw_result = 3; }
+message CommitRequest { RequestContext context = 1; string batch_id = 2; string report_id = 3; }
+message ProbeOpenRequest { RequestContext context = 1; string batch_id = 2; string probe_token = 3; repeated string region_ids = 4; }
+message DeriveRequest { RequestContext context = 1; repeated string input_fact_ids = 2; }
+service ExtractionControl {
+  rpc BeginExtraction(BeginExtractionRequest) returns (JsonReply);
+  rpc StoreCandidates(CandidateRequest) returns (JsonReply);
+  rpc ValidateCandidates(BatchRequest) returns (JsonReply);
+  rpc BeginProbe(BatchRequest) returns (JsonReply);
+  rpc CommitExtraction(CommitRequest) returns (JsonReply);
+  rpc DeriveFacts(DeriveRequest) returns (JsonReply);
+}
+// A probe capability never grants publication, SQL, code execution or mutation.
+service ProbeTools { rpc OpenDocument(ProbeOpenRequest) returns (OpenReply); }
+
+// M3 control messages never form part of the model tool surface.
+message M3Request { RequestContext context = 1; string payload_json = 2; }
+service JobControl {
+  rpc CreateJob(M3Request) returns (JsonReply);
+  rpc ClaimJob(M3Request) returns (JsonReply);
+  rpc RenewJob(M3Request) returns (JsonReply);
+  rpc ObservePrefix(M3Request) returns (JsonReply);
+  rpc FinishJob(M3Request) returns (JsonReply);
+  rpc CancelJobs(M3Request) returns (JsonReply);
+  rpc GetJob(M3Request) returns (JsonReply);
+}

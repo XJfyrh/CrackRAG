@@ -1,0 +1,31 @@
+{
+  "version": "m3-cache-calibration-v2",
+  "policy_version": "m3-cache-policy-v2",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "profile": {"temperature": 0, "thinking": "disabled", "response_format": "json_object", "tools": "absent", "max_tokens": [512, 2048], "namespace": "stable tenant-derived user_id; exact match required within each seed/target pair"},
+  "basis_types": ["RECENT_SETTLED_SEED"],
+  "claim_strength": "empirical",
+  "attribution_scope": "source_text_and_string_context_bundle",
+  "soft_window_ms": 5000,
+  "soft_window_anchor": "First immutable database settled_received_at for the successful physical seed. DB clock_timestamp supplies both anchor and admission time. Repeated observation, settlement replay or decision reconstruction cannot renew it.",
+  "soft_window_status": "application risk assumption to be measured in v2; not an empirically proven TTL or provider lease",
+  "provider_expires_at": "unknown",
+  "estimate": "A recently received successful settlement with the same complete native static prefix, parameters and tenant namespace makes cross-branch reuse plausible. The seed itself need not have a positive hit; it may have processed a cold input. Delayed receipt can weaken this estimate and is reported, not recast as provider readiness. Target dispatch never depends on the target's future usage.",
+  "integrity": "Go reconstructs matching physical calls from the authoritative ledger. Caller-provided verified/availability flags do not authorize dispatch. Simulated and real provider evidence remain isolated.",
+  "negative_rule": "The latest complete matching extraction with zero aggregate cache hits blocks the prefix for the remainder of that observation's window, including when a newer Answer exists. A subsequent successful matching extraction or aging out of the negative observation can change the estimate; no automatic extra request or renewal of an original window.",
+  "historical_evidence": [
+    {"path": "evidence/m3/reviews/live-cache-audit.json", "sha256": "93386b0f5a4dc5be2ef9d364e51e2fab800f2e1d50fa7bff1adb50584a8895d6"},
+    {"path": "evidence/m3/reviews/live-cache-review.md", "sha256": "aebbd0e709f2f6d77615894840d1434d446094219ec6ddcfd582bff82ac60622"},
+    {"path": "config/m3/live-freeze-v1.json", "sha256": "82d181a360c964434e5a51f9f3bf0f63c1bf3009f109610ea191fc4ae3b16dee"}
+  ],
+  "observed_scope": "16 protocol requests support limited source text/context bundle attribution. Two production Answer/Extraction pairs shared a 12945-byte native static prefix; extraction followed Answer response by 190.701/173.217ms and each reported 3712 aggregate hit tokens.",
+  "limitations": [
+    "The historical 620-token heuristic removed source text, textual context and some metadata; it is not a pure-document lower bound or exact coverage.",
+    "Historical state cannot create a current hot window; every dispatch needs fresh matching observations.",
+    "The 5000ms window and increased 2048 output allowance are v2 application choices, not established by the two historic timing samples.",
+    "Parameter fingerprints and actual static native prefixes must match within each seed/target pair; calibration methodology does not transfer current cache state across namespaces.",
+    "The first implementation supports recent settled seed evidence. Other independently calibrated pre-dispatch bases remain possible; this is not a unique M3 acceptance premise.",
+    "Cache estimates can be wrong. All requests reserve cold-price upper cost and settle actual usage; there is no cache-only guarantee or automatic retry."
+  ]
+}

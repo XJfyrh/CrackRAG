@@ -1,0 +1,160 @@
+{
+  "schema": "crackrag-release-quality-preparation-v1",
+  "prepared_on": "2026-09-16",
+  "status": "PREPARED_NOT_EXECUTED",
+  "no_api_calls": true,
+  "model_api_calls": 0,
+  "runtime_commit_binding": "REQUIRED_BEFORE_EXECUTION",
+  "checks": {
+    "public_json_schema_and_cross_references": "PASS",
+    "quality_12_cases_and_sequence_16_queries": "PASS",
+    "python_syntax": "PASS",
+    "offline_original_size_hash_page_count": "PASS",
+    "selected_page_stream_text_bounds_equivalence": "PASS",
+    "four_selected_renders_identical_to_visually_inspected_originals": "PASS",
+    "gold_not_present_in_question_values": "PASS"
+  },
+  "private_provenance_report": "prepared-reproduction-verified.json",
+  "private_provenance_sha256": "fd91e2c630a3385b41caea34b6daa1bc3bf81e523ba24a845bbde1a575a17a14",
+  "private_sources": [
+    {
+      "id": "fuyao-2024",
+      "sha256": "5e184ffd29c5f467bbffea158b3bb7c0be3a4f5959b33d1d633671c204dbbab1",
+      "bytes": 4316462,
+      "page_count": 200,
+      "scopes": [
+        {
+          "id": "fuyao-positive",
+          "relative_path": "selected/fuyao-positive.pdf",
+          "sha256": "102bd1d93c871bc5a4c0e24712d2e8faaa32ad07b0c9fb23fbf44c3e1bb73bcd",
+          "bytes": 658150,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 200,
+              "content_stream_sha256": "d0b86dc53bceb808744c4869b36ce35516688f28e5fc3bcc8eda1c5529157807"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/fuyao-positive-1.png",
+              "sha256": "7f966a2c53cb454044ac82da4e03d6490ec70d7eca5af2c1c54f4000cbb02fa1"
+            }
+          ]
+        },
+        {
+          "id": "fuyao-missing-header",
+          "relative_path": "selected/fuyao-missing-header.pdf",
+          "sha256": "ca305a778a77a59e6f771106d990c0cbc20ed5859a6150a8707a534126285563",
+          "bytes": 656284,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 94,
+              "content_stream_sha256": "4a6500a84af26ff2866b91cf5b948446b823bbac8185759755c2e165a61e9b6a"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/fuyao-missing-header-1.png",
+              "sha256": "a43a9031069edeb48324991099301b9583bc40def57259cfb8ae4505bd01530c"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "anjoy-2024",
+      "sha256": "91e063371871c8f84c6481b7ea54a144e108c0c337cbcc776947dfc55a7a30d7",
+      "bytes": 1870677,
+      "page_count": 239,
+      "scopes": [
+        {
+          "id": "anjoy-positive",
+          "relative_path": "selected/anjoy-positive.pdf",
+          "sha256": "216938ac08627a4452d62d8632b11befd21aabef82da3eef331d2aa67b6a22de",
+          "bytes": 290558,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 106,
+              "content_stream_sha256": "2bd9cf23a37e009e55048707eb25c5852d561411b0e0a59ced6f53f345ec8741"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/anjoy-positive-1.png",
+              "sha256": "84e58c244d76f52131fd4e788af226f96704679c3f64e6c39e9609d2e5bc778b"
+            }
+          ]
+        },
+        {
+          "id": "anjoy-missing-revenue",
+          "relative_path": "selected/anjoy-missing-revenue.pdf",
+          "sha256": "4c67ba48a84d72d3bc9d2ab405e75f5219248434e9a72f6da8793092adc503b6",
+          "bytes": 271551,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 107,
+              "content_stream_sha256": "904b95c87fc89cc2cf01e5e0421767ad2808b675ddb51f9b5d610885af57efa1"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/anjoy-missing-revenue-1.png",
+              "sha256": "807483d1737bc8b2966ec3a76f2f5b7b28a9f1d02514e61aff0d5c7a0102caab"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "frozen_files": [
+    {
+      "path": "eval/release/quality/.gitignore",
+      "bytes": 76,
+      "sha256": "bd735f01a17197317ce03683dcb9938e33e0d1d2d3193254b6e0c9ae600ecbbd"
+    },
+    {
+      "path": "eval/release/quality/gold.json",
+      "bytes": 5811,
+      "sha256": "ad3c6d3e6a8bc6de575366f0a058190a3bc9ecf5e853af39cbc0057e84e92387"
+    },
+    {
+      "path": "eval/release/quality/model-inputs.json",
+      "bytes": 11428,
+      "sha256": "3501f9a4b254dfaf698002fb4ebfec83735765c039f0d71f98dac0f8bf234b25"
+    },
+    {
+      "path": "eval/release/quality/preparation-candidates.json",
+      "bytes": 2060,
+      "sha256": "0963630d3b2543a04d1ccb6ba758135491c7269f4535c1f013068222480f7fa7"
+    },
+    {
+      "path": "eval/release/quality/quality-plan.json",
+      "bytes": 6487,
+      "sha256": "1e1059a6aeec9223c0b8bc1cb5532b60266845c20b616de13d050ff912402d5e"
+    },
+    {
+      "path": "eval/release/quality/README.md",
+      "bytes": 7649,
+      "sha256": "a5e386739fb174fe88b9119fadad2d337d924a5f92687bc6cc04b02498dc5581"
+    },
+    {
+      "path": "eval/release/quality/sequence-plan.json",
+      "bytes": 3808,
+      "sha256": "f8f4c838ccddadf7de0ca2cdb54aab7aae5ce131565e531dcbb7696988448b40"
+    },
+    {
+      "path": "eval/release/quality/sources.json",
+      "bytes": 4551,
+      "sha256": "e2d66ce3f4603a755f987d03ea81c6fd83bdf542977369f46312a7c836a109a9"
+    },
+    {
+      "path": "scripts/release_prepare_quality.py",
+      "bytes": 9615,
+      "sha256": "8590d872668ef63b0cbee97a81cf6af2d217c61006858ebec18ad2852788f338"
+    }
+  ]
+}

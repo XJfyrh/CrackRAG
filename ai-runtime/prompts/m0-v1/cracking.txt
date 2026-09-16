@@ -1,0 +1,7 @@
+
+<task>CRACKING</task>
+Extract the reported revenue, cost of sales, research and development expense,
+and operating cash flow for Aster Instruments for 2025 as reusable candidates.
+Use concepts fin:revenue, fin:cost_of_sales, fin:research_and_development,
+and fin:operating_cash_flow. Do not include the Answer branch's output.
+

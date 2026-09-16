@@ -1,0 +1,10 @@
+*.pdf
+*.png
+*.jpg
+*.jpeg
+parsed/
+sources/
+selected/
+selected-renders/
+raw/
+

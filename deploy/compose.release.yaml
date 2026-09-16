@@ -1,0 +1,95 @@
+name: ${CRACKRAG_PROJECT:-crackrag-release}
+x-app: &app
+  image: crackrag-release:local
+  build: {context: .., dockerfile: deploy/Release.Dockerfile}
+  user: "10001:10001"
+  read_only: true
+  tmpfs: ["/tmp:rw,nosuid,nodev,size=1g"]
+  cap_drop: [ALL]
+  security_opt: ["no-new-privileges:true"]
+  stop_grace_period: 35s
+  environment: &environment
+    M1_MODEL_PROVIDER: ${CRACKRAG_PROVIDER:-mock}
+    M1_EMBEDDING_MODE: ${CRACKRAG_EMBEDDING:-fixture}
+    M1_MOCK_SCENARIO: ${CRACKRAG_MOCK_SCENARIO:-happy}
+    M1_INTERNAL_TOKEN_FILE: /run/secrets/internal_token
+    M1_PRICE_SNAPSHOT: ${CRACKRAG_PRICE:-/app/config/m1-pricing.json}
+    CRACKRAG_RELEASE_MANIFEST: /app/release-manifest.json
+    CRACKRAG_RELEASE_ROOT: /app
+    CRACKRAG_LIVE_SESSION: ${CRACKRAG_SESSION:-}
+    CRACKRAG_LIVE_CONTROL: /state/live-control.json
+    CRACKRAG_ANSWER_POLICY: financial-supported-v1
+    M4_RECOVERY_ENABLED: "true"
+    M4_REDIS_URL: redis://redis:6379/0
+services:
+  postgres:
+    image: pgvector/pgvector@sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f
+    environment: {POSTGRES_USER: crackrag, POSTGRES_DB: crackrag, POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password}
+    volumes: ["postgres-data:/var/lib/postgresql/data", "${CRACKRAG_STATE:-../.release}/secrets/postgres_password:/run/secrets/postgres_password:ro"]
+    healthcheck: {test: [CMD-SHELL, "pg_isready -U crackrag -d crackrag"], interval: 3s, timeout: 3s, retries: 40}
+  redis:
+    image: redis@sha256:e7723ff73d963f5cc6d9c4643ea3d989527a402a319239054e9472a7fb9219a2
+    command: [redis-server, --appendonly, "yes"]
+    volumes: ["redis-data:/data"]
+    healthcheck: {test: [CMD, redis-cli, ping], interval: 3s, timeout: 3s, retries: 30}
+  runtime: &runtime
+    <<: *app
+    command: [python, -m, crackrag_m1.server]
+    environment: &runtime-environment
+      <<: *environment
+      M1_RUNTIME_ADDRESS: 0.0.0.0:50051
+      M1_DATA_TOOLS_ADDRESS: api:50052
+      M1_EMBEDDING_DIRECTORY: /models/bge-m3
+      DEEPSEEK_API_KEY_FILE: /run/secrets/deepseek_api_key
+    volumes: ["${CRACKRAG_STATE:-../.release}/state:/state:ro", "${CRACKRAG_STATE:-../.release}/models:/models:ro", "${CRACKRAG_STATE:-../.release}/secrets/internal_token:/run/secrets/internal_token:ro", "${CRACKRAG_STATE:-../.release}/secrets/deepseek_api_key:/run/secrets/deepseek_api_key:ro"]
+    healthcheck: {test: [CMD, python, -m, crackrag_m1.health], interval: 10s, timeout: 10s, retries: 90, start_period: 180s}
+  api: &api
+    <<: *app
+    command: [/app/api-bin/crackrag-api]
+    environment: &api-environment
+      <<: *environment
+      M1_DATABASE_URL_FILE: /run/secrets/database_url
+      M1_API_TOKENS_FILE: /run/secrets/api_tokens
+      M1_HTTP_ADDRESS: 0.0.0.0:8080
+      M1_GRPC_ADDRESS: 0.0.0.0:50052
+      M1_RUNTIME_ADDRESS: runtime:50051
+      M1_BLOB_DIRECTORY: /data/blobs
+      M1_MIGRATIONS_DIRECTORY: /app/migrations
+      M1_WEB_DIRECTORY: /app/web/dist
+    volumes: ["blob-data:/data/blobs", "${CRACKRAG_STATE:-../.release}/state:/state:ro", "${CRACKRAG_STATE:-../.release}/secrets/internal_token:/run/secrets/internal_token:ro", "${CRACKRAG_STATE:-../.release}/secrets/database_url:/run/secrets/database_url:ro", "${CRACKRAG_STATE:-../.release}/secrets/api_tokens:/run/secrets/api_tokens:ro"]
+    ports: ["127.0.0.1:${CRACKRAG_PORT:-18086}:8080"]
+    depends_on: {postgres: {condition: service_healthy}, redis: {condition: service_healthy}, runtime: {condition: service_healthy}}
+    healthcheck: {test: [CMD, /app/api-bin/crackrag-api, health], interval: 10s, timeout: 12s, retries: 30}
+  # Opt-in recovery validation pair. It shares the same authoritative ledger,
+  # quotas, private state and blobs; it is not a second independent project.
+  runtime2:
+    <<: *runtime
+    profiles: [recovery]
+    environment:
+      <<: *runtime-environment
+      M1_DATA_TOOLS_ADDRESS: api2:50052
+      M1_MOCK_SCENARIO: happy
+  api2:
+    <<: *api
+    profiles: [recovery]
+    environment:
+      <<: *api-environment
+      M1_RUNTIME_ADDRESS: runtime2:50051
+    ports: ["127.0.0.1:${CRACKRAG_RECOVERY_PORT:-18087}:8080"]
+    depends_on: {postgres: {condition: service_healthy}, redis: {condition: service_healthy}, runtime2: {condition: service_healthy}}
+  admin:
+    <<: *app
+    profiles: [tools]
+    user: "0:0"
+    read_only: false
+    cap_drop: []
+    environment:
+      CRACKRAG_HOST_UID: ${CRACKRAG_HOST_UID:-10001}
+      HF_HUB_OFFLINE: "0"
+      HF_HUB_DISABLE_XET: "1"
+    entrypoint: [python, /app/scripts/release/image.py]
+    volumes: ["${CRACKRAG_STATE:-../.release}:/release", "blob-data:/data/blobs"]
+volumes:
+  postgres-data:
+  redis-data:
+  blob-data:

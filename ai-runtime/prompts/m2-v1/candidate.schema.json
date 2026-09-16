@@ -1,0 +1,116 @@
+{
+  "$defs": {
+    "CandidateShape": {
+      "additionalProperties": false,
+      "properties": {
+        "entity": {
+          "title": "Entity",
+          "type": "string"
+        },
+        "property": {
+          "title": "Property",
+          "type": "string"
+        },
+        "period": {
+          "pattern": "^FY20\\d{2}$",
+          "title": "Period",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "CNY",
+            "ratio"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "scope": {
+          "title": "Scope",
+          "type": "string"
+        },
+        "value": {
+          "pattern": "^-?(?:0|[1-9]\\d{0,29})(?:\\.\\d{1,12})?$",
+          "title": "Value",
+          "type": "string"
+        },
+        "raw_value": {
+          "title": "Raw Value",
+          "type": "string"
+        },
+        "origin": {
+          "enum": [
+            "REPORTED",
+            "DERIVED"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "region_id": {
+          "title": "Region Id",
+          "type": "string"
+        },
+        "quote": {
+          "title": "Quote",
+          "type": "string"
+        },
+        "input_fact_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Input Fact Ids",
+          "type": "array"
+        },
+        "formula_version": {
+          "default": "",
+          "title": "Formula Version",
+          "type": "string"
+        },
+        "precision": {
+          "default": 0,
+          "title": "Precision",
+          "type": "integer"
+        },
+        "rounding": {
+          "default": "",
+          "title": "Rounding",
+          "type": "string"
+        },
+        "complete": {
+          "default": false,
+          "title": "Complete",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "entity",
+        "property",
+        "period",
+        "unit",
+        "scope",
+        "value",
+        "raw_value",
+        "origin",
+        "region_id",
+        "quote"
+      ],
+      "title": "CandidateShape",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "candidates": {
+      "items": {
+        "$ref": "#/$defs/CandidateShape"
+      },
+      "maxItems": 12,
+      "title": "Candidates",
+      "type": "array"
+    }
+  },
+  "required": [
+    "candidates"
+  ],
+  "title": "ExtractionShape",
+  "type": "object"
+}

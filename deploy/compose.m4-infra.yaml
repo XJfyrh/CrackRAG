@@ -1,0 +1,28 @@
+name: crackrag-m4
+services:
+  postgres:
+    image: pgvector/pgvector@sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f
+    environment:
+      POSTGRES_DB: crackrag_m4
+      POSTGRES_USER: crackrag
+      POSTGRES_PASSWORD: local-m4-development
+    ports: ["127.0.0.1:55436:5432"]
+    volumes: ["m4-postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crackrag -d crackrag_m4"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+  redis:
+    image: redis@sha256:e7723ff73d963f5cc6d9c4643ea3d989527a402a319239054e9472a7fb9219a2
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["127.0.0.1:56384:6379"]
+    volumes: ["m4-redis-data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
+volumes:
+  m4-postgres-data:
+  m4-redis-data:

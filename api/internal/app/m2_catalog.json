@@ -1,0 +1,189 @@
+{
+  "version": "m2-finance-v1",
+  "mapping_version": "release-finance-aliases-v1",
+  "concepts": [
+    {
+      "id": "fin:revenue",
+      "definition": "Reported consolidated revenue for the stated fiscal year, excluding adjusted or segment-specific bases.",
+      "unit": "CNY",
+      "aliases": [
+        "Revenue",
+        "营业收入",
+        "营收"
+      ]
+    },
+    {
+      "id": "fin:cost_of_revenue",
+      "definition": "Reported consolidated cost of revenue for the stated fiscal year.",
+      "unit": "CNY",
+      "aliases": [
+        "Cost of revenue",
+        "营业成本"
+      ]
+    },
+    {
+      "id": "fin:gross_margin",
+      "definition": "(Revenue - cost of revenue) / revenue on compatible periods, currencies and business scope; reported disclosure remains separate.",
+      "unit": "ratio",
+      "aliases": [
+        "Gross margin",
+        "毛利率"
+      ]
+    },
+    {
+      "id": "fin:net_profit",
+      "definition": "Reported consolidated net profit, not automatically attributable-to-parent profit.",
+      "unit": "CNY",
+      "aliases": [
+        "Net profit",
+        "净利润"
+      ]
+    }
+  ],
+  "entities": [
+    {
+      "id": "sample:holdings",
+      "scope": "development-fixture",
+      "aliases": [
+        "Sample Holdings",
+        "样例控股"
+      ]
+    },
+    {
+      "id": "cn:600519",
+      "scope": "issuer:600519",
+      "aliases": [
+        "贵州茅台酒股份有限公司",
+        "贵州茅台",
+        "茅台"
+      ]
+    },
+    {
+      "id": "cn:603288",
+      "scope": "issuer:603288",
+      "aliases": [
+        "佛山市海天调味食品股份有限公司",
+        "海天味业"
+      ]
+    },
+    {
+      "id": "cn:600887",
+      "scope": "issuer:600887",
+      "aliases": [
+        "内蒙古伊利实业集团股份有限公司",
+        "伊利股份"
+      ]
+    },
+    {
+      "id": "sample:other",
+      "scope": "development-fixture",
+      "aliases": [
+        "Other Holdings",
+        "另一控股"
+      ]
+    },
+    {
+      "id": "sample:ambiguous-a",
+      "scope": "development-fixture-a",
+      "aliases": [
+        "Shared Holdings"
+      ]
+    },
+    {
+      "id": "sample:ambiguous-b",
+      "scope": "development-fixture-b",
+      "aliases": [
+        "Shared Holdings"
+      ]
+    },
+    {
+      "id": "cn:000858",
+      "scope": "issuer:000858",
+      "aliases": [
+        "宜宾五粮液股份有限公司",
+        "五粮液"
+      ]
+    },
+    {
+      "id": "cn:000568",
+      "scope": "issuer:000568",
+      "aliases": [
+        "泸州老窖股份有限公司",
+        "泸州老窖"
+      ]
+    },
+    {
+      "id": "cn:600660",
+      "scope": "issuer:600660",
+      "aliases": [
+        "福耀玻璃工业集团股份有限公司",
+        "福耀玻璃"
+      ]
+    },
+    {
+      "id": "cn:603345",
+      "scope": "issuer:603345",
+      "aliases": [
+        "安井食品集团股份有限公司",
+        "安井食品"
+      ]
+    },
+    {
+      "id": "cn:600352",
+      "scope": "issuer:600352",
+      "aliases": [
+        "浙江龙盛集团股份有限公司",
+        "浙江龙盛"
+      ]
+    },
+    {
+      "id": "cn:601100",
+      "scope": "issuer:601100",
+      "aliases": [
+        "江苏恒立液压股份有限公司",
+        "恒立液压"
+      ]
+    }
+  ],
+  "formulas": [
+    {
+      "id": "gross-margin-v1",
+      "output": "fin:gross_margin",
+      "inputs": [
+        "fin:revenue",
+        "fin:cost_of_revenue"
+      ],
+      "expression": "(revenue-cost)/revenue",
+      "precision": 8,
+      "rounding": "ROUND_HALF_UP"
+    }
+  ],
+  "policy": {
+    "version": "release-validation-policy-v2",
+    "validator": "release-samepage-validator-v2",
+    "schema": "m2-candidate-v1",
+    "prompt": "m2-extraction-v1",
+    "answer_prompt": "m2-source-agent-v1",
+    "probe_prompt": "m2-probe-v1",
+    "tools": "m2-data-tools-v1",
+    "probe_rounds": 1,
+    "probe_model_calls": 2,
+    "probe_tool_calls": 4,
+    "probe_budget_cny": "0.10",
+    "experiment_budget_cny": "1.00",
+    "experiment_requests": 20,
+    "max_candidates": 12,
+    "max_results": 20,
+    "max_result_bytes": 24000,
+    "report_ttl_seconds": 120
+  },
+  "assets": {
+    "ai-runtime/prompts/m2-v1/candidate.schema.json": "ae3439a5d2c325fc6f3e9290ff3ae315d461fa120a173c814d386b3ee40aa349",
+    "ai-runtime/prompts/m2-v1/extraction.txt": "3f8dd98232daefa9d581a23b904284691f7e202f74f56e064d5a288b0166a3eb",
+    "ai-runtime/prompts/m2-v1/probe.txt": "350f5aa494112924136598157dac0a800a525a1a8989ef3d8aca4672f63e4c6f",
+    "ai-runtime/prompts/m2-v1/answer-contract.txt": "9edba6c1a5961a304407b5d6c3edca147fd6031fd99bf86fb7cf9501cff92114",
+    "ai-runtime/prompts/m1-v1/system.txt": "567ce9f2a7271f8f1bd1b9e4745ec6dc33a1dbea4e69dcb11bb6612625a205e5",
+    "ai-runtime/prompts/m1-v1/action.schema.json": "ce2890881b746d5f6269491c37776d030582f0622222fcbb1dc9270df7a83673",
+    "ai-runtime/prompts/release-v1/financial-answer.txt": "2f86a8fd0c8a6a108f07a0c37b225f4ffd72d578a36d5fb55a5bfc0dbcb5ee33"
+  }
+}

@@ -1,0 +1,48 @@
+name: crackrag-m2
+services:
+  postgres:
+    image: pgvector/pgvector@sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f
+    environment:
+      POSTGRES_DB: crackrag_m2
+      POSTGRES_USER: crackrag
+      POSTGRES_PASSWORD: local-m2-development
+    ports: ["127.0.0.1:55434:5432"]
+    volumes: ["m2-postgres-data:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U crackrag -d crackrag_m2"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  runtime:
+    build: {context: .., dockerfile: deploy/Runtime.Dockerfile}
+    environment:
+      M1_DATA_TOOLS_ADDRESS: api:50052
+      M1_RUNTIME_ADDRESS: 0.0.0.0:50051
+      M1_INTERNAL_TOKEN: ${M2_INTERNAL_TOKEN:-local-m2-service-token}
+      M1_MODEL_PROVIDER: ${M2_MODEL_PROVIDER:-mock}
+      M1_EMBEDDING_MODE: ${M2_EMBEDDING_MODE:-fixture}
+      M1_EMBEDDING_DIRECTORY: /models/bge-m3
+      M1_PRICE_SNAPSHOT: ${M2_PRICE_SNAPSHOT:-/app/config/m1-pricing.json}
+      DEEPSEEK_API_KEY: ${DEEPSEEK_API_KEY:-}
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+    volumes: ["${M2_MODEL_DIRECTORY:-../tmp/m1-models}:/models:ro"]
+  api:
+    build: {context: .., dockerfile: deploy/API.Dockerfile}
+    environment:
+      M1_DATABASE_URL: postgres://crackrag:local-m2-development@postgres:5432/crackrag_m2?sslmode=disable
+      M1_HTTP_ADDRESS: 0.0.0.0:8080
+      M1_GRPC_ADDRESS: 0.0.0.0:50052
+      M1_RUNTIME_ADDRESS: runtime:50051
+      M1_INTERNAL_TOKEN: ${M2_INTERNAL_TOKEN:-local-m2-service-token}
+      M1_MODEL_PROVIDER: ${M2_MODEL_PROVIDER:-mock}
+      M1_BLOB_DIRECTORY: /data/blobs
+      M1_MIGRATIONS_DIRECTORY: /app/migrations
+      M1_WEB_DIRECTORY: /app/web
+      M1_PRICE_SNAPSHOT: ${M2_PRICE_SNAPSHOT:-/app/config/m1-pricing.json}
+    ports: ["127.0.0.1:18082:8080"]
+    volumes: ["../tmp/m2-blobs:/data/blobs"]
+    depends_on:
+      postgres: {condition: service_healthy}
+volumes:
+  m2-postgres-data:

@@ -1,0 +1,25 @@
+{
+  "version": "crackrag-samples-v1",
+  "files": [
+    {
+      "file": "financial.pdf",
+      "sha256": "b2e586dacb021d36a706ac62f11b25ebb4633072e28499fece998e1d842b3244",
+      "source_type": "original_synthetic_fixture",
+      "license": "MIT",
+      "pages": [
+        1
+      ],
+      "expected_support": "SUPPORTED"
+    },
+    {
+      "file": "ambiguous.pdf",
+      "sha256": "f61fa5cda94f9ac193fff1005eef068765d2e87afef4a843624344337c04b491",
+      "source_type": "original_synthetic_fixture",
+      "license": "MIT",
+      "pages": [
+        1
+      ],
+      "expected_support": "INCONCLUSIVE"
+    }
+  ]
+}

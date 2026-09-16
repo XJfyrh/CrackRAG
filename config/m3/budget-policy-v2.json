@@ -1,0 +1,28 @@
+{
+  "version": "m3-budget-policy-v2",
+  "cumulative_experiment_id": "m3-live-v1",
+  "user_hard_cap_cny": "100",
+  "internal_safeguards": {
+    "maximum_requests": 2000,
+    "default_max_output_tokens": 2048,
+    "foreground_concurrency": 1,
+    "background_concurrency": 1,
+    "automatic_retries": 0,
+    "run_maximum_calls": 6,
+    "run_cost_budget_cny": "2",
+    "background_job_maximum_calls": 3,
+    "background_job_budget_cny": "1",
+    "probe_maximum_calls_per_logical_batch": 2,
+    "probe_budget_per_run_and_job_cny": "0.5",
+    "probe_global_budget_cny": "10",
+    "subexperiments": {
+      "cache-protocol": {"maximum_requests": 200, "cost_budget_cny": "20", "probe_enabled": false},
+      "quality": {"maximum_requests": 1000, "cost_budget_cny": "50"},
+      "sequence": {"maximum_requests": 800, "cost_budget_cny": "30"}
+    }
+  },
+  "enforcement": "Go server-owned policy, immutable per-Run contract and actual reserved request output limit. Amounts are nested restrictions on the same cumulative ledger, never additional independent balances.",
+  "historical_contracts": "Retain original output and local constraints for settlement; never rewrite historical costs, hashes, attempts or UNKNOWN occupancy.",
+  "stop": "Actual cache misses settle normally. Unknown fees retain the reservation and halt new paid calls; no automatic retries or unreviewed zero-cost assumptions.",
+  "scope": "Internal counts, token caps and lanes can be revised under the user's autonomous M3 authorization with a new version and corresponding validation. Cumulative CNY 100 remains the hard user cap."
+}

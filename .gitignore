@@ -1,0 +1,28 @@
+.env
+.env.*
+!.env.example
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+runs/
+tmp/
+
+
+# M1 local build and browser artifacts
+web/node_modules/
+api/bin/
+.playwright-cli/
+output/
+
+# Private deployment state, secrets, account opening balance, backups and models.
+.release/
+backups/
+*.dump
+*.sqlite
+*.sqlite3
+web/public/pdfjs/

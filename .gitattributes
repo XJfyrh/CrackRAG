@@ -1,0 +1,11 @@
+# Keep prompt and source bytes stable across Windows and Unix checkouts.
+* text=auto eol=lf
+*.docx binary
+*.pdf binary
+# M4 audit hashes refer to the exact captured bytes, including line endings.
+evidence/m4/** -text -whitespace
+# Price verification hashes the provider's downloaded HTML bytes.
+config/m4/*.html -text -whitespace
+# Frozen evaluation manifests bind exact bytes, including historical newlines.
+eval/release/quality/*.json -text -whitespace
+eval/release/quality/**/*.json -text -whitespace

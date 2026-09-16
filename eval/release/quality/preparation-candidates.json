@@ -1,0 +1,49 @@
+{
+  "status": "PREPARATION_ONLY_NOT_MODEL_TESTED",
+  "no_api_calls": true,
+  "selection_rule": "Before model evaluation, select two unseen issuers with original same-page entity, consolidated title, year columns, currency/unit and the three supported rows. Preserve unsuitable candidates; no performance-based replacement.",
+  "not_selected": [
+    {
+      "id": "wuliangye-2024",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-26/1223311527.PDF",
+      "sha256": "b737191a758994a35e9442d46847de771fe48b758feb9a7f35601def922435e7",
+      "bytes": 7895552,
+      "page_count": 147,
+      "inspected_physical_pages": [
+        60,
+        61,
+        62
+      ],
+      "review": "rendered_and_visually_inspected",
+      "reason": "Consolidated title/unit/year/revenue on page 60, cost and total net profit on continuation 61 without repeated table header. Outside chosen same-page positive scope."
+    },
+    {
+      "id": "luzhou-laojiao-2024",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-28/1223350383.pdf",
+      "sha256": "4c8ab78fac56032945e2ad789fddbc5b6e254251f497eb20c04b73016a03b4de",
+      "bytes": 2455650,
+      "page_count": 195,
+      "inspected_physical_pages": [
+        90,
+        91,
+        92
+      ],
+      "review": "rendered_and_visually_inspected",
+      "reason": "Header on page 90, revenue/cost on 91 and net profit on 92. Outside chosen same-page positive scope."
+    },
+    {
+      "id": "fuling-2024",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-29/1222941660.PDF",
+      "sha256": "6a92a481feeefe891c5161e1836d782d6cf673691ec304371325d5e5793bbb87",
+      "bytes": 3328047,
+      "page_count": 167,
+      "inspected_physical_pages": [
+        86,
+        87
+      ],
+      "review": "text_screened_only",
+      "reason": "Metric page 87 repeats year columns but consolidated title/unit remain on preceding page; not selected."
+    }
+  ],
+  "source_files_and_images": "Retained privately only, no full-text/public PDF distribution."
+}

@@ -1,0 +1,4 @@
+# Public release source uses LF on every platform. Historical Windows byte
+# identities remain in the private archive and are not this release's identity.
+* text=auto eol=lf
+src/crackrag_m1/m0_snapshot/** whitespace=-blank-at-eof

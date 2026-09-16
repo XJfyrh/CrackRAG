@@ -1,0 +1,126 @@
+{
+  "schema": "crackrag-release-quality-plan-v1",
+  "status": "PREPARED_NOT_EXECUTED",
+  "no_api_calls": true,
+  "model_api_calls": 0,
+  "answer_policy": "financial-supported-v1",
+  "case_counts": {
+    "supported_positive": 6,
+    "missing_evidence": 2,
+    "unsupported_basis": 2,
+    "reuse": 2,
+    "total": 12
+  },
+  "isolation": "New tenant and normal upload per context_group; no prior facts, no cross-group document access. Only the two reuse cases share their own revenue seed group. Each positive metric starts from its own cold group.",
+  "input_boundary": "Only model-inputs.json question/request and scope-bound original-page PDF are model/runtime inputs. gold.json, this plan, review notes and evaluator decisions are never included in prompts/tools/ingestion.",
+  "execution_order": "Run positive seeds and wait for their normal background work to settle before reuse. Run negative groups separately. Any preparation/extraction failure remains explicit.",
+  "grading": {
+    "positive": "All requested entity/year/concept/consolidated basis/unit/value must match gold, with validated citation back to selected/original page; unsupported/abstained/wrong-year/wrong-unit/wrong-total answers fail.",
+    "negative": "Pass only on explicit unsupported/inconclusive refusal without an unsupported numerical claim or fact publication; crash/network/timeout is not a pass.",
+    "reuse": "Full coverage and correct fact, explicit reused fact provenance, zero incremental paid calls after the seed/build is settled; blocked seed is never a pass.",
+    "aggregate": "Report 6 positive, 4 negative, 2 reuse denominators separately; no pooled metric that hides supported-answer failures. All 12 must pass for this limited quality gate.",
+    "limitations": "Two deliberately eligible same-page sources only; not complex cross-page, scans/OCR, arbitrary financial questions, or broad quality evidence."
+  },
+  "cases": [
+    {
+      "id": "q-fuyao-revenue",
+      "kind": "supported_positive",
+      "gold_id": "fuyao-revenue-2024",
+      "expected": "SUPPORTED_CORRECT",
+      "must_not_count_abstention_as_pass": true
+    },
+    {
+      "id": "q-fuyao-cost",
+      "kind": "supported_positive",
+      "gold_id": "fuyao-cost-2024",
+      "expected": "SUPPORTED_CORRECT",
+      "must_not_count_abstention_as_pass": true
+    },
+    {
+      "id": "q-fuyao-net-profit",
+      "kind": "supported_positive",
+      "gold_id": "fuyao-net-profit-2024",
+      "expected": "SUPPORTED_CORRECT",
+      "must_not_count_abstention_as_pass": true
+    },
+    {
+      "id": "q-anjoy-revenue",
+      "kind": "supported_positive",
+      "gold_id": "anjoy-revenue-2024",
+      "expected": "SUPPORTED_CORRECT",
+      "must_not_count_abstention_as_pass": true
+    },
+    {
+      "id": "q-anjoy-cost",
+      "kind": "supported_positive",
+      "gold_id": "anjoy-cost-2024",
+      "expected": "SUPPORTED_CORRECT",
+      "must_not_count_abstention_as_pass": true
+    },
+    {
+      "id": "q-anjoy-net-profit",
+      "kind": "supported_positive",
+      "gold_id": "anjoy-net-profit-2024",
+      "expected": "SUPPORTED_CORRECT",
+      "must_not_count_abstention_as_pass": true
+    },
+    {
+      "id": "q-fuyao-missing-header",
+      "kind": "missing_evidence",
+      "expected": "ABSTAIN_WITH_REASON",
+      "required_behavior": "No numerical answer or published validated fact for the unsupported requirement; explicit incomplete/unsupported status. INCONCLUSIVE is retained, not promoted to supported.",
+      "reason": "Authorized original continuation page lacks column-year labels, table-unit header and consolidated title; do not borrow page 93 or 200."
+    },
+    {
+      "id": "q-anjoy-missing-revenue",
+      "kind": "missing_evidence",
+      "expected": "ABSTAIN_WITH_REASON",
+      "required_behavior": "No numerical answer or published validated fact for the unsupported requirement; explicit incomplete/unsupported status. INCONCLUSIVE is retained, not promoted to supported.",
+      "reason": "Revenue row and table header are absent from the only authorized original page; no page 106 or previous-tenant facts."
+    },
+    {
+      "id": "q-fuyao-adjusted-revenue",
+      "kind": "unsupported_basis",
+      "expected": "ABSTAIN_WITH_REASON",
+      "required_behavior": "No numerical answer or published validated fact for the unsupported requirement; explicit incomplete/unsupported status. INCONCLUSIVE is retained, not promoted to supported.",
+      "reason": "Adjusted revenue is outside the reported consolidated concept; do not silently substitute reported revenue."
+    },
+    {
+      "id": "q-anjoy-parent-profit",
+      "kind": "unsupported_basis",
+      "expected": "ABSTAIN_WITH_REASON",
+      "required_behavior": "No numerical answer or published validated fact for the unsupported requirement; explicit incomplete/unsupported status. INCONCLUSIVE is retained, not promoted to supported.",
+      "reason": "Attributable-to-parent profit is not total consolidated net profit; reject unsupported concept/basis even if another source page contains it."
+    },
+    {
+      "id": "q-fuyao-reuse",
+      "kind": "reuse",
+      "gold_id": "fuyao-revenue-2024",
+      "depends_on": "q-fuyao-revenue",
+      "precondition": "Dependency passed and its ordinary background build has settled with the relevant fact PUBLISHED/active. Do not seed facts from gold.",
+      "expected": "SUPPORTED_CORRECT_WITH_REUSE",
+      "required_behavior": [
+        "Coverage FULL",
+        "correct gold fact and original-source provenance",
+        "no additional paid model calls across foreground/background/retries",
+        "active validated fact IDs present"
+      ],
+      "if_precondition_fails": "BLOCKED_NOT_PASS"
+    },
+    {
+      "id": "q-anjoy-reuse",
+      "kind": "reuse",
+      "gold_id": "anjoy-revenue-2024",
+      "depends_on": "q-anjoy-revenue",
+      "precondition": "Dependency passed and its ordinary background build has settled with the relevant fact PUBLISHED/active. Do not seed facts from gold.",
+      "expected": "SUPPORTED_CORRECT_WITH_REUSE",
+      "required_behavior": [
+        "Coverage FULL",
+        "correct gold fact and original-source provenance",
+        "no additional paid model calls across foreground/background/retries",
+        "active validated fact IDs present"
+      ],
+      "if_precondition_fails": "BLOCKED_NOT_PASS"
+    }
+  ]
+}

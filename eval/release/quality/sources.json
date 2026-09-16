@@ -1,0 +1,125 @@
+{
+  "schema": "crackrag-release-quality-sources-v1",
+  "prepared_on": "2026-09-16",
+  "status": "PREPARED_NOT_EXECUTED",
+  "no_api_calls": true,
+  "max_original_bytes": 20971520,
+  "max_selected_pages_per_scope": 32,
+  "page_numbering": "physical_pages are one-based in the original PDF; selected PDFs require the recorded page_map",
+  "render_review": "All four selected original pages rendered at 140 DPI and visually inspected. No reconstructed headers, OCR, table reformatting or missing-page inference.",
+  "independence_check": "No selected issuer names/stock codes found in prior tracked-source evaluation/docs/config/scripts search. These are source-holdout examples, not a blinded statistical benchmark. Source selection was based on declared same-page support, before model calls.",
+  "sources": [
+    {
+      "id": "fuyao-2024",
+      "entity_id": "cn:600660",
+      "entity_scope": "issuer:600660",
+      "entity_name": "福耀玻璃工业集团股份有限公司",
+      "aliases": [
+        "福耀玻璃工业集团股份有限公司",
+        "福耀玻璃"
+      ],
+      "title": "2024年年度报告",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-19/1222834034.PDF",
+      "bytes": 4316462,
+      "sha256": "5e184ffd29c5f467bbffea158b3bb7c0be3a4f5959b33d1d633671c204dbbab1",
+      "page_count": 200,
+      "publisher": "Issuer disclosure on CNINFO",
+      "scopes": [
+        {
+          "id": "fuyao-positive",
+          "physical_pages": [
+            200
+          ],
+          "printed_page_labels": [
+            "200 / 200"
+          ],
+          "role": "supported_same_page",
+          "table_title": "合并利润表",
+          "section": "第十二节 五年业绩摘要",
+          "same_page_evidence": [
+            "entity",
+            "consolidated_table_title",
+            "2024_and_2023_columns",
+            "CNY_yuan",
+            "revenue",
+            "cost_of_revenue",
+            "total_net_profit"
+          ]
+        },
+        {
+          "id": "fuyao-missing-header",
+          "physical_pages": [
+            94
+          ],
+          "printed_page_labels": [
+            "94 / 200"
+          ],
+          "role": "negative_original_continuation",
+          "missing_evidence": [
+            "column_year_labels",
+            "table_unit_header",
+            "consolidated_table_title"
+          ],
+          "note": "The report header mentions 2024, but does not label the numeric columns; adjacent page 93 is deliberately outside this scope."
+        }
+      ]
+    },
+    {
+      "id": "anjoy-2024",
+      "entity_id": "cn:603345",
+      "entity_scope": "issuer:603345",
+      "entity_name": "安井食品集团股份有限公司",
+      "aliases": [
+        "安井食品集团股份有限公司",
+        "安井食品"
+      ],
+      "title": "2024年年度报告",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-29/1223385636.PDF",
+      "bytes": 1870677,
+      "sha256": "91e063371871c8f84c6481b7ea54a144e108c0c337cbcc776947dfc55a7a30d7",
+      "page_count": 239,
+      "publisher": "Issuer disclosure on CNINFO",
+      "scopes": [
+        {
+          "id": "anjoy-positive",
+          "physical_pages": [
+            106
+          ],
+          "printed_page_labels": [
+            "105"
+          ],
+          "role": "supported_same_page",
+          "table_title": "合并利润表",
+          "section": "财务报告",
+          "same_page_evidence": [
+            "entity",
+            "consolidated_table_title",
+            "2024_and_2023_columns",
+            "CNY_yuan",
+            "revenue",
+            "cost_of_revenue",
+            "total_net_profit"
+          ],
+          "note": "There is an intervening footnote column. Revenue/cost footnote 七、61 is not a monetary value. Physical PDF page differs from printed page."
+        },
+        {
+          "id": "anjoy-missing-revenue",
+          "physical_pages": [
+            107
+          ],
+          "printed_page_labels": [
+            "106"
+          ],
+          "role": "negative_original_continuation",
+          "missing_evidence": [
+            "revenue_row",
+            "column_year_labels",
+            "table_unit_header",
+            "consolidated_table_title"
+          ],
+          "note": "Only this original continuation page is authorized; page 106 is excluded. A prose note mentioning yuan is not a table-unit header."
+        }
+      ]
+    }
+  ]
+}

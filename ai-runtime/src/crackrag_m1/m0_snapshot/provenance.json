@@ -1,0 +1,38 @@
+{
+  "version": "m1-m0-adapters-snapshot-v1",
+  "reason": "M0 prerequisite work is not committed. Preserve it untouched while making the M1 commit runnable from its own sources. Snapshot modules are byte-identical, not rewritten adapters.",
+  "files": {
+    "__init__.py": {
+      "source": "ai-runtime/src/crackrag_m0/__init__.py",
+      "sha256": "dc32f4587926ba4c17e2d431623ac13967777ff59c97d15726986ac841ec84cb"
+    },
+    "accounting.py": {
+      "source": "ai-runtime/src/crackrag_m0/accounting.py",
+      "sha256": "3b8850cb9dc854d6205505b0e302fcc3e20869c03b38374b4db03026e08bb6b0"
+    },
+    "artifacts.py": {
+      "source": "ai-runtime/src/crackrag_m0/artifacts.py",
+      "sha256": "cd68114966f2e25cd2516180f343033916f016e2cb6747f95771332bb869c476"
+    },
+    "config.py": {
+      "source": "ai-runtime/src/crackrag_m0/config.py",
+      "sha256": "83c30c18ea3f1db6a683ee2b752c8dee7cbff8bcfbb0f749c543c90f921d2091"
+    },
+    "pdf_sample.py": {
+      "source": "ai-runtime/src/crackrag_m0/pdf_sample.py",
+      "sha256": "a4b247b2b9a347ef9c3208ad6da536a36dc8230371be310c24532a416f4dcb6f"
+    },
+    "prompt.py": {
+      "source": "ai-runtime/src/crackrag_m0/prompt.py",
+      "sha256": "984ca9e0871c6b75219e7c6d71d02ab6184ab51501b0e9f60e996fd4e045f9e6"
+    },
+    "providers.py": {
+      "source": "ai-runtime/src/crackrag_m0/providers.py",
+      "sha256": "50623fa112bf678a9c1480596daffabf3f9ab2f462d74feb74b15b74bda60986"
+    },
+    "tariff.py": {
+      "source": "ai-runtime/src/crackrag_m0/tariff.py",
+      "sha256": "da980f3ec1517b9b6b54ea16113eb25dfba6fe13f04117fe0375166936085aa1"
+    }
+  }
+}

@@ -1,0 +1,68 @@
+name: public-source-and-mock
+on:
+  push:
+    branches: [main, 'XJfyrh/**']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: api/go.mod
+          cache-dependency-path: api/go.sum
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.19.0'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Review publication set
+        run: python scripts/check_public_source.py
+      - name: PostgreSQL and Redis integration
+        run: python scripts/check_go.py
+      - name: Build and start a fresh default mock deployment
+        run: |
+          ./crackrag init
+          ./crackrag up
+      - name: Offline runtime regressions in the built Linux environment
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/workspace" -w /workspace --entrypoint python crackrag-release:local scripts/check_python.py
+          docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/workspace" -w /workspace --entrypoint python crackrag-release:local scripts/release_tools_test.py
+      - name: Python parser to Go validator on two synthetic physical tables
+        run: |
+          docker run --rm --network none --user "$(id -u):$(id -g)" -v "$PWD:/workspace" -w /workspace --entrypoint python crackrag-release:local scripts/generate_table_interop.py
+          cd api
+          RELEASE_SYNTHETIC_TABLE_FIXTURE="$GITHUB_WORKSPACE/tmp/samepage-synthetic-interop.json" go test ./internal/app -run '^TestSamePageSyntheticParserInterop$' -count=1
+      - name: Normal upload, strict answer, explicit build and zero-call reuse
+        run: python scripts/check_mock.py
+      - name: Browser demonstration, source rendering and refresh without resubmission
+        run: |
+          npm ci --prefix web
+          cd web && npx playwright install --with-deps chromium && cd ..
+          npm run test:e2e --prefix web
+      - name: Resume saved candidates after primary and Redis interruption
+        run: ./crackrag demo-recovery
+      - name: Save sanitized check summaries
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: mock-checks
+          path: |
+            tmp/go-tests.jsonl
+            tmp/mock-acceptance.json
+            output/playwright/browser-acceptance.json
+            output/playwright/*.png
+          retention-days: 7
+      - name: Stop applications
+        if: always()
+        run: docker compose --project-directory . -f deploy/compose.release.yaml stop
+
+# No credentials, provider calls, real issuer PDFs, or private ledger are used.

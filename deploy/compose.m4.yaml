@@ -1,0 +1,78 @@
+# Optional application overlay:
+# docker compose -f deploy/compose.m4-infra.yaml -f deploy/compose.m4.yaml up --build
+# Native Windows validation uses the same dedicated infrastructure and does not
+# need to build/download runtime images or embedding models.
+name: crackrag-m4
+x-runtime: &runtime
+  build:
+    context: ..
+    dockerfile: deploy/Runtime.Dockerfile
+  environment: &runtime-env
+    M1_INTERNAL_TOKEN: local-m4-service-token
+    M1_MODEL_PROVIDER: mock
+    M1_EMBEDDING_MODE: fixture
+    M1_MOCK_SCENARIO: happy
+    M1_RUNTIME_ADDRESS: 0.0.0.0:50051
+    DEEPSEEK_API_KEY: ""
+    HF_HUB_OFFLINE: "1"
+    TRANSFORMERS_OFFLINE: "1"
+  volumes:
+    - ../ai-runtime/prompts:/app/ai-runtime/prompts:ro
+  healthcheck:
+    test: ["CMD", "python", "-m", "crackrag_m1.health"]
+    interval: 3s
+    timeout: 3s
+    retries: 30
+x-api: &api
+  build:
+    context: ..
+    dockerfile: deploy/API.Dockerfile
+  environment: &api-env
+    M1_DATABASE_URL: postgres://crackrag:local-m4-development@postgres:5432/crackrag_m4?sslmode=disable
+    M1_HTTP_ADDRESS: 0.0.0.0:8080
+    M1_GRPC_ADDRESS: 0.0.0.0:50052
+    M1_INTERNAL_TOKEN: local-m4-service-token
+    M1_API_TOKENS: demo-alpha=tenant-alpha,demo-beta=tenant-beta
+    M1_MODEL_PROVIDER: mock
+    M1_BLOB_DIRECTORY: /data/blobs
+    M1_MIGRATIONS_DIRECTORY: /app/migrations
+    M1_WEB_DIRECTORY: /app/web
+    M4_RECOVERY_ENABLED: "true"
+    M4_REDIS_URL: redis://redis:6379/0
+  volumes: ["../tmp/m4-blobs:/data/blobs"]
+  healthcheck:
+    test: ["CMD", "/app/api", "health"]
+    interval: 3s
+    timeout: 4s
+    retries: 30
+services:
+  runtime-a:
+    <<: *runtime
+    environment:
+      <<: *runtime-env
+      M1_DATA_TOOLS_ADDRESS: api-a:50052
+  runtime-b:
+    <<: *runtime
+    environment:
+      <<: *runtime-env
+      M1_DATA_TOOLS_ADDRESS: api-b:50052
+  api-a:
+    <<: *api
+    environment:
+      <<: *api-env
+      M1_RUNTIME_ADDRESS: runtime-a:50051
+    ports: ["127.0.0.1:18084:8080"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      runtime-a: {condition: service_healthy}
+  api-b:
+    <<: *api
+    environment:
+      <<: *api-env
+      M1_RUNTIME_ADDRESS: runtime-b:50051
+    ports: ["127.0.0.1:18085:8080"]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      runtime-b: {condition: service_healthy}

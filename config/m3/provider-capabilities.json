@@ -1,0 +1,68 @@
+{
+  "version": "m3-deepseek-capabilities-20260915-v1",
+  "checked_date": "2026-09-15",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "official_model_revision": "DeepSeek-V4.1-Flash",
+  "actual_serving_revision": "unknown until raw response model and system_fingerprint are observed",
+  "endpoint": "https://api.deepseek.com/chat/completions",
+  "cache": {
+    "enabled_by_default": true,
+    "semantics": "best_effort_complete_persisted_prefix_units",
+    "persistence_triggers": ["request input/output end", "detected shared prefix", "undisclosed fixed token intervals"],
+    "construction_latency": "seconds; not a deadline guarantee",
+    "ready_event": "unknown; none documented",
+    "during_answer_reuse_verified": false,
+    "completed_answer_implies_document_prefix_ready": false,
+    "cache_only_dispatch": "unknown; none documented",
+    "provider_cache_key": "unknown",
+    "hard_ttl": "unknown",
+    "token_interval": "unknown",
+    "location": "unknown",
+    "routing": "unknown",
+    "namespace_parameter": "user_id",
+    "raw_usage_fields": ["prompt_tokens", "prompt_cache_hit_tokens", "prompt_cache_miss_tokens", "prompt_tokens_details.cached_tokens"],
+    "usage_is_post_call_evidence": true,
+    "aggregate_hit_proves_document_coverage": false
+  },
+  "selected_protocol": {
+    "model": "deepseek-flash",
+    "max_tokens": 512,
+    "thinking": {"type": "disabled"},
+    "temperature": 0,
+    "response_format": {"type": "json_object"},
+    "response_json_schema": "not selected; chat API documents text/json_object only",
+    "native_tool_schema_strict": "beta feature, not selected",
+    "tool_choice": "omitted on both branches",
+    "schema_enforcement": "local strict Pydantic; shared branch instruction before source breakpoint",
+    "stream": false,
+    "automatic_retries": 0
+  },
+  "compatibility": {
+    "documentation_only": true,
+    "real_probe_status": "not_run_by_runtime_agent",
+    "tools_and_order_must_match": true,
+    "response_format_tool_choice_thinking_cache_invariance": "unknown until controlled probe",
+    "thinking_required_or_named_tool_choice": "officially unsupported; HTTP 400",
+    "json_mode_requires_explicit_json_instruction": true
+  },
+  "hot_only": {
+    "default": true,
+    "on_unknown": "SKIPPED",
+    "on_expired": "SKIPPED",
+    "implicit_cold_fallback": false,
+    "software_soft_window_seconds_max": 30,
+    "soft_window_is_provider_guarantee": false,
+    "evidence_kind": "CONTROLLED_DOCUMENT_PREFIX_REUSE",
+    "required_bindings": ["evidence_id", "native_prefix_sha256", "cache_namespace", "model", "model_revision", "control_attempt_ids", "measurement_attempt_ids", "evidence_artifact_sha256", "observed_at", "cache_soft_deadline", "document_cached_tokens_lower_bound", "coverage_attribution"],
+    "python_verified_flag_is_authoritative": false,
+    "authoritative_evidence_and_budget_gate": "Go ReserveCall; stored original attempts and controls must support coverage"
+  },
+  "official_sources": [
+    {"url": "https://api-docs.deepseek.com/guides/kv_cache/", "snapshot": "evidence/m3/provider/cache.html", "sha256": "567961b9fe8da1808b72f7c23eb0c8a2d7d8d44789f4abb86c7f3c8312e76c0e"},
+    {"url": "https://api-docs.deepseek.com/api/create-chat-completion/", "snapshot": "evidence/m3/provider/chat.html", "sha256": "a09b0e9c9b74a8cb1f62e1006b4931320be9c640cc274af54aa72f0e053b64a5"},
+    {"url": "https://api-docs.deepseek.com/quick_start/rate_limit/", "snapshot": "evidence/m3/provider/isolation.html", "sha256": "a8bb7e5c48b65336ca10759b1f3a3f5d3001bbad8b58577d775c74db2decb2da"},
+    {"url": "https://api-docs.deepseek.com/guides/thinking_mode/", "snapshot": "evidence/m3/provider/thinking.html", "sha256": "1c12f92419502c6d950b0f68ef2c679a774b4e3cd66d8a2f26642f52c63ff949"},
+    {"url": "https://api-docs.deepseek.com/guides/json_mode/", "snapshot": "evidence/m3/provider/json.html", "sha256": "a00d18f99ba3c84da4c085ed5fef02cf9f3e24b8664781183e13e48b127fd9a5"}
+  ]
+}

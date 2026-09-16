@@ -1,0 +1,245 @@
+{
+  "$defs": {
+    "Answer": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "const": "answer",
+          "title": "Action",
+          "type": "string"
+        },
+        "answer": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Answer",
+          "type": "string"
+        },
+        "citations": {
+          "items": {
+            "$ref": "#/$defs/Citation"
+          },
+          "maxItems": 5,
+          "title": "Citations",
+          "type": "array"
+        },
+        "facts": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "maxItems": 6,
+          "title": "Facts",
+          "type": "array"
+        },
+        "unresolved": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5,
+          "title": "Unresolved",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action",
+        "answer"
+      ],
+      "title": "Answer",
+      "type": "object"
+    },
+    "Calculate": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "const": "calculate",
+          "title": "Action",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "add",
+            "subtract",
+            "ratio",
+            "percent_change"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "operands": {
+          "items": {
+            "$ref": "#/$defs/Fact"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Operands",
+          "type": "array"
+        },
+        "precision": {
+          "default": 2,
+          "maximum": 6,
+          "minimum": 0,
+          "title": "Precision",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "action",
+        "operation",
+        "operands"
+      ],
+      "title": "Calculate",
+      "type": "object"
+    },
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "region_id": {
+          "title": "Region Id",
+          "type": "string"
+        },
+        "quote": {
+          "maxLength": 800,
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        }
+      },
+      "required": [
+        "region_id",
+        "quote"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "Fact": {
+      "additionalProperties": false,
+      "properties": {
+        "region_id": {
+          "title": "Region Id",
+          "type": "string"
+        },
+        "quote": {
+          "maxLength": 800,
+          "minLength": 1,
+          "title": "Quote",
+          "type": "string"
+        },
+        "value": {
+          "pattern": "^-?\\d+(?:\\.\\d+)?$",
+          "title": "Value",
+          "type": "string"
+        },
+        "year": {
+          "pattern": "^\\d{4}$",
+          "title": "Year",
+          "type": "string"
+        },
+        "unit": {
+          "maxLength": 24,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "entity": {
+          "maxLength": 100,
+          "minLength": 1,
+          "title": "Entity",
+          "type": "string"
+        }
+      },
+      "required": [
+        "region_id",
+        "quote",
+        "value",
+        "year",
+        "unit",
+        "entity"
+      ],
+      "title": "Fact",
+      "type": "object"
+    },
+    "Open": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "const": "open",
+          "title": "Action",
+          "type": "string"
+        },
+        "region_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Region Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "action",
+        "region_ids"
+      ],
+      "title": "Open",
+      "type": "object"
+    },
+    "Search": {
+      "additionalProperties": false,
+      "properties": {
+        "action": {
+          "const": "search",
+          "title": "Action",
+          "type": "string"
+        },
+        "query": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "title": "Query",
+          "type": "string"
+        },
+        "year": {
+          "default": 0,
+          "maximum": 2200,
+          "minimum": 0,
+          "title": "Year",
+          "type": "integer"
+        },
+        "page": {
+          "default": 0,
+          "maximum": 10000,
+          "minimum": 0,
+          "title": "Page",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "action",
+        "query"
+      ],
+      "title": "Search",
+      "type": "object"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "answer": "#/$defs/Answer",
+      "calculate": "#/$defs/Calculate",
+      "open": "#/$defs/Open",
+      "search": "#/$defs/Search"
+    },
+    "propertyName": "action"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/Answer"
+    },
+    {
+      "$ref": "#/$defs/Search"
+    },
+    {
+      "$ref": "#/$defs/Open"
+    },
+    {
+      "$ref": "#/$defs/Calculate"
+    }
+  ]
+}

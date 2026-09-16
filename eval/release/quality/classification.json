@@ -1,0 +1,12 @@
+{
+  "schema": "crackrag-quality-classification-v1",
+  "classified_on": "2026-09-16",
+  "current_role": "REGRESSION",
+  "independent_holdout": false,
+  "source_ids": ["fuyao-2024", "anjoy-2024"],
+  "reason": "Used after preparation to locate and repair ordinary same-page table syntax and question phrasing; independent acceptance requires fresh sources after code freeze.",
+  "original_preparation_sha256": "b2df39e7f90b3bad14ccd9f9b651dc70322b13bc6a4eb2ad376fead8aa02a28d",
+  "original_frozen_files_unchanged": true,
+  "replacement_holdout": "pending holdout-v2 after code freeze",
+  "preparation_model_api_calls": 0
+}

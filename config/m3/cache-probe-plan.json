@@ -1,0 +1,39 @@
+{
+  "version": "m3-cache-probe-plan-v1",
+  "provider": "deepseek",
+  "model": "deepseek-flash",
+  "document_kind": "authorized actual 2024 annual report page 63 region; selected by explicit document/region UUID",
+  "max_calls": 18,
+  "max_output_tokens": 512,
+  "automatic_retries": 0,
+  "request_concurrency": 1,
+  "global_parent": "m3-live-v1; 2000 calls/60 CNY; all concurrent experiments share Go admission",
+  "subexperiment": "cache-protocol; 40 calls/2 CNY",
+  "diagnostic_session_calls": 3,
+  "intentional_cache_wait_or_keepalive": false,
+  "branch_order": ["answer", "cracking", "cracking_alternate"],
+  "answer_question": "贵州茅台 2024 年营业收入是多少？请按来源回答并引用短原文。",
+  "requirements": [{"entity_id":"cn:600519","concept_id":"fin:revenue","period":"FY2024","unit":"CNY","scope":"consolidated","kind":"scalar"}],
+  "alternate_requirements": [{"entity_id":"cn:600519","concept_id":"fin:cost_of_revenue","period":"FY2024","unit":"CNY","scope":"consolidated","kind":"scalar"}],
+  "groups": [
+    {"id":"default","calls":3,"purpose":"Actual shared-system Answer/Cracking/alternate Cracking suffixes; inspect current complete-prefix-unit cache behavior"},
+    {"id":"document_absent_control","calls":3,"relative_to":"default","changed_variable":"source document text and textual context removed; source metadata/roles/system/parameters/suffix unchanged","purpose":"Independent bound on non-document input tokens for all three suffixes"},
+    {"id":"response_format_text","calls":3,"relative_to":"default","changed_variable":"response_format.type=json_object to text","purpose":"Single-variable format/cache compatibility"},
+    {"id":"tool_choice_none","calls":3,"relative_to":"default","changed_variable":"tool_choice omitted to explicit none","purpose":"Single-variable tool-choice/cache compatibility"},
+    {"id":"tool_schema","calls":3,"relative_to":"tool_choice_none","changed_variable":"one static native function schema added; tool_choice stays none","purpose":"Native tool/schema/cache compatibility without tool execution"},
+    {"id":"thinking_enabled","calls":3,"relative_to":"default","changed_variable":"thinking.type=disabled to enabled","purpose":"Thinking/cache compatibility under the same 512 output cap"}
+  ],
+  "coverage": {
+    "method": "max independently measured no-document control prompt_tokens + 256 token framing margin",
+    "document_cache_lower_estimate": "max(0,measurement.prompt_cache_hit_tokens - non_document_upper_estimate)",
+    "framing_margin_tokens": 256,
+    "provider_exact_tokenizer_available": false,
+    "claim": "controlled finite-sample inference with explicit tokenization uncertainty; not a provider guaranteed bound or readiness event",
+    "default_first_six_inconclusive": "stop all further paid cache probing for this path",
+    "positive_aggregate_hit_alone": "unknown"
+  },
+  "stop_conditions": ["first missing/unknown usage or cost", "Go budget/concurrency/authority rejection", "default six calls do not establish positive controlled document coverage", "18 physical calls attempted", "original diagnostic deadline"],
+  "namespace": "actual documented user_id, stable m3- plus SHA256(tenant) first 32 hex; never a provider cache key",
+  "warm_state": "uncontrolled; cannot forcibly clear DeepSeek cache; all actual timings and ordering recorded",
+  "publication": "none; diagnostic stage other uses no Agent, job, Probe or fact publication"
+}

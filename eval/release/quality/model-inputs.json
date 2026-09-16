@@ -1,0 +1,361 @@
+{
+  "schema": "crackrag-release-quality-requests-v1",
+  "contains_gold": false,
+  "notice": "Runner sends only question and request fields plus dynamically bound authorized document IDs. IDs/context_group/scope_id select isolation and files; never send gold/plan verdicts/values to the agent.",
+  "quality": [
+    {
+      "id": "q-fuyao-revenue",
+      "scope_id": "fuyao-positive",
+      "context_group": "q-fuyao-revenue",
+      "question": "福耀玻璃2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "q-fuyao-cost",
+      "scope_id": "fuyao-positive",
+      "context_group": "q-fuyao-cost",
+      "question": "福耀玻璃2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-fuyao-net-profit",
+      "scope_id": "fuyao-positive",
+      "context_group": "q-fuyao-net-profit",
+      "question": "福耀玻璃2024年合并口径净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-anjoy-revenue",
+      "scope_id": "anjoy-positive",
+      "context_group": "q-anjoy-revenue",
+      "question": "安井食品2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "q-anjoy-cost",
+      "scope_id": "anjoy-positive",
+      "context_group": "q-anjoy-cost",
+      "question": "安井食品2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-anjoy-net-profit",
+      "scope_id": "anjoy-positive",
+      "context_group": "q-anjoy-net-profit",
+      "question": "安井食品2024年合并口径净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-fuyao-missing-header",
+      "scope_id": "fuyao-missing-header",
+      "context_group": "q-fuyao-missing-header",
+      "question": "福耀玻璃2024年合并口径净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-anjoy-missing-revenue",
+      "scope_id": "anjoy-missing-revenue",
+      "context_group": "q-anjoy-missing-revenue",
+      "question": "安井食品2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-fuyao-adjusted-revenue",
+      "scope_id": "fuyao-positive",
+      "context_group": "q-fuyao-adjusted-revenue",
+      "question": "福耀玻璃2024年调整后营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-anjoy-parent-profit",
+      "scope_id": "anjoy-positive",
+      "context_group": "q-anjoy-parent-profit",
+      "question": "安井食品2024年归属于母公司股东的净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-fuyao-reuse",
+      "scope_id": "fuyao-positive",
+      "context_group": "q-fuyao-revenue",
+      "question": "福耀玻璃2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "HOT_ONLY",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-anjoy-reuse",
+      "scope_id": "anjoy-positive",
+      "context_group": "q-anjoy-revenue",
+      "question": "请给出安井食品2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "HOT_ONLY",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "id": "s-fuyao-baseline-1",
+      "scope_id": "fuyao-positive",
+      "context_group": "s-fuyao-baseline",
+      "step": 1,
+      "question": "福耀玻璃2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-fuyao-baseline-2",
+      "scope_id": "fuyao-positive",
+      "context_group": "s-fuyao-baseline",
+      "step": 2,
+      "question": "福耀玻璃2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-fuyao-baseline-3",
+      "scope_id": "fuyao-positive",
+      "context_group": "s-fuyao-baseline",
+      "step": 3,
+      "question": "福耀玻璃2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-fuyao-baseline-4",
+      "scope_id": "fuyao-positive",
+      "context_group": "s-fuyao-baseline",
+      "step": 4,
+      "question": "请给出福耀玻璃2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-fuyao-build-1",
+      "scope_id": "fuyao-positive",
+      "context_group": "s-fuyao-build",
+      "step": 1,
+      "question": "福耀玻璃2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-fuyao-build-2",
+      "scope_id": "fuyao-positive",
+      "context_group": "s-fuyao-build",
+      "step": 2,
+      "question": "福耀玻璃2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-fuyao-build-3",
+      "scope_id": "fuyao-positive",
+      "context_group": "s-fuyao-build",
+      "step": 3,
+      "question": "福耀玻璃2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-fuyao-build-4",
+      "scope_id": "fuyao-positive",
+      "context_group": "s-fuyao-build",
+      "step": 4,
+      "question": "请给出福耀玻璃2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-anjoy-baseline-1",
+      "scope_id": "anjoy-positive",
+      "context_group": "s-anjoy-baseline",
+      "step": 1,
+      "question": "安井食品2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-anjoy-baseline-2",
+      "scope_id": "anjoy-positive",
+      "context_group": "s-anjoy-baseline",
+      "step": 2,
+      "question": "安井食品2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-anjoy-baseline-3",
+      "scope_id": "anjoy-positive",
+      "context_group": "s-anjoy-baseline",
+      "step": 3,
+      "question": "安井食品2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-anjoy-baseline-4",
+      "scope_id": "anjoy-positive",
+      "context_group": "s-anjoy-baseline",
+      "step": 4,
+      "question": "请给出安井食品2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-anjoy-build-1",
+      "scope_id": "anjoy-positive",
+      "context_group": "s-anjoy-build",
+      "step": 1,
+      "question": "安井食品2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-anjoy-build-2",
+      "scope_id": "anjoy-positive",
+      "context_group": "s-anjoy-build",
+      "step": 2,
+      "question": "安井食品2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-anjoy-build-3",
+      "scope_id": "anjoy-positive",
+      "context_group": "s-anjoy-build",
+      "step": 3,
+      "question": "安井食品2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-anjoy-build-4",
+      "scope_id": "anjoy-positive",
+      "context_group": "s-anjoy-build",
+      "step": 4,
+      "question": "请给出安井食品2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    }
+  ]
+}
