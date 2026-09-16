@@ -1,0 +1,127 @@
+{
+  "schema": "crackrag-release-quality-sources-v1",
+  "dataset_id": "holdout-v3",
+  "prepared_on": "2026-09-16",
+  "status": "PREPARED_NOT_EXECUTED",
+  "no_api_calls": true,
+  "max_original_bytes": 20971520,
+  "max_selected_pages_per_scope": 32,
+  "page_numbering": "physical_pages are one-based in original PDFs; each selected scope has a recorded original-to-selected page_map",
+  "render_review": "Four original pages visually inspected after 140-DPI Poppler rendering. No source modification, reconstructed headers, OCR, table reformatting or cross-page inference.",
+  "independence_check": "Selected for the unchanged declared same-page support after semantic freeze. Neither source was used for implementation repair, production parsing, validation, model calls or earlier executed gold. Songlin was newly discovered after this freeze; Linglong was web-text-screened only as an unexecuted v2 backup, with no download, visual/gold freeze or runtime use then. Root explicitly accepted this disclosed preparation-only prior exposure. These are eligible source holdouts, not a blind or random population sample.",
+  "sources": [
+    {
+      "id": "songlin-2024",
+      "entity_id": "cn:603992",
+      "entity_scope": "issuer:603992",
+      "entity_name": "厦门松霖科技股份有限公司",
+      "aliases": [
+        "厦门松霖科技股份有限公司",
+        "松霖科技"
+      ],
+      "title": "2024年年度报告",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-31/1222962236.PDF",
+      "bytes": 4366562,
+      "sha256": "e3fa31c2e40941bb0ecc0f921deddc01d3e0ff3dbeed7a4a4434492330a4902e",
+      "page_count": 209,
+      "publisher": "Issuer disclosure on CNINFO",
+      "scopes": [
+        {
+          "id": "songlin-positive",
+          "physical_pages": [
+            86
+          ],
+          "printed_page_labels": [
+            "86 / 209"
+          ],
+          "role": "supported_same_page",
+          "table_title": "合并利润表",
+          "section": "财务报告",
+          "same_page_evidence": [
+            "entity",
+            "consolidated_table_title",
+            "2024_and_2023_columns",
+            "CNY_yuan",
+            "revenue",
+            "cost_of_revenue",
+            "total_net_profit"
+          ],
+          "note": "The entire target row and its original year-column header, entity, consolidated title and currency/unit declaration are on this page. An intervening footnote column is not a monetary value."
+        },
+        {
+          "id": "songlin-missing-revenue",
+          "physical_pages": [
+            87
+          ],
+          "printed_page_labels": [
+            "87 / 209"
+          ],
+          "role": "negative_original_continuation",
+          "missing_evidence": [
+            "consolidated_revenue_row",
+            "consolidated_table_unit_header",
+            "consolidated_table_title"
+          ],
+          "note": "Only original continuation page 87 is authorized. It repeats year-column labels but contains no revenue row, consolidated title or currency/unit declaration. The source page 86 and previous-tenant facts are outside this scope."
+        }
+      ]
+    },
+    {
+      "id": "linglong-2024",
+      "entity_id": "cn:601966",
+      "entity_scope": "issuer:601966",
+      "entity_name": "山东玲珑轮胎股份有限公司",
+      "aliases": [
+        "山东玲珑轮胎股份有限公司",
+        "玲珑轮胎"
+      ],
+      "title": "2024年年度报告",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-25/1223285950.PDF",
+      "bytes": 1933526,
+      "sha256": "ee5e21ef24837cb7b4d806c79dab28b18588bb73f52ee43b05ca68fd04d27172",
+      "page_count": 234,
+      "publisher": "Issuer disclosure on CNINFO",
+      "scopes": [
+        {
+          "id": "linglong-positive",
+          "physical_pages": [
+            100
+          ],
+          "printed_page_labels": [
+            "100 / 234"
+          ],
+          "role": "supported_same_page",
+          "table_title": "合并利润表",
+          "section": "财务报告",
+          "same_page_evidence": [
+            "entity",
+            "consolidated_table_title",
+            "2024_and_2023_columns",
+            "CNY_yuan",
+            "revenue",
+            "cost_of_revenue",
+            "total_net_profit"
+          ],
+          "note": "The entire target row and its original year-column header, entity, consolidated title and currency/unit declaration are on this page. An intervening footnote column is not a monetary value."
+        },
+        {
+          "id": "linglong-missing-consolidated-revenue",
+          "physical_pages": [
+            101
+          ],
+          "printed_page_labels": [
+            "101 / 234"
+          ],
+          "role": "negative_original_continuation",
+          "missing_evidence": [
+            "consolidated_revenue_row",
+            "consolidated_column_year_labels",
+            "consolidated_table_unit_header",
+            "consolidated_table_title"
+          ],
+          "note": "Only original page 101 is authorized. The upper continuation has no revenue or original consolidated header; the lower NEW table is explicitly 母公司利润表. Its revenue and headers cannot substitute for consolidated revenue. Page 100 is outside this scope."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,186 @@
+{
+  "schema": "crackrag-release-quality-preparation-v1",
+  "dataset_id": "holdout-v3",
+  "prepared_on": "2026-09-16",
+  "frozen_at": "2026-09-16T12:03:24.742452+00:00",
+  "status": "PREPARED_NOT_EXECUTED",
+  "classification": "INDEPENDENT_FROM_IMPLEMENTATION_REPAIR_SOURCE_HOLDOUT_PREPARED_NOT_EXECUTED",
+  "no_api_calls": true,
+  "model_api_calls": 0,
+  "production_parser_calls": 0,
+  "production_validator_calls": 0,
+  "runtime_commit_binding": "REQUIRED_BEFORE_EXECUTION",
+  "semantic_code_commit_at_freeze": "6ea470c",
+  "checks": {
+    "public_json_cross_references": "PASS",
+    "quality_12_cases_and_sequence_16_queries": "PASS",
+    "fourteen_isolated_context_groups": "PASS",
+    "offline_original_size_hash_page_count": "PASS",
+    "official_fetch_repeat_hash_check": "PASS",
+    "selected_page_stream_text_bounds_equivalence": "PASS",
+    "four_selected_renders_identical_to_visually_inspected_originals": "PASS",
+    "gold_literal_values_match_original_source_pages": "PASS",
+    "gold_not_present_in_question_values": "PASS",
+    "previous_v2_nine_frozen_files_and_preparation_unchanged": "PASS",
+    "semantic_freeze": "8 semantic/prompt/parser files unchanged; exact frozen catalog SHA reconstructed and compared to prove only root-authorized additions of two issuer entries",
+    "actual_input_order_matches_sequence_plan": "PASS"
+  },
+  "prior_exposure": "Linglong was webpage-text-screened only as a v2 unexecuted backup, never downloaded/visually reviewed/gold-frozen/runtime-tested or used for implementation repair there. V3 root accepted this explicitly disclosed preparation-only contact. Do not claim never seen or random/blind sampling. Songlin was first selected after v3 semantic freeze.",
+  "postfreeze_metadata_changes": [
+    "Root added cn:603992 / issuer:603992 松霖科技 aliases",
+    "Root added cn:601966 / issuer:601966 玲珑轮胎 aliases"
+  ],
+  "catalog_at_preparation_sha256": "126d440cab934f4b624b42746a2ba5b7006511dc0b27a6435deb354c8cb04f18",
+  "private_provenance_report": "prepared-reproduction.json",
+  "private_provenance_sha256": "e44fcd6261e367540f5460b4cb748adff35b5eefe83b0ac7a54532e40dceb492",
+  "private_static_check_report": "preparation-static-checks.json",
+  "private_static_check_sha256": "98027dad448d116c062d82460877212a75b6c8a6565a58608a3ea12ae600a871",
+  "private_catalog_metadata_report": "catalog-metadata-check.json",
+  "private_catalog_metadata_sha256": "56e37253196bd162d8846af69d2a1bcfbefb93d2eb4e96f21355acfc2c5a1d73",
+  "private_sources": [
+    {
+      "id": "songlin-2024",
+      "sha256": "e3fa31c2e40941bb0ecc0f921deddc01d3e0ff3dbeed7a4a4434492330a4902e",
+      "bytes": 4366562,
+      "page_count": 209,
+      "scopes": [
+        {
+          "id": "songlin-positive",
+          "relative_path": "selected/songlin-positive.pdf",
+          "sha256": "8e92d2b557594e719f9b985e168b92294438defcd2f42b745d2e9fcbc2c22205",
+          "bytes": 637749,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 86,
+              "content_stream_sha256": "96340ca1107d0409b6eb3bca657b05d67ea01f49b893d121389c75add06481a8"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/songlin-positive-1.png",
+              "sha256": "d670e98fca0a5b65eb78cfd37a09157b5cc3ef4024dcf241913ad950f1da5a88"
+            }
+          ]
+        },
+        {
+          "id": "songlin-missing-revenue",
+          "relative_path": "selected/songlin-missing-revenue.pdf",
+          "sha256": "2739d38c01f9aaf96159021779bf47d82d4bb6f47f33b8131a942656e568f99f",
+          "bytes": 636179,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 87,
+              "content_stream_sha256": "a5977dcf87c7a2e795c86a7dd6d06f0a4d9148a19f7ac037b229123aa38294d8"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/songlin-missing-revenue-1.png",
+              "sha256": "d417beca04eda953ddc3b983ec62c2b33f91a451dda179de0ec341782cd0b3ce"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "linglong-2024",
+      "sha256": "ee5e21ef24837cb7b4d806c79dab28b18588bb73f52ee43b05ca68fd04d27172",
+      "bytes": 1933526,
+      "page_count": 234,
+      "scopes": [
+        {
+          "id": "linglong-positive",
+          "relative_path": "selected/linglong-positive.pdf",
+          "sha256": "bf6274fc1243b0f6e5c3d04c4268f92bcfbd7cb2001d4e4c1878b8d6bf6a03b5",
+          "bytes": 286965,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 100,
+              "content_stream_sha256": "5f2b776efd7c2620c644fc7ecad56325b4dae049e98dd267d718ee05b9bf7a2b"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/linglong-positive-1.png",
+              "sha256": "fab2976c53798619ff0fb78a3339e6b365fa9b384b0d01a1c79a58f11fa34f60"
+            }
+          ]
+        },
+        {
+          "id": "linglong-missing-consolidated-revenue",
+          "relative_path": "selected/linglong-missing-consolidated-revenue.pdf",
+          "sha256": "4d79f54b1a846ebb22a34bb1c59ad3c6c302ece0e5a0ad4d08cad919d1c62b01",
+          "bytes": 287578,
+          "page_map": [
+            {
+              "selected_physical_page": 1,
+              "original_physical_page": 101,
+              "content_stream_sha256": "8fe71ff20ce384c45ed53ff94a99a06c23461bf7fe5301d20b97606b6b03fca3"
+            }
+          ],
+          "renders": [
+            {
+              "relative_path": "selected-renders/linglong-missing-consolidated-revenue-1.png",
+              "sha256": "29cc16705d1680595ab520b3505d907cd7a6c7f3ba054b15ce831b77e48bece6"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "frozen_files": [
+    {
+      "path": "eval/release/quality/holdout-v3/code-freeze.json",
+      "bytes": 2128,
+      "sha256": "d7bd5787f855afcdcb4558f212d3ac186978960a99fdc05605ef761462eb26d4"
+    },
+    {
+      "path": "eval/release/quality/holdout-v3/gold.json",
+      "bytes": 5870,
+      "sha256": "1b1514f51fef89973e5ef66fe2aad7e1f723e06316fc389e17772a3e624e7113"
+    },
+    {
+      "path": "eval/release/quality/holdout-v3/model-inputs.json",
+      "bytes": 11352,
+      "sha256": "81edf8885feadc46e7cbf750acb619cb44ffc341404c78db2d143faf4c74f060"
+    },
+    {
+      "path": "eval/release/quality/holdout-v3/preparation-candidates.json",
+      "bytes": 11283,
+      "sha256": "1f4a82862ff8dd2311826d2605a982f4bca43fd79ecbce2da801f2ff3761c9d3"
+    },
+    {
+      "path": "eval/release/quality/holdout-v3/quality-plan.json",
+      "bytes": 7308,
+      "sha256": "ac8366839128d351355a6898ba4a397bb9c5c5efbcb898fd592a666e19f5a184"
+    },
+    {
+      "path": "eval/release/quality/holdout-v3/README.md",
+      "bytes": 5190,
+      "sha256": "f54c794afcc77550de7a6564417f5cfe217cacff48763c38f8cec0551f682b12"
+    },
+    {
+      "path": "eval/release/quality/holdout-v3/sequence-plan.json",
+      "bytes": 3822,
+      "sha256": "faf80694d5a8ff89fe0a4114eb52a79a36da656dbc6b07934b446858965cfbec"
+    },
+    {
+      "path": "eval/release/quality/holdout-v3/sources.json",
+      "bytes": 5308,
+      "sha256": "3793f352305f29af876fa23ecf329c7905b6a2d873b96c02da78351691f52c72"
+    },
+    {
+      "path": "scripts/release_prepare_quality.py",
+      "bytes": 9615,
+      "sha256": "8590d872668ef63b0cbee97a81cf6af2d217c61006858ebec18ad2852788f338"
+    }
+  ],
+  "pre_execution_structure_review": {
+    "reviewer": "preparation owner; deterministic JSON cross-reference/count/order checks, no production semantic execution",
+    "status": "PASS",
+    "independent_evaluator_boundary": "Independent final scorer prohibited from reading gold/README/original source page values before all twelve real quality cases have settled. Only model-input/count/hash structure review may be shared beforehand."
+  }
+}

@@ -1,0 +1,362 @@
+{
+  "schema": "crackrag-release-quality-requests-v1",
+  "contains_gold": false,
+  "notice": "Runner sends only question and request fields plus dynamically bound authorized document IDs. IDs/context_group/scope_id select isolation and files; never send gold/plan verdicts/values to the agent.",
+  "quality": [
+    {
+      "id": "q-songlin-revenue",
+      "scope_id": "songlin-positive",
+      "context_group": "q-songlin-revenue",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "q-songlin-cost",
+      "scope_id": "songlin-positive",
+      "context_group": "q-songlin-cost",
+      "question": "松霖科技2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-songlin-net-profit",
+      "scope_id": "songlin-positive",
+      "context_group": "q-songlin-net-profit",
+      "question": "松霖科技2024年合并口径净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-linglong-revenue",
+      "scope_id": "linglong-positive",
+      "context_group": "q-linglong-revenue",
+      "question": "玲珑轮胎2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "q-linglong-cost",
+      "scope_id": "linglong-positive",
+      "context_group": "q-linglong-cost",
+      "question": "玲珑轮胎2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-linglong-net-profit",
+      "scope_id": "linglong-positive",
+      "context_group": "q-linglong-net-profit",
+      "question": "玲珑轮胎2024年合并口径净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-songlin-missing-revenue",
+      "scope_id": "songlin-missing-revenue",
+      "context_group": "q-songlin-missing-revenue",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-linglong-missing-consolidated-revenue",
+      "scope_id": "linglong-missing-consolidated-revenue",
+      "context_group": "q-linglong-missing-consolidated-revenue",
+      "question": "玲珑轮胎2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-songlin-adjusted-revenue",
+      "scope_id": "songlin-positive",
+      "context_group": "q-songlin-adjusted-revenue",
+      "question": "松霖科技2024年调整后营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-linglong-parent-profit",
+      "scope_id": "linglong-positive",
+      "context_group": "q-linglong-parent-profit",
+      "question": "玲珑轮胎2024年归属于母公司股东的净利润是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-songlin-reuse",
+      "scope_id": "songlin-positive",
+      "context_group": "q-songlin-revenue",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "HOT_ONLY",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "q-linglong-reuse",
+      "scope_id": "linglong-positive",
+      "context_group": "q-linglong-revenue",
+      "question": "请给出玲珑轮胎2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "HOT_ONLY",
+        "subexperiment": "quality",
+        "build_facts": false
+      }
+    }
+  ],
+  "sequence": [
+    {
+      "id": "s-songlin-baseline-1",
+      "scope_id": "songlin-positive",
+      "context_group": "s-songlin-baseline",
+      "step": 1,
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-songlin-baseline-2",
+      "scope_id": "songlin-positive",
+      "context_group": "s-songlin-baseline",
+      "step": 2,
+      "question": "松霖科技2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-songlin-baseline-3",
+      "scope_id": "songlin-positive",
+      "context_group": "s-songlin-baseline",
+      "step": 3,
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-songlin-baseline-4",
+      "scope_id": "songlin-positive",
+      "context_group": "s-songlin-baseline",
+      "step": 4,
+      "question": "请给出松霖科技2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-songlin-build-1",
+      "scope_id": "songlin-positive",
+      "context_group": "s-songlin-build",
+      "step": 1,
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-songlin-build-2",
+      "scope_id": "songlin-positive",
+      "context_group": "s-songlin-build",
+      "step": 2,
+      "question": "松霖科技2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-songlin-build-3",
+      "scope_id": "songlin-positive",
+      "context_group": "s-songlin-build",
+      "step": 3,
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-songlin-build-4",
+      "scope_id": "songlin-positive",
+      "context_group": "s-songlin-build",
+      "step": 4,
+      "question": "请给出松霖科技2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-linglong-build-1",
+      "scope_id": "linglong-positive",
+      "context_group": "s-linglong-build",
+      "step": 1,
+      "question": "玲珑轮胎2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-linglong-build-2",
+      "scope_id": "linglong-positive",
+      "context_group": "s-linglong-build",
+      "step": 2,
+      "question": "玲珑轮胎2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-linglong-build-3",
+      "scope_id": "linglong-positive",
+      "context_group": "s-linglong-build",
+      "step": 3,
+      "question": "玲珑轮胎2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-linglong-build-4",
+      "scope_id": "linglong-positive",
+      "context_group": "s-linglong-build",
+      "step": 4,
+      "question": "请给出玲珑轮胎2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": true
+      }
+    },
+    {
+      "id": "s-linglong-baseline-1",
+      "scope_id": "linglong-positive",
+      "context_group": "s-linglong-baseline",
+      "step": 1,
+      "question": "玲珑轮胎2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-linglong-baseline-2",
+      "scope_id": "linglong-positive",
+      "context_group": "s-linglong-baseline",
+      "step": 2,
+      "question": "玲珑轮胎2024年合并口径营业成本是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-linglong-baseline-3",
+      "scope_id": "linglong-positive",
+      "context_group": "s-linglong-baseline",
+      "step": 3,
+      "question": "玲珑轮胎2024年合并口径营业收入是多少人民币元？",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    },
+    {
+      "id": "s-linglong-baseline-4",
+      "scope_id": "linglong-positive",
+      "context_group": "s-linglong-baseline",
+      "step": 4,
+      "question": "请给出玲珑轮胎2024年度合并营业收入，单位为人民币元。",
+      "request": {
+        "mode": "m3",
+        "execution_policy": "COLD_ALLOWED",
+        "subexperiment": "sequence",
+        "build_facts": false
+      }
+    }
+  ],
+  "dataset_id": "holdout-v3"
+}

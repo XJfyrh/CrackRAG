@@ -1,0 +1,73 @@
+{
+  "schema": "crackrag-release-short-sequence-v1",
+  "status": "PREPARED_NOT_EXECUTED",
+  "no_api_calls": true,
+  "logical_queries": 16,
+  "unit_of_comparison": "Four-query cumulative sequence per issuer and arm, including all triggered work",
+  "sequence": [
+    "revenue",
+    "cost_of_revenue",
+    "exact_repeated_revenue",
+    "paraphrased_revenue"
+  ],
+  "arms": {
+    "baseline": {
+      "mode": "m3",
+      "answer_policy": "financial-supported-v1",
+      "build_facts": false,
+      "requirement": "Fresh independent tenant, normal upload, zero pre-existing facts; no fact publication/experience building. Ordinary supported answers still required."
+    },
+    "build": {
+      "mode": "m3",
+      "answer_policy": "financial-supported-v1",
+      "build_facts": true,
+      "requirement": "Fresh independent tenant and normal upload; experience may only originate from this arm ordinary requests/builds."
+    }
+  },
+  "execution_order": [
+    {
+      "issuer": "songlin",
+      "arms": [
+        "baseline",
+        "build"
+      ]
+    },
+    {
+      "issuer": "linglong",
+      "arms": [
+        "build",
+        "baseline"
+      ]
+    }
+  ],
+  "controls": [
+    "Same service instance/project cost ledger, provider/model/config/schema/prompt/price snapshot, source PDF bytes and selected pages across arms",
+    "Quality tenants and both arm tenants isolated; no gold or evaluation content in model/tool inputs",
+    "Run sequentially; await all foreground/background/retry jobs to terminal and ledger reconciliation before next step",
+    "Record actual cold/hot/reuse outcomes, not requested build flag as proof",
+    "No provider-cache flush or artificial prefix warmup; record input cache-hit/miss usage where supplied. Counterbalancing only partly limits provider-cache/time-order confounding."
+  ],
+  "record_per_step": [
+    "run_id and idempotency key hash",
+    "request and runtime config hashes",
+    "start, first-answer and final-background-settled times",
+    "foreground latency and end-to-end settled latency",
+    "answer status/value/provenance/quality verdict",
+    "coverage and used/published fact IDs",
+    "all attributable call attempt IDs and stage/foreground/background/retry category",
+    "input/output/cache-hit/cache-miss token counts when provider reports them",
+    "known estimated CNY, unresolved reserved upper CNY, unknown-call count",
+    "jobs queued/completed/failed/cancelled and build cost",
+    "document ingestion time/local compute cost separately as measured or unknown"
+  ],
+  "cost_math": {
+    "total": "SUM(all model call costs attributable to all four queries, including answer, routing/probe, build, retry/recovery and delayed background calls); retain unresolved reservation separately",
+    "comparison": "(baseline_total - build_total) / baseline_total only if both totals settled, baseline_total > 0 and all paired answers correct; report signed result, including increased cost",
+    "incremental_reuse": "Measure step 3 and 4 incremental calls/tokens/cost after earlier builds are settled; do not omit earlier build expense from total",
+    "unknown": "Do not turn missing usage, unsettled calls or local compute into zero. Stop further paid work when the active cost ledger requires it; mark comparison inconclusive."
+  },
+  "go_no_go": "Bind exact release commit/config, active budget balance and price snapshot before first real call. This plan neither raises the user total CNY 100 cap nor grants an extra per-plan budget. Root execution owner chooses a bounded reservation and records it.",
+  "claims": "A 2-issuer paired smoke measurement supports reproducibility, not statistical cost-saving claims or proof of exact supplier prefix-cache insertion/coverage/TTL.",
+  "dataset_id": "holdout-v3",
+  "evaluation_gold": "gold.json, evaluator only"
+}

@@ -1,0 +1,256 @@
+{
+  "schema": "crackrag-source-selection-v3",
+  "classification": "PREPARATION_SCREENING_NOT_RUNTIME_VALIDATION",
+  "no_api_calls": true,
+  "production_parser_calls": 0,
+  "validator_calls": 0,
+  "model_calls": 0,
+  "rule": "Original PDF text screening and visual review after v3 code freeze; select by original same-page support, never runtime pass/fail. Selection is purposive, not random.",
+  "candidates": [
+    {
+      "id": "yangnong-2024",
+      "issuer": "扬农化工",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-25/1222882421.PDF",
+      "physical_pages_screened": [
+        86,
+        87
+      ],
+      "screening": "official web PDF text screening only",
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "hualu-2024",
+      "issuer": "华鲁恒升",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-29/1222940908.PDF",
+      "physical_pages_screened": [
+        73,
+        74
+      ],
+      "screening": "official web PDF text screening only",
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "fuling-2024",
+      "issuer": "涪陵榨菜",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-29/1222941660.PDF",
+      "physical_pages_screened": [
+        86,
+        87
+      ],
+      "screening": "official web PDF text screening only",
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "supor-2024",
+      "issuer": "苏泊尔",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-28/1222928386.PDF",
+      "physical_pages_screened": [
+        77,
+        78,
+        79
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 4541600,
+      "sha256": "9819abd69b7cb18c703c9d8f1dda4a9f476609a4056595767126a25b96abede8",
+      "page_count": 174,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "songlin-2024",
+      "issuer": "松霖科技",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-31/1222962236.PDF",
+      "physical_pages_screened": [
+        86,
+        87
+      ],
+      "screening": "plain PDF text plus original-page 140-DPI Poppler visual review",
+      "bytes": 4366562,
+      "sha256": "e3fa31c2e40941bb0ecc0f921deddc01d3e0ff3dbeed7a4a4434492330a4902e",
+      "page_count": 209,
+      "decision": "SELECTED",
+      "reason": "Three target rows share original same-page entity/year/consolidated/currency-unit declarations; the genuine following page provides the missing-consolidated-revenue negative."
+    },
+    {
+      "id": "hangmin-2024",
+      "issuer": "航民股份",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-29/1222941776.PDF",
+      "physical_pages_screened": [
+        77,
+        78
+      ],
+      "screening": "official web PDF text screening only",
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "gongniu-2024",
+      "issuer": "公牛集团",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-25/1223284030.PDF",
+      "physical_pages_screened": [
+        95,
+        96
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 1515956,
+      "sha256": "a99c2b87f0157db947574d0b037c9525741fccef41f32b2bd4ccf7eebe5f3ebc",
+      "page_count": 237,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "bethel-2024",
+      "issuer": "伯特利",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-23/1223218080.PDF",
+      "physical_pages_screened": [
+        86,
+        87
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 1441610,
+      "sha256": "a3ac5d89cb1d91438289777660f2c0cc1f2e02c8c1208efb539d537aa6ccd248",
+      "page_count": 247,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "jinshiyuan-2024",
+      "issuer": "今世缘",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-30/1223416277.PDF",
+      "physical_pages_screened": [
+        65,
+        66
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 1403668,
+      "sha256": "b42c8bc47bf90836eb87eeef2a715ce9d37572f52db6809c4bed34d6fabb0377",
+      "page_count": 173,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "hengshun-2024",
+      "issuer": "恒顺醋业",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-22/1223193060.PDF",
+      "physical_pages_screened": [
+        107,
+        108
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 1514599,
+      "sha256": "11fc1afe0f2e295a95e7d1247e258d6b862e79e090f2ed231bd9c38f5ebc3e5e",
+      "page_count": 239,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "kuka-2024",
+      "issuer": "顾家家居",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-29/1223386613.PDF",
+      "physical_pages_screened": [
+        99,
+        100
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 1751071,
+      "sha256": "f69afbf2cd15fbdb23f1be654d17bfe7bc5b81d12cf1a11c93f4d1a25d1c08fc",
+      "page_count": 227,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "daqin-2024",
+      "issuer": "大秦铁路",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-30/1223452300.pdf",
+      "physical_pages_screened": [
+        74,
+        75
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 3357857,
+      "sha256": "96cf90582de2b3e2932517ab2fdc0f33690ff0f2c9e309e85bcb664899f7fb8b",
+      "page_count": 220,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "meida-2024",
+      "issuer": "浙江美大",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-26/1223331935.PDF",
+      "physical_pages_screened": [
+        76,
+        77
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 3579109,
+      "sha256": "8d0af8b404854f7f3a05da09adc6e48f487ab48377b22690d551cff11bc47652",
+      "page_count": 197,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "qianhe-2024",
+      "issuer": "千禾味业",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-16/1223103749.PDF",
+      "physical_pages_screened": [
+        69,
+        70
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 1277823,
+      "sha256": "bc50e75d62cf8fc585828027763c78220768050e0b938554da4b59ffed2215e3",
+      "page_count": 197,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "taoli-2024",
+      "issuer": "桃李面包",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-21/1222856789.PDF",
+      "physical_pages_screened": [
+        123,
+        124
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 5543030,
+      "sha256": "357997638d3507952b7f58c1058f4165802f15eea154fcff54c7604b30f2cd00",
+      "page_count": 331,
+      "decision": "NOT_SELECTED",
+      "reason": "One or more target rows and their own original table heading/year/currency-unit declarations are split across pages. No source repair, header reconstruction or runtime test attempted."
+    },
+    {
+      "id": "joyson-2024",
+      "issuer": "均胜电子",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-03-28/1222927138.PDF",
+      "physical_pages_screened": [
+        101,
+        102
+      ],
+      "screening": "plain pypdf text screening only",
+      "bytes": 4993433,
+      "sha256": "2c5e141615a273dafa06e11a83a4badb0d9686575055234aa3e3ed552cf09b8b",
+      "page_count": 274,
+      "decision": "NOT_SELECTED_BACKUP",
+      "reason": "Plain text suggests same-page targets. Downloaded/text-screened concurrently with Linglong selection, but not visually confirmed, gold-frozen or runtime-tested after the two selected sources were confirmed."
+    },
+    {
+      "id": "linglong-2024",
+      "issuer": "玲珑轮胎",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-04-25/1223285950.PDF",
+      "physical_pages_screened": [
+        100,
+        101
+      ],
+      "screening": "plain PDF text plus original-page 140-DPI Poppler visual review",
+      "bytes": 1933526,
+      "sha256": "ee5e21ef24837cb7b4d806c79dab28b18588bb73f52ee43b05ca68fd04d27172",
+      "page_count": 234,
+      "decision": "SELECTED",
+      "reason": "Three target rows share original same-page entity/year/consolidated/currency-unit declarations; the genuine following page provides the missing-consolidated-revenue negative.",
+      "prior_exposure": "V2 preparation records this issuer as a webpage-text-screened backup only: no download, visual review, gold freezing, production parsing/validator/model call or implementation repair. V3 root accepted disclosed preparation-only exposure; first original PDF download/visual selection and gold freeze occurred after v3 semantic freeze."
+    }
+  ]
+}
