@@ -22,6 +22,10 @@ output/
 # Private deployment state, secrets, account opening balance, backups and models.
 .release/
 backups/
+evidence/
+archive/
+.agents/
+.codex/
 *.dump
 *.sqlite
 *.sqlite3

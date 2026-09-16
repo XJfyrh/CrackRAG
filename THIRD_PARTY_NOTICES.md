@@ -17,9 +17,8 @@ redistributing, or deploying a combined application.
 - [License text](https://github.com/pymupdf/PyMuPDF/blob/1.26.7/COPYING)
 - [MuPDF source](https://github.com/ArtifexSoftware/mupdf)
 
-The first release distributes original source and local build instructions,
-not historical Windows executables or prebuilt runtime images. The dependency
-lock and Docker build instructions identify the dependencies used. Dependency
+The first release distributes original source and local build instructions.
+The dependency lock and Docker build instructions identify the dependencies used. Dependency
 licenses and applicable corresponding-source obligations remain in force.
 
 ## Embedding assets and other dependencies
@@ -52,7 +51,6 @@ pages locally in the browser. It is licensed under Apache-2.0. Its original
 LICENSE and the accompanying CMap/font/WASM notices are copied with the browser
 assets at build time; see the [upstream license](https://github.com/mozilla/pdf.js/blob/master/LICENSE).
 
-Private historical archives, database exports, browser traces, model request
-payloads, invoices, credentials, and third-party research papers are excluded
-from the public source baseline. Public validation summaries are separately
-generated artifacts and are not represented as complete historical archives.
+Database exports, browser traces, model request payloads, invoices, credentials,
+and third-party research papers are excluded from the public source distribution.
+Public evaluation summaries report methodology, results, and limitations.

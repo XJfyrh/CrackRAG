@@ -2,7 +2,7 @@
 
 公开仓库是唯一持续开发主线。`main` 保存可复现代码；探索工作使用 `XJfyrh/experiment-<topic>`，产品改动使用 `XJfyrh/<topic>`，验收后的正式版本使用不可移动的 `v<major>.<minor>.<patch>` 标签。
 
-旧研究 Git 历史、冻结证据和工作区独有材料保存在独立私有只读归档。`baseline-import.json` 记录干净基线的来源和排除项；它不是新版本的最终发布哈希或完整历史冻结。公开仓库不会伪造缺失的历史材料来使旧审计通过。
+版本复现以正式标签、产品清单和 Release 附件校验和为准。
 
 产品默认 `financial-supported-v1` 且仅开放 M3 入口。研究人员可显式选择 `CRACKRAG_ANSWER_POLICY=legacy` 运行历史研究路径；此配置不属于首发产品验收。
 
