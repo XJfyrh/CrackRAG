@@ -1,0 +1,38 @@
+{
+  "schema": "crackrag-evaluation-classification-v1",
+  "dataset_id": "holdout-v2",
+  "effective_classification": "REGRESSION",
+  "classified_at": "2026-09-16T11:36:03.302795+00:00",
+  "previous_classification": "INDEPENDENT_SOURCE_HOLDOUT_PREPARED_NOT_EXECUTED",
+  "reason": "The first frozen live evaluation failed its supported-answer gate. The Hengli original-page net-profit case was then used to locate a source-informed validator row-range defect. This material must be retained as regression after the fix, not relabeled as a new independent holdout.",
+  "first_live_result_reported_by_execution_owner": {
+    "supported_positive": {
+      "passed": 5,
+      "total": 6
+    },
+    "negative": {
+      "passed": 4,
+      "total": 4
+    },
+    "reuse": {
+      "passed": 2,
+      "total": 2
+    },
+    "limited_quality_gate": "NOT_PASSED",
+    "failed_case_id": "q-hengli-net-profit",
+    "failed_reason": "ROW_OUTSIDE_HEADER_TABLE",
+    "source_id": "hengli-2024",
+    "original_physical_page": 68,
+    "qualification": "Original page contains the requested total net-profit row and declarations; positive abstention is a failure, not a passed safety case.",
+    "sequence_cost": "One issuer build arm cost increased and the other decreased; overall build cost was 16.65% higher than baseline. Preserve the original measured result; do not replace with post-fix reruns.",
+    "provenance": "Root execution-owner report, 2026-09-16. Full first-run records remain separate and immutable; this additive classification does not replace them."
+  },
+  "preservation": {
+    "original_preparation_sha256": "40e81474b39a947c00bec148d68c831e1cd7caca2ef68b49a08e4f4d28558e28",
+    "frozen_file_hashes_verified_unchanged": 9,
+    "original_sources_questions_gold_plans_and_code_freeze": "Unchanged; only CLASSIFICATION.md and classification.json were added.",
+    "first_execution_records": "Must be retained with original outcomes and cost measurements; no failed-case deletion or retroactive success.",
+    "future_reruns": "Regression-only and separately identified."
+  },
+  "next_holdout": "Wait for root to declare and record a new semantic freeze. Then select two previously unused issuers; no holdout-v3 sources have been selected by this preparation agent."
+}

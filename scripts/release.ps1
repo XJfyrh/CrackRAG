@@ -10,7 +10,7 @@ if ($env:CRACKRAG_PROJECT -notmatch '^crackrag-release[a-zA-Z0-9_-]*$') { throw 
 $env:CRACKRAG_HOST_UID = '10001'
 New-Item -ItemType Directory -Force -Path $env:CRACKRAG_STATE | Out-Null
 function Invoke-ReleaseCompose {
- $composeArgs = @('compose','--project-directory',(Join-Path $releaseRoot 'deploy'))
+ $composeArgs = @('compose','--project-name',$env:CRACKRAG_PROJECT,'--project-directory',(Join-Path $releaseRoot 'deploy'))
  $envPath = Join-Path $env:CRACKRAG_STATE 'compose.env'
  if (Test-Path -LiteralPath $envPath) { $composeArgs += @('--env-file',$envPath) }
  $composeArgs += @('-f',(Join-Path $releaseRoot 'deploy/compose.release.yaml'))

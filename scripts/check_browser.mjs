@@ -4,6 +4,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createRequire} from 'node:module';
+import {createHash} from 'node:crypto';
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const require=createRequire(path.join(root,'web/package.json'));
 const {chromium,expect}=require('@playwright/test');
@@ -15,11 +16,13 @@ const recoveryArg=process.argv.indexOf('--recovery-evidence');
 const recoveryFolder=recoveryArg>=0?process.argv[recoveryArg+1]:null;
 if(recoveryArg>=0&&!recoveryFolder)throw new Error('--recovery-evidence requires a completed private demo directory');
 async function api(route){const response=await fetch(base+route,{headers:{Authorization:`Bearer ${token}`}});if(!response.ok)throw new Error(`HTTP ${response.status} on ${route}`);return response.json()}
-if((await api('/healthz')).provider!=='mock')throw new Error('MOCK_ONLY: refusing browser submissions to a paid target');
+const releaseHealth=await api('/healthz');
+if(releaseHealth.provider!=='mock')throw new Error('MOCK_ONLY: refusing browser submissions to a paid target');
 const browser=await chromium.launch({headless:!process.argv.includes('--headed')});
 const context=await browser.newContext({viewport:{width:1440,height:1000},locale:'zh-CN',...(record?{recordVideo:{dir:output,size:{width:1440,height:1000}}}:{})});
 const page=await context.newPage();
 const errors=[],posts=[],results=[];
+let acceptance;
 page.on('pageerror',error=>errors.push(error.message));
 page.on('request',request=>{if(request.method()==='POST'&&new URL(request.url()).pathname==='/api/v1/queries')posts.push(Date.now())});
 const started=Date.now();
@@ -28,7 +31,9 @@ async function caption(text,seconds=18){
  await page.evaluate(text=>{let e=document.getElementById('demo-caption');if(!e){e=document.createElement('div');e.id='demo-caption';e.style.cssText='position:fixed;left:8%;right:8%;bottom:18px;z-index:10000;background:#123b32ee;color:white;padding:15px 22px;border-radius:10px;font:17px/1.6 sans-serif;box-shadow:0 3px 14px #0003';document.body.append(e)}e.textContent=text},text);
  await page.waitForTimeout(seconds*1000);
 }
+async function clearCaption(){if(record)await page.evaluate(()=>document.getElementById('demo-caption')?.remove())}
 async function upload(name){
+ await clearCaption();
  await page.getByLabel('选择 PDF').setInputFiles(path.join(root,'web/public/samples',name));
  await page.getByRole('textbox',{name:'页码范围'}).fill('1');
  const received=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/v1/documents'&&r.request().method()==='POST');
@@ -38,8 +43,11 @@ async function upload(name){
  await expect.poll(async()=>{const d=(await api('/api/v1/documents')).documents.find(d=>d.id===created.document_id);return d?.state},{timeout:120000}).toBe('READY');
  await expect(page.getByRole('checkbox',{name,exact:true}).first()).toBeEnabled({timeout:10000});
 }
-async function ask(button,expected){
+async function ask(button,expected,options={}){
+ await clearCaption();
  await page.getByRole('button',{name:button,exact:true}).click();
+ if(options.question)await page.getByRole('textbox',{name:'问题',exact:true}).fill(options.question);
+ if(options.policy)await page.getByRole('combobox',{name:'后台构建策略'}).selectOption(options.policy);
  const received=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/v1/queries'&&r.request().method()==='POST');
  await page.getByRole('button',{name:'查阅并回答',exact:true}).click();
  const response=await received;if(response.status()!==202)throw new Error(`query rejected ${response.status()}`);
@@ -63,7 +71,7 @@ try{
  await page.locator('.answer-card').scrollIntoViewIfNeeded();
  await page.screenshot({path:path.join(output,'01-supported.png')});
  await caption('2 / 首问查阅原文。模型提出声明，Go 重新验证来源语义后生成答案。通过回答校验，并不会自动发布正式事实。',22);
- await page.locator('.source-link').first().click();
+ await clearCaption();await page.locator('.source-link').first().click();
  await expect(page.getByRole('heading',{name:'来源核验 · 第 1 页'})).toBeVisible();
  await expect(page.getByLabel('PDF 来源页 1')).toHaveAttribute('data-status','ready',{timeout:20000});
  await page.locator('.source-card').scrollIntoViewIfNeeded();
@@ -99,7 +107,14 @@ try{
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBeTruthy();
  await page.screenshot({path:path.join(output,'06-mobile.png'),fullPage:true});
  await page.setViewportSize({width:1440,height:1000});
+ const hot=await ask('② 显式构建','SUPPORTED',{question:'样例控股2024年营业成本是多少？',policy:'HOT_ONLY'});
+ expect(hot.diagnostics.m3.jobs.length).toBeGreaterThan(0);
+ expect(hot.diagnostics.m3.jobs.every(job=>['COMMITTED','SKIPPED'].includes(job.state))).toBeTruthy();
+ await page.getByRole('heading',{name:'后台事实构建',exact:true}).scrollIntoViewIfNeeded();
+ await page.screenshot({path:path.join(output,'08-hot-policy.png')});
+ await caption('8 / 单独展示 HOT_ONLY：仅在经验缓存依据满足规则时继续构建，也可能正常跳过。此处是 mock 策略演示；经验窗口不是供应商缓存承诺，命中不是验收前提。',18);
  if(recoveryFolder){
+  await clearCaption();
   const proof=JSON.parse(await fs.readFile(path.join(recoveryFolder,'proof.json'),'utf8'));
   const saved=JSON.parse(await fs.readFile(path.join(recoveryFolder,'before.json'),'utf8'));
   if(proof.status!=='PASS'||proof.paid_calls!==0||proof.calls_before!==proof.calls_after||proof.full_reuse_model_calls!==0||proof.release_manifest_sha256!==(await api('/healthz')).release_manifest_sha256)throw new Error('Recovery proof does not match this mock release');
@@ -114,12 +129,18 @@ try{
   await expect(page.getByText('已发布通过验证的事实',{exact:true})).toBeVisible();
   await page.getByRole('heading',{name:'后台事实构建',exact:true}).scrollIntoViewIfNeeded();
   await page.screenshot({path:path.join(output,'07-recovery.png')});
-  await caption(`8 / 查看刚完成的受控恢复演练：候选保存后终止主实例，并重启 Redis；备用实例接续同一个任务。调用数保持 ${proof.calls_before} → ${proof.calls_after}，恢复后复用零模型调用。命令与核对记录随版本说明提供。`,24);
+  await caption(`9 / 查看刚完成的受控恢复演练：候选保存后终止主实例，并重启 Redis；备用实例接续同一个任务。调用数保持 ${proof.calls_before} → ${proof.calls_after}，恢复后复用零模型调用。命令与核对记录随版本说明提供。`,24);
   expect(posts.length).toBe(noPosts);
   results.push({recovery_run:saved.run.id,calls_before:proof.calls_before,calls_after:proof.calls_after,full_reuse_model_calls:0});
  }
  await caption('支持范围：明确实体、年度和合并口径的财务标量。复杂跨页表格、扫描 OCR 与任意问答不在首版范围。源码、运行步骤与真实评测证据随版本交付。',22);
  expect(errors).toEqual([]);
- await fs.writeFile(path.join(output,'browser-acceptance.json'),JSON.stringify({version:'release-browser-acceptance-v1',provider:'mock',results,query_posts:posts.length,refresh_history_created_posts:0,page_errors:errors,video:record,elapsed_seconds:(Date.now()-started)/1000},null,2));
- console.log('PASS: browser upload, supported answer, source, explicit build, zero-call reuse, refusal, refresh/history, mobile layout');
+ acceptance={version:'release-browser-acceptance-v1',provider:'mock',release_manifest_sha256:releaseHealth.release_manifest_sha256,results,query_posts:posts.length,refresh_history_created_posts:0,page_errors:errors,video:record,elapsed_seconds:(Date.now()-started)/1000};
 }finally{await context.close();await browser.close()}
+if(record){
+ const videoPath=await page.video().path();
+ const bytes=await fs.readFile(videoPath);
+ acceptance.video_file={name:path.basename(videoPath),sha256:createHash('sha256').update(bytes).digest('hex'),bytes:bytes.length};
+}
+await fs.writeFile(path.join(output,'browser-acceptance.json'),JSON.stringify(acceptance,null,2));
+console.log('PASS: browser upload, supported answer, source, explicit build, zero-call reuse, refusal, refresh/history, mobile layout, HOT policy');

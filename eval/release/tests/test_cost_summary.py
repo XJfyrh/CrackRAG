@@ -77,6 +77,9 @@ class CostSummaryTests(unittest.TestCase):
         self.assertEqual(report['total_amount_cny'], Decimal('0.11000008'))
         self.assertLess(report['comparison']['signed_savings_percent'], 0)
         self.assertEqual(report['total_model_attempts'], 8)
+        self.assertEqual(report['release_manifest_sha256'], self.driver['release_manifest_sha256'])
+        self.assertEqual(report['model_inputs_sha256'], cost.digest(self.inputs))
+        self.assertEqual(report['summarizer_sha256'], cost.digest(ROOT / 'scripts/summarize_release_cost.py'))
         probe = report['pairs'][0]['build']['stages']['probe']
         self.assertEqual(probe['failed_http_calls'], 1)
         self.assertEqual(probe['amount_cny'], Decimal('0.02000001'))
@@ -196,6 +199,18 @@ class CostSummaryTests(unittest.TestCase):
                 '--output-json', str(output_json), '--output-markdown', str(output_md)]
         with patch.object(sys, 'argv', args), self.assertRaises(SystemExit): cost.main()
         self.assertFalse(output_json.exists()); self.assertFalse(output_md.exists())
+
+    def test_cli_writes_only_sanitized_aggregates_with_decimal_strings(self):
+        output_json = self.root / 'synthetic-public.json'; output_md = self.root / 'synthetic-public.md'
+        args = ['summary', '--inputs', str(self.inputs), '--sequence-directory', str(self.evidence),
+                '--output-json', str(output_json), '--output-markdown', str(output_md)]
+        with patch.object(sys, 'argv', args): cost.main()
+        report = json.loads(output_json.read_text(encoding='utf-8'))
+        self.assertEqual(report['total_amount_cny'], '0.11000008')
+        self.assertTrue(report['comparison']['signed_savings_percent'].startswith('-'))
+        self.assertIn('Cache hit', output_md.read_text(encoding='utf-8'))
+        for path in (output_json, output_md):
+            self.assertNotIn('PRIVATE', path.read_text(encoding='utf-8'))
 
     def test_zero_baseline_percentage_is_unavailable(self):
         result = cost.comparison(Decimal('0'), Decimal('0.01'))

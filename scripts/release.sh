@@ -11,9 +11,9 @@ CRACKRAG_STATE=$(CDPATH= cd -- "$CRACKRAG_STATE" && pwd)
 export CRACKRAG_STATE
 compose() {
  if [ -f "$CRACKRAG_STATE/compose.env" ]; then
-  docker compose --project-directory "$ROOT/deploy" --env-file "$CRACKRAG_STATE/compose.env" -f "$ROOT/deploy/compose.release.yaml" "$@"
+  docker compose --project-name "$CRACKRAG_PROJECT" --project-directory "$ROOT/deploy" --env-file "$CRACKRAG_STATE/compose.env" -f "$ROOT/deploy/compose.release.yaml" "$@"
  else
-  docker compose --project-directory "$ROOT/deploy" -f "$ROOT/deploy/compose.release.yaml" "$@"
+  docker compose --project-name "$CRACKRAG_PROJECT" --project-directory "$ROOT/deploy" -f "$ROOT/deploy/compose.release.yaml" "$@"
  fi
 }
 admin() { compose --profile tools run --rm --no-deps admin "$@"; }

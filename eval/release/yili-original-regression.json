@@ -1,0 +1,86 @@
+{
+  "schema": "crackrag-original-yili-regression-v1",
+  "status": "PASS",
+  "classification": "HISTORICAL_REGRESSION_NOT_HOLDOUT",
+  "checked_on": "2026-09-16",
+  "no_api_calls": true,
+  "paid_api_calls": 0,
+  "database_access": false,
+  "source": {
+    "title": "内蒙古伊利实业集团股份有限公司2024年年度报告",
+    "url": "https://www.yili.com/uploads/2025-04-29/478095e5-22ea-40f7-87eb-7d55651a0ad51745927217322.pdf",
+    "sha256": "9c4f934fd1253ae881af5432963537d2e21e7b992fa8b5f4bc36d61af04dfaab",
+    "bytes": 1590787,
+    "total_physical_pages": 270,
+    "authorized_physical_pages": [
+      92
+    ],
+    "printed_page_label": "88 / 266",
+    "excluded_previous_physical_page": 91
+  },
+  "historical_failure": {
+    "description": "The old Answer assigned the first net-profit numeric column on this continuation page to FY2024, even though the authorized page had no year-column header. The 2024 report running header was insufficient authority.",
+    "legacy_record_sha256": "647e46a0374662c5c5740b3200f4ae6864e7a18ef8bdaf524824fa475cea4c05",
+    "prior_facts": "The historical record already retained candidate INCONCLUSIVE and no formal fact publication; the failure being rechecked is the old freeform Answer."
+  },
+  "method": {
+    "visual_review": "Re-rendered actual original physical page 92 with Poppler at 140 DPI and inspected it. No column-year header, table unit header or consolidated table title appears on that page.",
+    "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+    "parse_scope": "Only original physical page 92; neighbor_page_context null; no reconstructed source text or header",
+    "embedding": "Named fixture DenseEncoder; no retrieval/embedding-quality claim, no model assets or provider calls",
+    "actual_regions": 8,
+    "regions_containing_exact_legacy_quote": 1,
+    "go_execution": "Private Go -overlay test compiled against unchanged current app package; no API source/test file added or edited"
+  },
+  "checks": {
+    "exact_legacy_claim_source_semantics": "INCONCLUSIVE",
+    "exact_legacy_claim_reason": "YEAR_COLUMN_UNPROVEN",
+    "equivalent_current_strict_claim_answer": "INCONCLUSIVE",
+    "unproved_numeric_answer_emitted": false,
+    "accepted_answer_sources": 0,
+    "reused_facts": 0,
+    "answer_publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+    "exact_legacy_freeform_answer_replayed_to_strict_entry": "ANSWER_SCHEMA_INVALID before database access",
+    "publication_guard_read_review": "CommitFacts skips every item whose status is not VALIDATED and revalidates eligible items before insert"
+  },
+  "limitations": [
+    "This is an explicit original-document offline semantic/Answer regression, not a paid model rerun or fresh HTTP/database publication test.",
+    "Fixture embedding tests parser geometry/source semantics, not semantic retrieval quality.",
+    "Original PDF, page image, parsed full text, legacy response and private overlay artifacts are not distributed in the public source repository."
+  ],
+  "private_proof_sha256": "234ca525528c15a601202ad49f92f2538c9fd32fcc71d7ad4023c1e05112b204",
+  "code_files": [
+    {
+      "path": "ai-runtime/src/crackrag_m1/parser.py",
+      "sha256": "446c22627c286653a229fe040b6f6b29c6d0643fe5056176cf5ddaf73ad40486"
+    },
+    {
+      "path": "ai-runtime/src/crackrag_m1/embedding.py",
+      "sha256": "383360d6e6a2738626a3f9f68f7d7bd3a9922e0bb683aeb8b2f4666117574299"
+    },
+    {
+      "path": "api/internal/app/m2_types.go",
+      "sha256": "1b5303e18592dfc005e3924e6bcdab08492194a81e69b99b061fe45814393cce"
+    },
+    {
+      "path": "api/internal/app/m2_validator.go",
+      "sha256": "39482a69a8eff05146e323a98544d5f0fa5f0851f5b15063d249fec9165de2f4"
+    },
+    {
+      "path": "api/internal/app/source_table_context.go",
+      "sha256": "4247a54ed94f383cb667de7f644659411efd185e2e7a3122defe46a0bbafb427"
+    },
+    {
+      "path": "api/internal/app/release_answer.go",
+      "sha256": "248616ae695dfe542db8c8b492e4f3f79c394d703bdc8d77031899a7bce4a769"
+    },
+    {
+      "path": "api/internal/app/m2_commit.go",
+      "sha256": "6d1af9fdcd025f858cbcd55ca9ef05c33029344759860f1dd21404bd592602ab"
+    },
+    {
+      "path": "api/internal/app/m2_catalog.json",
+      "sha256": "b4a3e3d30306d5190ab99b9b89ad027b08bb904fa4630769fd0915d2f65eb9e7"
+    }
+  ]
+}

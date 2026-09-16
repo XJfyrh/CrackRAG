@@ -30,9 +30,11 @@ func semanticSource(c Candidate, r *pb.Region, entity, concept string) (string, 
 	// table's positive business scope or unit declaration to this region.
 	declarations := r.Text
 	tableText := r.Text
+	boundTable := false
 	if preamble, bound, invalid := sourceBoundTablePreamble(r, context); invalid {
 		doubts = append(doubts, "TABLE_CONTEXT_BINDING_INVALID")
 	} else if bound {
+		boundTable = true
 		declarations += "\n" + preamble
 		surrounding += "\n" + preamble
 		// The complete table is part of the same OpenDocument observation.
@@ -176,6 +178,18 @@ func semanticSource(c Candidate, r *pb.Region, entity, concept string) (string, 
 					col = i
 				}
 			}
+		} else if boundTable {
+			// A differently labelled subtable header is still a boundary. Do
+			// not carry the supported header past explicit fiscal-year columns.
+			markedYears := 0
+			for _, cell := range cells[1:] {
+				if normalizeYear(cell) != "" && (strings.Contains(cell, "年") || strings.HasPrefix(cell, "FY")) {
+					markedYears++
+				}
+			}
+			if markedYears >= 2 {
+				return "INCONCLUSIVE", "MULTIPLE_TABLE_HEADERS", checks
+			}
 		}
 	}
 	if header == nil {
@@ -190,19 +204,43 @@ func semanticSource(c Candidate, r *pb.Region, entity, concept string) (string, 
 	matchingRows := 0
 	value := ""
 	insideTable := false
+	continuedLabel := false
 	previousRow := []string(nil)
 	for lineNumber, line := range lines {
 		if lineNumber == headerLine {
 			insideTable = true
+			continuedLabel = false
 			previousRow = nil
 			continue
+		}
+		if boundTable && insideTable && sourceTableSectionBoundary(line) {
+			// A merged title/unit cell may serialize with empty pipe columns.
+			// Its declaration still ends the preceding semantic table section.
+			insideTable = false
+			continuedLabel = false
+			previousRow = nil
 		}
 		cells := splitCells(line)
 		if len(cells) < 2 {
 			if strings.TrimSpace(line) != "" {
-				insideTable = false
 				previousRow = nil
+				// Parser-v4 serializes cell-internal newlines into the bound
+				// physical table text. An unrelated wrapped label must not end
+				// that table forever. Free text has no such geometric authority.
+				if boundTable && insideTable && !sourceTableSectionBoundary(line) {
+					continuedLabel = true
+				} else {
+					insideTable = false
+					continuedLabel = false
+				}
 			}
+			continue
+		}
+		if continuedLabel {
+			// Do not reinterpret a wrapped suffix as a complete metric, e.g.
+			// "持续经营\n净利润 | ...". Nor may it supply an immediate parent.
+			continuedLabel = false
+			previousRow = nil
 			continue
 		}
 		ids := exactConcept(cells[0])
@@ -295,6 +333,19 @@ var sourceGroupedNumeric = regexp.MustCompile(`^-?[1-9][0-9]{0,2}(?:,[0-9]{3})+(
 var sourceAnnualStatementPeriod = regexp.MustCompile(`^(20[0-9]{2})年1[—－-]12月$`)
 var sourceTotalNetProfitLabel = regexp.MustCompile(`^[一二三四五六七八九十]+、净利润(?:[（(]净亏损以[“"][-－−][”"]号填列[）)])?$`)
 var sourceMissingBasisNote = regexp.MustCompile(`(?i)(?:basis|scope|consolidation)[^\r\n]{0,60}(?:note|footnote)[^\r\n]{0,60}(?:not supplied|not included|missing|unavailable)|(?:口径|合并范围)附注(?:未提供|缺失|缺少)`)
+
+// Even a physical table may contain a new section declaration. It cannot lend
+// the preceding header/preamble to later rows. This deliberately does not try
+// to reconstruct wrapped target labels or infer omitted scope/unit metadata.
+func sourceTableSectionBoundary(line string) bool {
+	line = strings.TrimSpace(line)
+	lower := strings.ToLower(line)
+	return sourceScopeDeclaration.MatchString(line) || sourceUnitDeclaration.MatchString(line) ||
+		sourceMissingBasisNote.MatchString(line) || strings.Contains(line, "利润表") ||
+		strings.Contains(line, "资产负债表") || strings.Contains(line, "现金流量表") ||
+		strings.Contains(line, "币种") || strings.Contains(line, "口径") ||
+		strings.Contains(lower, "statement") || strings.Contains(lower, "balance sheet") || strings.Contains(lower, "currency")
+}
 
 func sourceIncomeComponent(label string) (string, string) {
 	switch label {

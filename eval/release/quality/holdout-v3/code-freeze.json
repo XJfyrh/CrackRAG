@@ -1,0 +1,47 @@
+{
+  "schema": "crackrag-holdout-semantic-freeze-v3",
+  "frozen_before_source_selection": true,
+  "frozen_at": "2026-09-16T11:46:04.673125+00:00",
+  "authority": "Root declared new semantic freeze after the bound-table wrapped-row fix and independent 150-test/subtest review plus synthetic parser interop. Holdout-v2 remains failed regression.",
+  "no_api_calls": true,
+  "source_selection_rule": "Official original annual-report pages within declared same-page financial scalar support; inspect/render manually, never run held-out gold through validator/model to select candidates.",
+  "allowed_postfreeze_metadata_change": "New issuer aliases only; root owns catalog updates. Any semantic/prompt/parser change informed by a source reclassifies it as regression.",
+  "files": [
+    {
+      "path": "api/internal/app/m2_types.go",
+      "sha256": "1b5303e18592dfc005e3924e6bcdab08492194a81e69b99b061fe45814393cce"
+    },
+    {
+      "path": "api/internal/app/m2_validator.go",
+      "sha256": "952e8eeff72887c0f2bd1a1e3b408153ad3eabb849db233d56bcc6abf6d92021"
+    },
+    {
+      "path": "api/internal/app/source_table_context.go",
+      "sha256": "4247a54ed94f383cb667de7f644659411efd185e2e7a3122defe46a0bbafb427"
+    },
+    {
+      "path": "api/internal/app/release_answer.go",
+      "sha256": "248616ae695dfe542db8c8b492e4f3f79c394d703bdc8d77031899a7bce4a769"
+    },
+    {
+      "path": "api/internal/app/m2_catalog.json",
+      "sha256": "545167a51444621312c3f37faa087e1ac988dd81d95e32763abb230fbe2e65ef"
+    },
+    {
+      "path": "ai-runtime/src/crackrag_m1/parser.py",
+      "sha256": "446c22627c286653a229fe040b6f6b29c6d0643fe5056176cf5ddaf73ad40486"
+    },
+    {
+      "path": "ai-runtime/src/crackrag_m1/agent.py",
+      "sha256": "bc5437befda15a6f6605db72a25faefff0118d33e000312e31eb8d14460ac3fa"
+    },
+    {
+      "path": "ai-runtime/src/crackrag_m1/m2.py",
+      "sha256": "c638fcfc55b4b21a94f5b1f174d560a2e9e65dac82f61911215d5d88adadd07d"
+    },
+    {
+      "path": "ai-runtime/prompts/release-v1/financial-answer.txt",
+      "sha256": "2f86a8fd0c8a6a108f07a0c37b225f4ffd72d578a36d5fb55a5bfc0dbcb5ee33"
+    }
+  ]
+}

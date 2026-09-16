@@ -143,6 +143,14 @@
         "江苏恒立液压股份有限公司",
         "恒立液压"
       ]
+    },
+    {
+      "id": "cn:603992",
+      "scope": "issuer:603992",
+      "aliases": [
+        "厦门松霖科技股份有限公司",
+        "松霖科技"
+      ]
     }
   ],
   "formulas": [
@@ -159,8 +167,8 @@
     }
   ],
   "policy": {
-    "version": "release-validation-policy-v2",
-    "validator": "release-samepage-validator-v2",
+    "version": "release-validation-policy-v3",
+    "validator": "release-samepage-validator-v3",
     "schema": "m2-candidate-v1",
     "prompt": "m2-extraction-v1",
     "answer_prompt": "m2-source-agent-v1",

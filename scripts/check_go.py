@@ -6,7 +6,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-compose = ['docker', 'compose', '-f', str(ROOT / 'tests/compose.yaml')]
+compose = ['docker', 'compose', '--project-name', 'crackrag-release-tests', '-f', str(ROOT / 'tests/compose.yaml')]
 databases = {
     'M1_TEST_DATABASE_URL': 'crackrag_m1_test',
     'M2_TEST_DATABASE_URL': 'crackrag_m2_test',

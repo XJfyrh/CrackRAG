@@ -75,7 +75,9 @@ export CRACKRAG_PORT=18088
 
 Windows 对应 `$env:CRACKRAG_PROJECT`、`$env:CRACKRAG_STATE`、`$env:CRACKRAG_PORT`。恢复拒绝非空数据库、非空 PDF 目标、哈希不符或不同发布身份。恢复后保持 mock/暂停，核对文档、来源、事实、任务终态、UNKNOWN 和累计费用后，才重新准备真实会话。模型权重不包含在备份中，真实运行前需执行 `models` 重新准备与校验。重新准备会话时用 `--opening /release/state/opening-balance.json` 延续恢复的期初记录，不能创建新的零余额起点。不能同时启用恢复副本与原付费实例。
 
-Linux 可在完成源码镜像构建后运行独立的零付费备份恢复检查：
+恢复到真实模式前，在新的私有目录重新填写 `secrets/deepseek_api_key`，使用新生成的 `secrets/access_token` 登录，准备并校验模型资产。确认官方价格仍在 24 小时有效期内；过期时先 `price refresh`，再以保留的 opening 准备新会话。恢复备份不会复制旧凭证。
+
+Linux 可在完成源码镜像构建后运行独立的零付费备份恢复检查。该可选测试脚本另需宿主 Python 3；普通产品管理入口不需要：
 
 ```sh
 sh scripts/check_restore_mock.sh

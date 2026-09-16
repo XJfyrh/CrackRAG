@@ -241,11 +241,15 @@ def summarize(inputs_path, evidence):
     baseline = sum((p['baseline']['amount_cny'] for p in results), Decimal(0))
     build = sum((p['build']['amount_cny'] for p in results), Decimal(0))
     return {'schema': 'crackrag-public-sequence-cost-v1', 'accounting_status': 'COMPLETE_KNOWN_ESTIMATED_MODEL_COST',
+            'release_manifest_sha256': driver['release_manifest_sha256'],
+            'model_inputs_sha256': driver['inputs_sha256'], 'summarizer_sha256': digest(__file__),
             'currency': 'CNY', 'billing_confirmed': False, 'independent_answer_quality_verified': False,
             'cost_basis': 'Authoritative amount_cny for every settled attempt, including failures; usage-price estimates, not a supplier-confirmed bill.',
+            'calls_meaning': 'All recorded model attempts, including failed and explicitly undispatched attempts; not only successful HTTP responses.',
             'limitations': ['No gold was read; supported status is not independent answer correctness.',
                             'Signed cost difference is descriptive, not a quality-adjusted or general savings claim.',
                             'Ingestion, local compute and storage cost are excluded and remain unmetered.',
+                            'Only this frozen sequence is totaled; project opening balances and other historical costs require separate ledger reconciliation.',
                             'Missing usage fields remain missing; reported totals are not inferred.',
                             'Latency starts at driver polling, not request dispatch or token generation.'],
             'pairs': results, 'total_model_attempts': len(seen_calls), 'total_amount_cny': baseline + build,
@@ -269,6 +273,9 @@ def serialized(value):
 def markdown(report):
     lines = ['# Short-sequence model cost measurement', '',
              'Known, settled model-cost estimates in CNY. Supplier billing is not confirmed; answer correctness was not independently evaluated by this script.', '',
+             f"Release manifest SHA-256: `{report['release_manifest_sha256']}`.",
+             f"Frozen model inputs SHA-256: `{report['model_inputs_sha256']}`.",
+             f"Summarizer SHA-256: `{report['summarizer_sha256']}`.", '',
              '| Case | State | Answer | Coverage | Calls | Estimated CNY | Zero-call validated reuse | Background terminals |',
              '| --- | --- | --- | --- | ---: | ---: | --- | --- |']
     for pair in report['pairs']:
