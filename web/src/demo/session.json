@@ -1,0 +1,2884 @@
+{
+  "schema": "crackrag-demo-replay-v1",
+  "captured_at": "2026-09-23T12:29:55.096Z",
+  "product": {
+    "release": "v0.1.0",
+    "commit": "37f2a29509b2e5fd14f70659036009619c83cf3dbec1116d9b1638789601478d",
+    "provider": "deepseek",
+    "embedding": "bge-m3:5617a9f61b028005a4858fdac845db406aefb181:dense-cls-l2:512:overlap64:v1"
+  },
+  "notice": {
+    "mode": "replay",
+    "banner": "真实 DeepSeek 段共 3 次模型调用、已知用量费用估算 ¥0.00989692；重复提问 0 次模型调用。最后的缺证据示例使用模拟模式，未计入真实费用。",
+    "evidence_url": "https://github.com/XJfyrh/CrackRAG/releases/tag/v0.1.0"
+  },
+  "tenant_label": "demo",
+  "healthz": {
+    "mock": {
+      "answer_policy": "financial-supported-v1",
+      "config_version": "m3-runtime-v1",
+      "embedding_version": "fixture-hash1024-v1-NOT-BGE",
+      "protocol_version": "crackrag.v1",
+      "provider": "mock",
+      "release_manifest_sha256": "37f2a29509b2e5fd14f70659036009619c83cf3dbec1116d9b1638789601478d",
+      "status": "ok"
+    },
+    "deepseek": {
+      "provider": "deepseek",
+      "embedding_version": "bge-m3:5617a9f61b028005a4858fdac845db406aefb181:dense-cls-l2:512:overlap64:v1",
+      "release_manifest_sha256": "37f2a29509b2e5fd14f70659036009619c83cf3dbec1116d9b1638789601478d"
+    }
+  },
+  "documents": [
+    {
+      "id": "dab42da9-dd45-44c1-ad44-5faa8c4a96fe",
+      "title": "ambiguous.pdf",
+      "current_version_id": "e08075dd-c629-4678-835a-fc95c68b6a81",
+      "state": "READY",
+      "indexed_pages": [
+        1
+      ],
+      "requested_pages": [
+        1
+      ],
+      "build_usage": null
+    },
+    {
+      "id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+      "title": "Songlin-2024-annual-report.pdf",
+      "current_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef",
+      "state": "READY",
+      "indexed_pages": [
+        86
+      ],
+      "requested_pages": [
+        86
+      ],
+      "build_usage": null
+    }
+  ],
+  "queries": [
+    {
+      "order": 1,
+      "role": "first-answer",
+      "dialog": "supported",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "document_ids": [
+        "dfa1a82e-7d68-445c-a282-3c17c929c4c4"
+      ],
+      "build_facts": false,
+      "execution_policy": "HOT_ONLY",
+      "run_steps": [
+        {
+          "id": "a5f2aaa0-b787-400d-9f5e-1b51c4523698",
+          "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+          "document_version_ids": [
+            "6a404e07-9099-4797-a48a-6c648ae461ef"
+          ],
+          "provider": "deepseek",
+          "state": "COMPLETED",
+          "answer": {
+            "text": "厦门松霖科技股份有限公司 · FY2024 · Revenue：3014989619.04 CNY（合并口径）。",
+            "provider": "deepseek",
+            "tool_calls": 4,
+            "model_calls": 1,
+            "evidence_summary": {
+              "facts": [
+                {
+                  "value": "3014989619.04",
+                  "origin": "OBSERVED_SOURCE",
+                  "status": "SUPPORTED",
+                  "reasons": [],
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "cn:603992",
+                    "concept_id": "fin:revenue"
+                  },
+                  "requirement_key": "2b899c675f3789def8825a1143b5905cc871594fb91da29d64da49a59b42c50a"
+                }
+              ],
+              "sources": [
+                {
+                  "bbox": [
+                    71.17814822313262,
+                    129.6919921875,
+                    524.2658944478849,
+                    781.3440185546875
+                  ],
+                  "kind": "table",
+                  "page": 86,
+                  "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                  "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                  "title": "Songlin-2024-annual-report.pdf",
+                  "context": {
+                    "bbox_scope": "original source block/table; chunks share its real bounding box",
+                    "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                    "region_source": "table-0",
+                    "table_context": {
+                      "page": 86,
+                      "version": "same-page-table-context-v1",
+                      "table_bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                      "table_index": 0,
+                      "preamble_lines": [
+                        {
+                          "bbox": [
+                            76.58399963378906,
+                            44.10896682739258,
+                            254.44400024414062,
+                            54.0899658203125
+                          ],
+                          "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                        },
+                        {
+                          "bbox": [
+                            271.3699951171875,
+                            83.34893798828125,
+                            326.4565734863281,
+                            95.05998229980469
+                          ],
+                          "text": "合并利润表"
+                        },
+                        {
+                          "bbox": [
+                            259.6099853515625,
+                            103.74896240234375,
+                            340.989990234375,
+                            114.30896759033203
+                          ],
+                          "text": "2024 年1—12 月"
+                        },
+                        {
+                          "bbox": [
+                            403.2699890136719,
+                            117.428955078125,
+                            524.1400146484375,
+                            127.98896026611328
+                          ],
+                          "text": "单位：元 币种：人民币"
+                        }
+                      ],
+                      "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                      "preceding_table_bottom": 0
+                    },
+                    "context_blocks": [
+                      {
+                        "bbox": [
+                          76.58399963378906,
+                          44.10896682739258,
+                          482.85400390625,
+                          54.0899658203125
+                        ],
+                        "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                        "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                      },
+                      {
+                        "bbox": [
+                          76.58399963378906,
+                          66.64892578125,
+                          81.86399841308594,
+                          77.20893096923828
+                        ],
+                        "text": " \n",
+                        "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                      }
+                    ],
+                    "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                    "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                    "chunk_start_token": 0,
+                    "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                    "pdf_page_rotation": 0,
+                    "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                    "neighbor_page_context": null
+                  },
+                  "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                  "page_width": 595.3200073242188,
+                  "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                  "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                  "page_height": 841.9199829101562,
+                  "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                  "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                  "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                  "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                }
+              ],
+              "unresolved": [],
+              "validation": "Go source semantics and authoritative query scope checked",
+              "calculations": [],
+              "reused_facts": [],
+              "fact_publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "structured_coverage": {
+                "status": "MISSING",
+                "matched": [],
+                "missing": [
+                  {
+                    "reason": "NO_CURRENT_VALIDATED_FACT",
+                    "requirement": {
+                      "kind": "scalar",
+                      "unit": "CNY",
+                      "scope": "consolidated",
+                      "period": "FY2024",
+                      "entity_id": "cn:603992",
+                      "concept_id": "fin:revenue"
+                    }
+                  }
+                ],
+                "version": "m2-data-tools-v1",
+                "conflicts": [],
+                "truncated": false,
+                "next_cursor": null
+              },
+              "configuration_version": "m3-runtime-v1",
+              "raw_observation_region_ids": [
+                "29a95fca-6642-5af1-bb68-10f3a35f8bc1"
+              ]
+            },
+            "answer_validation": {
+              "items": [
+                {
+                  "value": "3014989619.04",
+                  "origin": "OBSERVED_SOURCE",
+                  "status": "SUPPORTED",
+                  "reasons": [],
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "cn:603992",
+                    "concept_id": "fin:revenue"
+                  },
+                  "requirement_key": "2b899c675f3789def8825a1143b5905cc871594fb91da29d64da49a59b42c50a"
+                }
+              ],
+              "policy": "financial-supported-v1",
+              "status": "SUPPORTED",
+              "publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "question_reasons": []
+            }
+          },
+          "error": null,
+          "created_at": "2026-09-16T13:29:11.839349Z",
+          "deadline_at": "2026-09-16T13:31:11.841497Z",
+          "finished_at": "2026-09-16T13:29:14.471437Z",
+          "calls": [
+            {
+              "amount_cny": "0.00811900",
+              "attempt_id": "33d5d44b-5350-46b6-b8c9-2c99f760371b",
+              "cost_reconciliation": null,
+              "created_at": "2026-09-16T13:29:12.396308Z",
+              "experiment_id": "m3-live-v1",
+              "finished_at": "2026-09-16T13:29:14.456222Z",
+              "provider": "deepseek",
+              "record": {
+                "attempt_id": "33d5d44b-5350-46b6-b8c9-2c99f760371b",
+                "automatic_retries": 0,
+                "batch_id": null,
+                "budget_reservation": {
+                  "upper_cny": "0.113392",
+                  "observed_at": "2026-09-16T13:29:12.639740699Z",
+                  "snapshot_id": "03500947-ec06-4507-93ab-c00ce8575d1d"
+                },
+                "cache": {
+                  "source": "usage.prompt_cache_hit_tokens/prompt_cache_miss_tokens",
+                  "status": "miss",
+                  "reusable_at": null,
+                  "cache_location": "unknown",
+                  "coverage_reason": "aggregate usage does not locate cached document token spans",
+                  "coverage_status": "unknown",
+                  "input_hit_ratio": 0,
+                  "provider_cache_key": null,
+                  "provider_expires_at": null,
+                  "document_shared_prefix_coverage": null
+                },
+                "completion_id": "210d229b-9c3f-4d2f-9e9e-63623685abb8",
+                "cost": {
+                  "amount": "0.008119",
+                  "reason": null,
+                  "status": "estimated",
+                  "currency": "CNY",
+                  "simulated": false,
+                  "components": {
+                    "output": "0.00056",
+                    "cache_read": "0.00",
+                    "input_fresh": "0.007559"
+                  },
+                  "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+                  "price_version": "release-deepseek-flash-20260916T132435431193Z",
+                  "rate_selection": {
+                    "tier": "off_peak",
+                    "schedule": "deepseek-cn-peak-v1",
+                    "multiplier": "1",
+                    "time_basis": "client request start; provider billing boundary rule unconfirmed",
+                    "beijing_time": "2026-09-16T21:29:12.651720+08:00",
+                    "effective_rates_per_million": {
+                      "output_per_million": "4",
+                      "input_hit_per_million": "0.02",
+                      "input_miss_per_million": "1"
+                    }
+                  },
+                  "billing_confirmed": false
+                },
+                "finished_at": "2026-09-16T13:29:14.449558+00:00",
+                "http_status": 200,
+                "latency_ms": 1800.153,
+                "model": "deepseek-flash",
+                "normalized_usage": {
+                  "issues": [],
+                  "output": 140,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "input_fresh": 7559,
+                  "input_total": 7559,
+                  "inferred_fields": [],
+                  "total_tokens_reported": 7699,
+                  "reasoning_tokens_in_output": null
+                },
+                "prompt_version": "financial-shared-prefix-v1",
+                "provider": "deepseek",
+                "raw_usage": {
+                  "total_tokens": 7699,
+                  "prompt_tokens": 7559,
+                  "completion_tokens": 140,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 0
+                  },
+                  "prompt_cache_hit_tokens": 0,
+                  "prompt_cache_miss_tokens": 7559
+                },
+                "request_id_source": "response.body.id (completion identifier fallback, not a transport request id)",
+                "run_id": "a5f2aaa0-b787-400d-9f5e-1b51c4523698",
+                "schema_version": "financial-answer-v1",
+                "simulated": false,
+                "stage": "answer",
+                "started_at": "2026-09-16T13:29:12.651720+00:00"
+              },
+              "reserved_upper_cny": "0.11339200",
+              "stage": "answer",
+              "state": "SETTLED"
+            }
+          ],
+          "cost": {
+            "billing_confirmed": false,
+            "currency": "CNY",
+            "ingestion_included": false,
+            "known_estimated_subtotal": "0.00811900",
+            "query_local_compute_cost": "unknown",
+            "status": "estimated",
+            "unknown_calls": 0,
+            "unresolved_reserved_upper": "0"
+          },
+          "diagnostics": {
+            "batches": [],
+            "local_validation_cost": "unmetered",
+            "m3": {
+              "foreground_done_is_independent": true,
+              "jobs": [],
+              "pending_jobs": 0
+            },
+            "m4": {
+              "authoritative_store": "postgresql",
+              "dead_letters": 0,
+              "delivery_attempts": 0,
+              "durable_receipts": 0,
+              "enabled": true,
+              "external_exactly_once": false,
+              "outbox_events": 0,
+              "reconciled_calls": 0,
+              "redis_role": "reference_notifications",
+              "status": "available",
+              "unknown_calls": 0,
+              "unnotified_events": 0
+            },
+            "mapping": "deterministic_scoped_aliases_no_model_call"
+          }
+        }
+      ],
+      "regions": {
+        "29a95fca-6642-5af1-bb68-10f3a35f8bc1": {
+          "bbox": [
+            71.17814822313262,
+            129.6919921875,
+            524.2658944478849,
+            781.3440185546875
+          ],
+          "context": null,
+          "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+          "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef",
+          "kind": "table",
+          "page": 86,
+          "page_height": 841.9199829101562,
+          "page_width": 595.3200073242188,
+          "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+          "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+          "score": 0,
+          "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+          "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+          "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+          "title": "Songlin-2024-annual-report.pdf",
+          "replay_page": 1
+        }
+      }
+    },
+    {
+      "order": 2,
+      "role": "build",
+      "dialog": "supported",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "document_ids": [
+        "dfa1a82e-7d68-445c-a282-3c17c929c4c4"
+      ],
+      "build_facts": true,
+      "execution_policy": "COLD_ALLOWED",
+      "run_steps": [
+        {
+          "id": "4aba39f1-8d98-42d6-8646-205112dc95af",
+          "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+          "document_version_ids": [
+            "6a404e07-9099-4797-a48a-6c648ae461ef"
+          ],
+          "provider": "deepseek",
+          "state": "COMPLETED",
+          "answer": {
+            "text": "厦门松霖科技股份有限公司 · FY2024 · Revenue：3014989619.04 CNY（合并口径）。",
+            "provider": "deepseek",
+            "tool_calls": 4,
+            "model_calls": 1,
+            "evidence_summary": {
+              "facts": [
+                {
+                  "value": "3014989619.04",
+                  "origin": "OBSERVED_SOURCE",
+                  "status": "SUPPORTED",
+                  "reasons": [],
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "cn:603992",
+                    "concept_id": "fin:revenue"
+                  },
+                  "requirement_key": "2b899c675f3789def8825a1143b5905cc871594fb91da29d64da49a59b42c50a"
+                }
+              ],
+              "sources": [
+                {
+                  "bbox": [
+                    71.17814822313262,
+                    129.6919921875,
+                    524.2658944478849,
+                    781.3440185546875
+                  ],
+                  "kind": "table",
+                  "page": 86,
+                  "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                  "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                  "title": "Songlin-2024-annual-report.pdf",
+                  "context": {
+                    "bbox_scope": "original source block/table; chunks share its real bounding box",
+                    "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                    "region_source": "table-0",
+                    "table_context": {
+                      "page": 86,
+                      "version": "same-page-table-context-v1",
+                      "table_bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                      "table_index": 0,
+                      "preamble_lines": [
+                        {
+                          "bbox": [
+                            76.58399963378906,
+                            44.10896682739258,
+                            254.44400024414062,
+                            54.0899658203125
+                          ],
+                          "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                        },
+                        {
+                          "bbox": [
+                            271.3699951171875,
+                            83.34893798828125,
+                            326.4565734863281,
+                            95.05998229980469
+                          ],
+                          "text": "合并利润表"
+                        },
+                        {
+                          "bbox": [
+                            259.6099853515625,
+                            103.74896240234375,
+                            340.989990234375,
+                            114.30896759033203
+                          ],
+                          "text": "2024 年1—12 月"
+                        },
+                        {
+                          "bbox": [
+                            403.2699890136719,
+                            117.428955078125,
+                            524.1400146484375,
+                            127.98896026611328
+                          ],
+                          "text": "单位：元 币种：人民币"
+                        }
+                      ],
+                      "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                      "preceding_table_bottom": 0
+                    },
+                    "context_blocks": [
+                      {
+                        "bbox": [
+                          76.58399963378906,
+                          44.10896682739258,
+                          482.85400390625,
+                          54.0899658203125
+                        ],
+                        "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                        "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                      },
+                      {
+                        "bbox": [
+                          76.58399963378906,
+                          66.64892578125,
+                          81.86399841308594,
+                          77.20893096923828
+                        ],
+                        "text": " \n",
+                        "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                      }
+                    ],
+                    "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                    "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                    "chunk_start_token": 0,
+                    "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                    "pdf_page_rotation": 0,
+                    "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                    "neighbor_page_context": null
+                  },
+                  "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                  "page_width": 595.3200073242188,
+                  "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                  "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                  "page_height": 841.9199829101562,
+                  "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                  "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                  "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                  "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                }
+              ],
+              "unresolved": [],
+              "validation": "Go source semantics and authoritative query scope checked",
+              "calculations": [],
+              "reused_facts": [],
+              "fact_publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "structured_coverage": {
+                "status": "MISSING",
+                "matched": [],
+                "missing": [
+                  {
+                    "reason": "NO_CURRENT_VALIDATED_FACT",
+                    "requirement": {
+                      "kind": "scalar",
+                      "unit": "CNY",
+                      "scope": "consolidated",
+                      "period": "FY2024",
+                      "entity_id": "cn:603992",
+                      "concept_id": "fin:revenue"
+                    }
+                  }
+                ],
+                "version": "m2-data-tools-v1",
+                "conflicts": [],
+                "truncated": false,
+                "next_cursor": null
+              },
+              "configuration_version": "m3-runtime-v1",
+              "raw_observation_region_ids": [
+                "29a95fca-6642-5af1-bb68-10f3a35f8bc1"
+              ]
+            },
+            "answer_validation": {
+              "items": [
+                {
+                  "value": "3014989619.04",
+                  "origin": "OBSERVED_SOURCE",
+                  "status": "SUPPORTED",
+                  "reasons": [],
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "cn:603992",
+                    "concept_id": "fin:revenue"
+                  },
+                  "requirement_key": "2b899c675f3789def8825a1143b5905cc871594fb91da29d64da49a59b42c50a"
+                }
+              ],
+              "policy": "financial-supported-v1",
+              "status": "SUPPORTED",
+              "publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "question_reasons": []
+            }
+          },
+          "error": null,
+          "created_at": "2026-09-16T13:30:21.239881Z",
+          "deadline_at": "2026-09-16T13:32:21.24186Z",
+          "finished_at": "2026-09-16T13:30:23.193149Z",
+          "calls": [
+            {
+              "amount_cny": "0.00084348",
+              "attempt_id": "ba935202-0bf5-401a-82db-50da3bb2ee8c",
+              "cost_reconciliation": null,
+              "created_at": "2026-09-16T13:30:21.76349Z",
+              "experiment_id": "m3-live-v1",
+              "finished_at": "2026-09-16T13:30:23.181409Z",
+              "provider": "deepseek",
+              "record": {
+                "attempt_id": "ba935202-0bf5-401a-82db-50da3bb2ee8c",
+                "automatic_retries": 0,
+                "batch_id": null,
+                "budget_reservation": {
+                  "upper_cny": "0.113392",
+                  "observed_at": "2026-09-16T13:30:22.032424237Z",
+                  "snapshot_id": "ed56e43c-0ae5-4d31-9a9d-bcce47365bbf"
+                },
+                "cache": {
+                  "source": "usage.prompt_cache_hit_tokens/prompt_cache_miss_tokens",
+                  "status": "hit",
+                  "reusable_at": null,
+                  "cache_location": "unknown",
+                  "coverage_reason": "aggregate usage does not locate cached document token spans",
+                  "coverage_status": "unknown",
+                  "input_hit_ratio": 0.9821404947744411,
+                  "provider_cache_key": null,
+                  "provider_expires_at": null,
+                  "document_shared_prefix_coverage": null
+                },
+                "completion_id": "22fcd165-7e78-4815-b852-5ec770f413cf",
+                "cost": {
+                  "amount": "0.00084348",
+                  "reason": null,
+                  "status": "estimated",
+                  "currency": "CNY",
+                  "simulated": false,
+                  "components": {
+                    "output": "0.00056",
+                    "cache_read": "0.00014848",
+                    "input_fresh": "0.000135"
+                  },
+                  "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+                  "price_version": "release-deepseek-flash-20260916T132435431193Z",
+                  "rate_selection": {
+                    "tier": "off_peak",
+                    "schedule": "deepseek-cn-peak-v1",
+                    "multiplier": "1",
+                    "time_basis": "client request start; provider billing boundary rule unconfirmed",
+                    "beijing_time": "2026-09-16T21:30:22.038347+08:00",
+                    "effective_rates_per_million": {
+                      "output_per_million": "4",
+                      "input_hit_per_million": "0.02",
+                      "input_miss_per_million": "1"
+                    }
+                  },
+                  "billing_confirmed": false
+                },
+                "finished_at": "2026-09-16T13:30:23.177877+00:00",
+                "http_status": 200,
+                "latency_ms": 1139.924,
+                "model": "deepseek-flash",
+                "normalized_usage": {
+                  "issues": [],
+                  "output": 140,
+                  "cache_read": 7424,
+                  "cache_write": 0,
+                  "input_fresh": 135,
+                  "input_total": 7559,
+                  "inferred_fields": [],
+                  "total_tokens_reported": 7699,
+                  "reasoning_tokens_in_output": null
+                },
+                "prompt_version": "financial-shared-prefix-v1",
+                "provider": "deepseek",
+                "raw_usage": {
+                  "total_tokens": 7699,
+                  "prompt_tokens": 7559,
+                  "completion_tokens": 140,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 7424
+                  },
+                  "prompt_cache_hit_tokens": 7424,
+                  "prompt_cache_miss_tokens": 135
+                },
+                "request_id_source": "response.body.id (completion identifier fallback, not a transport request id)",
+                "run_id": "4aba39f1-8d98-42d6-8646-205112dc95af",
+                "schema_version": "financial-answer-v1",
+                "simulated": false,
+                "stage": "answer",
+                "started_at": "2026-09-16T13:30:22.038347+00:00"
+              },
+              "reserved_upper_cny": "0.11339200",
+              "stage": "answer",
+              "state": "SETTLED"
+            },
+            {
+              "amount_cny": "0.00093444",
+              "attempt_id": "5cc00700-0f2c-4a22-ad86-5f6e385cb74e",
+              "cost_reconciliation": null,
+              "created_at": "2026-09-16T13:30:22.411674Z",
+              "experiment_id": "m3-live-v1",
+              "finished_at": "2026-09-16T13:30:23.913283Z",
+              "provider": "deepseek",
+              "record": {
+                "attempt_id": "5cc00700-0f2c-4a22-ad86-5f6e385cb74e",
+                "automatic_retries": 0,
+                "batch_id": "003e96aa-596c-478d-afcc-6bd88f3ba5f5",
+                "budget_reservation": {
+                  "upper_cny": "0.102928",
+                  "observed_at": "2026-09-16T13:30:22.661183043Z",
+                  "snapshot_id": "36c9c97d-0979-40de-97b3-96ac0e68176d"
+                },
+                "cache": {
+                  "source": "usage.prompt_cache_hit_tokens/prompt_cache_miss_tokens",
+                  "status": "hit",
+                  "reusable_at": null,
+                  "cache_location": "unknown",
+                  "coverage_reason": "aggregate usage does not locate cached document token spans",
+                  "coverage_status": "unknown",
+                  "input_hit_ratio": 0.9536262733769195,
+                  "provider_cache_key": null,
+                  "provider_expires_at": null,
+                  "document_shared_prefix_coverage": null
+                },
+                "completion_id": "50759aa2-e0d0-464a-8411-243c3610eb33",
+                "cost": {
+                  "amount": "0.00093444",
+                  "reason": null,
+                  "status": "estimated",
+                  "currency": "CNY",
+                  "simulated": false,
+                  "components": {
+                    "output": "0.000504",
+                    "cache_read": "0.00012544",
+                    "input_fresh": "0.000305"
+                  },
+                  "price_source": "https://api-docs.deepseek.com/zh-cn/quick_start/pricing/",
+                  "price_version": "release-deepseek-flash-20260916T132435431193Z",
+                  "rate_selection": {
+                    "tier": "off_peak",
+                    "schedule": "deepseek-cn-peak-v1",
+                    "multiplier": "1",
+                    "time_basis": "client request start; provider billing boundary rule unconfirmed",
+                    "beijing_time": "2026-09-16T21:30:22.669025+08:00",
+                    "effective_rates_per_million": {
+                      "output_per_million": "4",
+                      "input_hit_per_million": "0.02",
+                      "input_miss_per_million": "1"
+                    }
+                  },
+                  "billing_confirmed": false
+                },
+                "finished_at": "2026-09-16T13:30:23.910498+00:00",
+                "http_status": 200,
+                "latency_ms": 1243.095,
+                "model": "deepseek-flash",
+                "normalized_usage": {
+                  "issues": [],
+                  "output": 126,
+                  "cache_read": 6272,
+                  "cache_write": 0,
+                  "input_fresh": 305,
+                  "input_total": 6577,
+                  "inferred_fields": [],
+                  "total_tokens_reported": 6703,
+                  "reasoning_tokens_in_output": null
+                },
+                "prompt_version": "m3-shared-prefix-v1",
+                "provider": "deepseek",
+                "raw_usage": {
+                  "total_tokens": 6703,
+                  "prompt_tokens": 6577,
+                  "completion_tokens": 126,
+                  "prompt_tokens_details": {
+                    "cached_tokens": 6272
+                  },
+                  "prompt_cache_hit_tokens": 6272,
+                  "prompt_cache_miss_tokens": 305
+                },
+                "request_id_source": "response.body.id (completion identifier fallback, not a transport request id)",
+                "run_id": "4aba39f1-8d98-42d6-8646-205112dc95af",
+                "schema_version": "m2-candidate-v1",
+                "simulated": false,
+                "stage": "extraction",
+                "started_at": "2026-09-16T13:30:22.669025+00:00"
+              },
+              "reserved_upper_cny": "0.10292800",
+              "stage": "extraction",
+              "state": "SETTLED"
+            }
+          ],
+          "cost": {
+            "billing_confirmed": false,
+            "currency": "CNY",
+            "ingestion_included": false,
+            "known_estimated_subtotal": "0.00177792",
+            "query_local_compute_cost": "unknown",
+            "status": "estimated",
+            "unknown_calls": 0,
+            "unresolved_reserved_upper": "0"
+          },
+          "diagnostics": {
+            "batches": [
+              {
+                "batch_id": "003e96aa-596c-478d-afcc-6bd88f3ba5f5",
+                "probe_model_calls": 0,
+                "probe_rounds": 0,
+                "probe_tool_calls": 0,
+                "report_id": "5ddc3924-354b-43ab-8bdb-8892f5f144af",
+                "state": "COMMITTED",
+                "validation": {
+                  "REJECTED": 0,
+                  "VALIDATED": 1,
+                  "INCONCLUSIVE": 0
+                }
+              }
+            ],
+            "local_validation_cost": "unmetered",
+            "m3": {
+              "foreground_done_is_independent": true,
+              "jobs": [
+                {
+                  "attempt": 1,
+                  "batch_id": "003e96aa-596c-478d-afcc-6bd88f3ba5f5",
+                  "candidate_digest": "9a9251c0e3115159c47c89cf49edfd922767482d2550f4efe5ef8832cd482ac2",
+                  "completed_at": "2026-09-16T13:30:24.203629Z",
+                  "created_at": "2026-09-16T13:30:21.751072Z",
+                  "deadline_at": "2026-09-16T13:32:21.24186Z",
+                  "fencing_token": 1,
+                  "job_id": "d881fffc-ed10-4ad8-a134-058b23140b33",
+                  "prefix_manifest_id": "76801bec-fa98-47cc-8046-a70bba71dd32",
+                  "reason": "VALIDATED_SUBSET_PUBLISHED",
+                  "state": "COMMITTED"
+                }
+              ],
+              "pending_jobs": 0
+            },
+            "m4": {
+              "authoritative_store": "postgresql",
+              "dead_letters": 0,
+              "delivery_attempts": 1,
+              "durable_receipts": 1,
+              "enabled": true,
+              "external_exactly_once": false,
+              "outbox_events": 1,
+              "reconciled_calls": 0,
+              "redis_role": "reference_notifications",
+              "status": "available",
+              "unknown_calls": 0,
+              "unnotified_events": 0
+            },
+            "mapping": "deterministic_scoped_aliases_no_model_call"
+          }
+        }
+      ],
+      "regions": {
+        "29a95fca-6642-5af1-bb68-10f3a35f8bc1": {
+          "bbox": [
+            71.17814822313262,
+            129.6919921875,
+            524.2658944478849,
+            781.3440185546875
+          ],
+          "context": null,
+          "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+          "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef",
+          "kind": "table",
+          "page": 86,
+          "page_height": 841.9199829101562,
+          "page_width": 595.3200073242188,
+          "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+          "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+          "score": 0,
+          "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+          "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+          "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+          "title": "Songlin-2024-annual-report.pdf",
+          "replay_page": 1
+        }
+      }
+    },
+    {
+      "order": 3,
+      "role": "repeat",
+      "dialog": "supported",
+      "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+      "document_ids": [
+        "dfa1a82e-7d68-445c-a282-3c17c929c4c4"
+      ],
+      "build_facts": false,
+      "execution_policy": "HOT_ONLY",
+      "run_steps": [
+        {
+          "id": "c834c46d-6ab7-463f-a151-0e07ee03d08d",
+          "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+          "document_version_ids": [
+            "6a404e07-9099-4797-a48a-6c648ae461ef"
+          ],
+          "provider": "deepseek",
+          "state": "COMPLETED",
+          "answer": {
+            "text": "厦门松霖科技股份有限公司 · FY2024 · Revenue：3014989619.04 CNY（合并口径）。",
+            "provider": "deepseek",
+            "tool_calls": 3,
+            "model_calls": 0,
+            "evidence_summary": {
+              "facts": [
+                {
+                  "value": "3014989619.04",
+                  "origin": "VALIDATED_FACT",
+                  "status": "SUPPORTED",
+                  "reasons": [],
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "cn:603992",
+                    "concept_id": "fin:revenue"
+                  },
+                  "requirement_key": "2b899c675f3789def8825a1143b5905cc871594fb91da29d64da49a59b42c50a"
+                }
+              ],
+              "sources": [
+                {
+                  "bbox": [
+                    71.17814822313262,
+                    129.6919921875,
+                    524.2658944478849,
+                    781.3440185546875
+                  ],
+                  "kind": "table",
+                  "page": 86,
+                  "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                  "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                  "title": "Songlin-2024-annual-report.pdf",
+                  "context": {
+                    "bbox_scope": "original source block/table; chunks share its real bounding box",
+                    "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                    "region_source": "table-0",
+                    "table_context": {
+                      "page": 86,
+                      "version": "same-page-table-context-v1",
+                      "table_bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                      "table_index": 0,
+                      "preamble_lines": [
+                        {
+                          "bbox": [
+                            76.58399963378906,
+                            44.10896682739258,
+                            254.44400024414062,
+                            54.0899658203125
+                          ],
+                          "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                        },
+                        {
+                          "bbox": [
+                            271.3699951171875,
+                            83.34893798828125,
+                            326.4565734863281,
+                            95.05998229980469
+                          ],
+                          "text": "合并利润表"
+                        },
+                        {
+                          "bbox": [
+                            259.6099853515625,
+                            103.74896240234375,
+                            340.989990234375,
+                            114.30896759033203
+                          ],
+                          "text": "2024 年1—12 月"
+                        },
+                        {
+                          "bbox": [
+                            403.2699890136719,
+                            117.428955078125,
+                            524.1400146484375,
+                            127.98896026611328
+                          ],
+                          "text": "单位：元 币种：人民币"
+                        }
+                      ],
+                      "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                      "preceding_table_bottom": 0
+                    },
+                    "context_blocks": [
+                      {
+                        "bbox": [
+                          76.58399963378906,
+                          44.10896682739258,
+                          482.85400390625,
+                          54.0899658203125
+                        ],
+                        "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                        "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                      },
+                      {
+                        "bbox": [
+                          76.58399963378906,
+                          66.64892578125,
+                          81.86399841308594,
+                          77.20893096923828
+                        ],
+                        "text": " \n",
+                        "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                      }
+                    ],
+                    "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                    "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                    "chunk_start_token": 0,
+                    "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                    "pdf_page_rotation": 0,
+                    "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                    "neighbor_page_context": null
+                  },
+                  "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                  "page_width": 595.3200073242188,
+                  "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                  "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                  "page_height": 841.9199829101562,
+                  "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                  "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                  "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                  "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                }
+              ],
+              "unresolved": [],
+              "validation": "Go source semantics and authoritative query scope checked",
+              "calculations": [],
+              "reused_facts": [
+                {
+                  "unit": "CNY",
+                  "scope": "consolidated",
+                  "value": "3014989619.04",
+                  "origin": "REPORTED",
+                  "period": "FY2024",
+                  "fact_id": "e32e8a4b-15cf-49a3-9288-938fee0e77a2",
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "currency": "CNY",
+                  "entity_id": "cn:603992",
+                  "raw_value": "3,014,989,619.04",
+                  "report_id": "5ddc3924-354b-43ab-8bdb-8892f5f144af",
+                  "concept_id": "fin:revenue",
+                  "input_fact_ids": [],
+                  "concept_version": "m2-finance-v1",
+                  "mapping_version": "release-finance-aliases-v1",
+                  "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                }
+              ],
+              "fact_publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "structured_coverage": {
+                "status": "FULL",
+                "matched": [
+                  {
+                    "fact_ids": [
+                      "e32e8a4b-15cf-49a3-9288-938fee0e77a2"
+                    ],
+                    "requirement": {
+                      "kind": "scalar",
+                      "unit": "CNY",
+                      "scope": "consolidated",
+                      "period": "FY2024",
+                      "entity_id": "cn:603992",
+                      "concept_id": "fin:revenue"
+                    }
+                  }
+                ],
+                "missing": [],
+                "version": "m2-data-tools-v1",
+                "conflicts": [],
+                "truncated": false,
+                "next_cursor": null
+              },
+              "configuration_version": "m3-runtime-v1",
+              "raw_observation_region_ids": []
+            },
+            "answer_validation": {
+              "items": [
+                {
+                  "value": "3014989619.04",
+                  "origin": "VALIDATED_FACT",
+                  "status": "SUPPORTED",
+                  "reasons": [],
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "cn:603992",
+                    "concept_id": "fin:revenue"
+                  },
+                  "requirement_key": "2b899c675f3789def8825a1143b5905cc871594fb91da29d64da49a59b42c50a"
+                }
+              ],
+              "policy": "financial-supported-v1",
+              "status": "SUPPORTED",
+              "publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "question_reasons": []
+            }
+          },
+          "error": null,
+          "created_at": "2026-09-16T13:31:03.736234Z",
+          "deadline_at": "2026-09-16T13:33:03.737899Z",
+          "finished_at": "2026-09-16T13:31:03.928567Z",
+          "calls": [],
+          "cost": {
+            "billing_confirmed": false,
+            "currency": "CNY",
+            "ingestion_included": false,
+            "known_estimated_subtotal": "0",
+            "query_local_compute_cost": "unknown",
+            "status": "estimated",
+            "unknown_calls": 0,
+            "unresolved_reserved_upper": "0"
+          },
+          "diagnostics": {
+            "batches": [],
+            "local_validation_cost": "unmetered",
+            "m3": {
+              "foreground_done_is_independent": true,
+              "jobs": [],
+              "pending_jobs": 0
+            },
+            "m4": {
+              "authoritative_store": "postgresql",
+              "dead_letters": 0,
+              "delivery_attempts": 0,
+              "durable_receipts": 0,
+              "enabled": true,
+              "external_exactly_once": false,
+              "outbox_events": 0,
+              "reconciled_calls": 0,
+              "redis_role": "reference_notifications",
+              "status": "available",
+              "unknown_calls": 0,
+              "unnotified_events": 0
+            },
+            "mapping": "deterministic_scoped_aliases_no_model_call"
+          }
+        }
+      ],
+      "regions": {
+        "29a95fca-6642-5af1-bb68-10f3a35f8bc1": {
+          "bbox": [
+            71.17814822313262,
+            129.6919921875,
+            524.2658944478849,
+            781.3440185546875
+          ],
+          "context": null,
+          "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+          "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef",
+          "kind": "table",
+          "page": 86,
+          "page_height": 841.9199829101562,
+          "page_width": 595.3200073242188,
+          "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+          "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+          "score": 0,
+          "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+          "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+          "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+          "title": "Songlin-2024-annual-report.pdf",
+          "replay_page": 1
+        }
+      }
+    },
+    {
+      "order": 4,
+      "role": "paraphrase",
+      "dialog": "supported",
+      "question": "请给出松霖科技2024年度合并营业收入，单位为人民币元。",
+      "document_ids": [
+        "dfa1a82e-7d68-445c-a282-3c17c929c4c4"
+      ],
+      "build_facts": false,
+      "execution_policy": "HOT_ONLY",
+      "run_steps": [
+        {
+          "id": "f83327f5-6e1b-4073-9837-88642dc4a365",
+          "question": "请给出松霖科技2024年度合并营业收入，单位为人民币元。",
+          "document_version_ids": [
+            "6a404e07-9099-4797-a48a-6c648ae461ef"
+          ],
+          "provider": "deepseek",
+          "state": "COMPLETED",
+          "answer": {
+            "text": "厦门松霖科技股份有限公司 · FY2024 · Revenue：3014989619.04 CNY（合并口径）。",
+            "provider": "deepseek",
+            "tool_calls": 3,
+            "model_calls": 0,
+            "evidence_summary": {
+              "facts": [
+                {
+                  "value": "3014989619.04",
+                  "origin": "VALIDATED_FACT",
+                  "status": "SUPPORTED",
+                  "reasons": [],
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "cn:603992",
+                    "concept_id": "fin:revenue"
+                  },
+                  "requirement_key": "2b899c675f3789def8825a1143b5905cc871594fb91da29d64da49a59b42c50a"
+                }
+              ],
+              "sources": [
+                {
+                  "bbox": [
+                    71.17814822313262,
+                    129.6919921875,
+                    524.2658944478849,
+                    781.3440185546875
+                  ],
+                  "kind": "table",
+                  "page": 86,
+                  "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                  "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                  "title": "Songlin-2024-annual-report.pdf",
+                  "context": {
+                    "bbox_scope": "original source block/table; chunks share its real bounding box",
+                    "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                    "region_source": "table-0",
+                    "table_context": {
+                      "page": 86,
+                      "version": "same-page-table-context-v1",
+                      "table_bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                      "table_index": 0,
+                      "preamble_lines": [
+                        {
+                          "bbox": [
+                            76.58399963378906,
+                            44.10896682739258,
+                            254.44400024414062,
+                            54.0899658203125
+                          ],
+                          "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                        },
+                        {
+                          "bbox": [
+                            271.3699951171875,
+                            83.34893798828125,
+                            326.4565734863281,
+                            95.05998229980469
+                          ],
+                          "text": "合并利润表"
+                        },
+                        {
+                          "bbox": [
+                            259.6099853515625,
+                            103.74896240234375,
+                            340.989990234375,
+                            114.30896759033203
+                          ],
+                          "text": "2024 年1—12 月"
+                        },
+                        {
+                          "bbox": [
+                            403.2699890136719,
+                            117.428955078125,
+                            524.1400146484375,
+                            127.98896026611328
+                          ],
+                          "text": "单位：元 币种：人民币"
+                        }
+                      ],
+                      "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                      "preceding_table_bottom": 0
+                    },
+                    "context_blocks": [
+                      {
+                        "bbox": [
+                          76.58399963378906,
+                          44.10896682739258,
+                          482.85400390625,
+                          54.0899658203125
+                        ],
+                        "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                        "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                      },
+                      {
+                        "bbox": [
+                          76.58399963378906,
+                          66.64892578125,
+                          81.86399841308594,
+                          77.20893096923828
+                        ],
+                        "text": " \n",
+                        "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                      }
+                    ],
+                    "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                    "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                    "chunk_start_token": 0,
+                    "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                    "pdf_page_rotation": 0,
+                    "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                    "neighbor_page_context": null
+                  },
+                  "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                  "page_width": 595.3200073242188,
+                  "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                  "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                  "page_height": 841.9199829101562,
+                  "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                  "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                  "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                  "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                }
+              ],
+              "unresolved": [],
+              "validation": "Go source semantics and authoritative query scope checked",
+              "calculations": [],
+              "reused_facts": [
+                {
+                  "unit": "CNY",
+                  "scope": "consolidated",
+                  "value": "3014989619.04",
+                  "origin": "REPORTED",
+                  "period": "FY2024",
+                  "fact_id": "e32e8a4b-15cf-49a3-9288-938fee0e77a2",
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "currency": "CNY",
+                  "entity_id": "cn:603992",
+                  "raw_value": "3,014,989,619.04",
+                  "report_id": "5ddc3924-354b-43ab-8bdb-8892f5f144af",
+                  "concept_id": "fin:revenue",
+                  "input_fact_ids": [],
+                  "concept_version": "m2-finance-v1",
+                  "mapping_version": "release-finance-aliases-v1",
+                  "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                }
+              ],
+              "fact_publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "structured_coverage": {
+                "status": "FULL",
+                "matched": [
+                  {
+                    "fact_ids": [
+                      "e32e8a4b-15cf-49a3-9288-938fee0e77a2"
+                    ],
+                    "requirement": {
+                      "kind": "scalar",
+                      "unit": "CNY",
+                      "scope": "consolidated",
+                      "period": "FY2024",
+                      "entity_id": "cn:603992",
+                      "concept_id": "fin:revenue"
+                    }
+                  }
+                ],
+                "missing": [],
+                "version": "m2-data-tools-v1",
+                "conflicts": [],
+                "truncated": false,
+                "next_cursor": null
+              },
+              "configuration_version": "m3-runtime-v1",
+              "raw_observation_region_ids": []
+            },
+            "answer_validation": {
+              "items": [
+                {
+                  "value": "3014989619.04",
+                  "origin": "VALIDATED_FACT",
+                  "status": "SUPPORTED",
+                  "reasons": [],
+                  "sources": [
+                    {
+                      "bbox": [
+                        71.17814822313262,
+                        129.6919921875,
+                        524.2658944478849,
+                        781.3440185546875
+                      ],
+                      "kind": "table",
+                      "page": 86,
+                      "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+                      "quote": "其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92",
+                      "title": "Songlin-2024-annual-report.pdf",
+                      "context": {
+                        "bbox_scope": "original source block/table; chunks share its real bounding box",
+                        "page_context": "厦门松霖科技股份有限公司2024 年年度报告\n合并利润表\n2024 年1—12 月\n单位：元 币种：人民币\n项目 附注 2024 年度 2023 年度\n一、营业总收入 3,014,989,619.04 2,983,419,869.92\n其中：营业收入 七.61 3,014,989,619.04 2,983,419,869.92\n利息收入\n已赚保费\n手续费及佣金收入\n二、营业总成本 2,545,707,667.66 2,546,025,169.49\n其中：营业成本 七.61 1,948,457,767.50 1,942,125,701.86\n利息支出\n手续费及佣金支出\n退保金\n赔付支出净额\n提取保险责任准备金净额\n保单红利支出\n分保费用\n税金及附加 七.62 28,609,457.13 31,176,101.26\n销售费用 七.63 83,185,579.04 115,115,314.56\n管理费用 七.64 283,453,814.08 260,314,245.27\n研发费用 七.65 225,113,709.16 203,531,659.51\n财务费用 七.66 -23,112,65",
+                        "region_source": "table-0",
+                        "table_context": {
+                          "page": 86,
+                          "version": "same-page-table-context-v1",
+                          "table_bbox": [
+                            71.17814822313262,
+                            129.6919921875,
+                            524.2658944478849,
+                            781.3440185546875
+                          ],
+                          "table_text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的投\n资收益 |  | 121,636.80 | -1,044,165.83\n以摊余成本计量的金融资产\n终止确认收益 |  |  | \n汇兑收益（损失以“－”号填列） |  |  | \n净敞口套期收益（损失以“-”号填\n列） |  |  | \n公允价值变动收益（损失以“－”\n号填列） | 七.70 | 2,320,140.55 | -28,637,435.06\n信用减值损失（损失以“-”号填列） | 七.71 | 5,737,500.51 | -11,556,450.43\n资产减值损失（损失以“-”号填列） | 七.72 | -16,284,345.75 | -44,032,191.51\n资产处置收益（损失以“－”号填\n列） | 七.73 | 754,691.66 | 168,250.60\n三、营业利润（亏损以“－”号填列） |  | 499,773,709.39 | 379,502,588.41\n加：营业外收入 | 七.74 | 1,594,953.23 | 958,743.73\n减：营业外支出 | 七.75 | 8,170,160.78 | 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） |  | 493,198,501.84 | 377,884,139.52\n减：所得税费用 | 七.76 | 46,783,488.25 | -13,209,672.83\n五、净利润（净亏损以“－”号填列） |  | 446,415,013.59 | 391,093,812.35\n（一）按经营持续性分类 |  |  | \n1.持续经营净利润（净亏损以“－” |  | 446,415,013.59 | 427,831,514.83",
+                          "table_index": 0,
+                          "preamble_lines": [
+                            {
+                              "bbox": [
+                                76.58399963378906,
+                                44.10896682739258,
+                                254.44400024414062,
+                                54.0899658203125
+                              ],
+                              "text": "厦门松霖科技股份有限公司2024 年年度报告"
+                            },
+                            {
+                              "bbox": [
+                                271.3699951171875,
+                                83.34893798828125,
+                                326.4565734863281,
+                                95.05998229980469
+                              ],
+                              "text": "合并利润表"
+                            },
+                            {
+                              "bbox": [
+                                259.6099853515625,
+                                103.74896240234375,
+                                340.989990234375,
+                                114.30896759033203
+                              ],
+                              "text": "2024 年1—12 月"
+                            },
+                            {
+                              "bbox": [
+                                403.2699890136719,
+                                117.428955078125,
+                                524.1400146484375,
+                                127.98896026611328
+                              ],
+                              "text": "单位：元 币种：人民币"
+                            }
+                          ],
+                          "table_text_sha256": "3aa8c987c1322005511a07b36fee09b9d2b09e1c50cc7c56831ccef9117d2b60",
+                          "preceding_table_bottom": 0
+                        },
+                        "context_blocks": [
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              44.10896682739258,
+                              482.85400390625,
+                              54.0899658203125
+                            ],
+                            "text": "厦门松霖科技股份有限公司2024 年年度报告 \n \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b0"
+                          },
+                          {
+                            "bbox": [
+                              76.58399963378906,
+                              66.64892578125,
+                              81.86399841308594,
+                              77.20893096923828
+                            ],
+                            "text": " \n",
+                            "block_id": "6a404e07-9099-4797-a48a-6c648ae461ef:p86:b1"
+                          }
+                        ],
+                        "footnote_context": " 379,502,588.41\n加：营业外收入 七.74 1,594,953.23 958,743.73\n减：营业外支出 七.75 8,170,160.78 2,577,192.62\n四、利润总额（亏损总额以“－”号填列） 493,198,501.84 377,884,139.52\n减：所得税费用 七.76 46,783,488.25 -13,209,672.83\n五、净利润（净亏损以“－”号填列） 446,415,013.59 391,093,812.35\n（一）按经营持续性分类\n1.持续经营净利润（净亏损以“－” 446,415,013.59 427,831,514.83\n86 / 209",
+                        "page_number_rule": "one-based physical PDF page; printed label not inferred",
+                        "chunk_start_token": 0,
+                        "coordinate_system": "PDF points in the displayed page after rotation; origin top-left; x right, y down",
+                        "pdf_page_rotation": 0,
+                        "table_context_join": "neighbor text only; no automatic semantic year/column join",
+                        "neighbor_page_context": null
+                      },
+                      "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+                      "page_width": 595.3200073242188,
+                      "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+                      "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+                      "page_height": 841.9199829101562,
+                      "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+                      "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+                      "observation_sha256": "07df7c678b4b73f527575c1ba3e83d5ff150037e1b73ff563a4615b8b33ebcce",
+                      "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef"
+                    }
+                  ],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "cn:603992",
+                    "concept_id": "fin:revenue"
+                  },
+                  "requirement_key": "2b899c675f3789def8825a1143b5905cc871594fb91da29d64da49a59b42c50a"
+                }
+              ],
+              "policy": "financial-supported-v1",
+              "status": "SUPPORTED",
+              "publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "question_reasons": []
+            }
+          },
+          "error": null,
+          "created_at": "2026-09-16T13:31:28.469978Z",
+          "deadline_at": "2026-09-16T13:33:28.471055Z",
+          "finished_at": "2026-09-16T13:31:28.626979Z",
+          "calls": [],
+          "cost": {
+            "billing_confirmed": false,
+            "currency": "CNY",
+            "ingestion_included": false,
+            "known_estimated_subtotal": "0",
+            "query_local_compute_cost": "unknown",
+            "status": "estimated",
+            "unknown_calls": 0,
+            "unresolved_reserved_upper": "0"
+          },
+          "diagnostics": {
+            "batches": [],
+            "local_validation_cost": "unmetered",
+            "m3": {
+              "foreground_done_is_independent": true,
+              "jobs": [],
+              "pending_jobs": 0
+            },
+            "m4": {
+              "authoritative_store": "postgresql",
+              "dead_letters": 0,
+              "delivery_attempts": 0,
+              "durable_receipts": 0,
+              "enabled": true,
+              "external_exactly_once": false,
+              "outbox_events": 0,
+              "reconciled_calls": 0,
+              "redis_role": "reference_notifications",
+              "status": "available",
+              "unknown_calls": 0,
+              "unnotified_events": 0
+            },
+            "mapping": "deterministic_scoped_aliases_no_model_call"
+          }
+        }
+      ],
+      "regions": {
+        "29a95fca-6642-5af1-bb68-10f3a35f8bc1": {
+          "bbox": [
+            71.17814822313262,
+            129.6919921875,
+            524.2658944478849,
+            781.3440185546875
+          ],
+          "context": null,
+          "document_id": "dfa1a82e-7d68-445c-a282-3c17c929c4c4",
+          "document_version_id": "6a404e07-9099-4797-a48a-6c648ae461ef",
+          "kind": "table",
+          "page": 86,
+          "page_height": 841.9199829101562,
+          "page_width": 595.3200073242188,
+          "parser_version": "pymupdf-page-regions-v1:m1-region-chunks-v4",
+          "region_id": "29a95fca-6642-5af1-bb68-10f3a35f8bc1",
+          "score": 0,
+          "source_url": "/api/v1/documents/dfa1a82e-7d68-445c-a282-3c17c929c4c4/versions/6a404e07-9099-4797-a48a-6c648ae461ef/source#page=86",
+          "text": "项目 | 附注 | 2024 年度 | 2023 年度\n一、营业总收入 |  | 3,014,989,619.04 | 2,983,419,869.92\n其中：营业收入 | 七.61 | 3,014,989,619.04 | 2,983,419,869.92\n利息收入 |  |  | \n已赚保费 |  |  | \n手续费及佣金收入 |  |  | \n二、营业总成本 |  | 2,545,707,667.66 | 2,546,025,169.49\n其中：营业成本 | 七.61 | 1,948,457,767.50 | 1,942,125,701.86\n利息支出 |  |  | \n手续费及佣金支出 |  |  | \n退保金 |  |  | \n赔付支出净额 |  |  | \n提取保险责任准备金净额 |  |  | \n保单红利支出 |  |  | \n分保费用 |  |  | \n税金及附加 | 七.62 | 28,609,457.13 | 31,176,101.26\n销售费用 | 七.63 | 83,185,579.04 | 115,115,314.56\n管理费用 | 七.64 | 283,453,814.08 | 260,314,245.27\n研发费用 | 七.65 | 225,113,709.16 | 203,531,659.51\n财务费用 | 七.66 | -23,112,659.25 | -6,237,852.97\n其中：利息费用 |  | 22,388,200.65 | 26,100,849.28\n利息收入 |  | 14,490,021.05 | 19,311,811.46\n加：其他收益 | 七.67 | 19,931,059.18 | 19,341,049.38\n投资收益（损失以“－”号填列） | 七.68 | 18,032,711.86 | 6,824,665.00\n其中：对联营企业和合营企业的",
+          "text_sha256": "f4f129c1d6b0380a78cf8b4dd51de3fbe556bc9ffd0a8608f32e3d0d683fed6f",
+          "title": "Songlin-2024-annual-report.pdf",
+          "replay_page": 1
+        }
+      }
+    },
+    {
+      "order": 5,
+      "role": "abstention",
+      "dialog": "inconclusive",
+      "question": "样例控股2024年净利润是多少？",
+      "document_ids": [
+        "dab42da9-dd45-44c1-ad44-5faa8c4a96fe"
+      ],
+      "build_facts": false,
+      "execution_policy": "HOT_ONLY",
+      "run_steps": [
+        {
+          "id": "3f1ff180-0991-4667-b5c2-07262e7a1c27",
+          "question": "样例控股2024年净利润是多少？",
+          "document_version_ids": [
+            "e08075dd-c629-4678-835a-fc95c68b6a81"
+          ],
+          "provider": "mock",
+          "state": "COMPLETED",
+          "answer": {
+            "text": "Sample Holdings · FY2024 · Net profit：证据不足，未给出确定数值。",
+            "provider": "mock",
+            "tool_calls": 4,
+            "model_calls": 1,
+            "evidence_summary": {
+              "facts": [
+                {
+                  "status": "INCONCLUSIVE",
+                  "reasons": [
+                    "REQUIRED_BASIS_NOTE_MISSING"
+                  ],
+                  "sources": [],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "sample:holdings",
+                    "concept_id": "fin:net_profit"
+                  },
+                  "requirement_key": "b7528ff5ec2184b79ef55774cde982454e6cfce1cc2871239ed36a458b71d77d"
+                }
+              ],
+              "sources": [],
+              "unresolved": [
+                "Sample Holdings · FY2024 · Net profit：证据不足，未给出确定数值。"
+              ],
+              "validation": "Go source semantics and authoritative query scope checked",
+              "calculations": [],
+              "reused_facts": [],
+              "fact_publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "structured_coverage": {
+                "status": "MISSING",
+                "matched": [],
+                "missing": [
+                  {
+                    "reason": "NO_CURRENT_VALIDATED_FACT",
+                    "requirement": {
+                      "kind": "scalar",
+                      "unit": "CNY",
+                      "scope": "consolidated",
+                      "period": "FY2024",
+                      "entity_id": "sample:holdings",
+                      "concept_id": "fin:net_profit"
+                    }
+                  }
+                ],
+                "version": "m2-data-tools-v1",
+                "conflicts": [],
+                "truncated": false,
+                "next_cursor": null
+              },
+              "configuration_version": "m3-runtime-v1",
+              "raw_observation_region_ids": []
+            },
+            "answer_validation": {
+              "items": [
+                {
+                  "status": "INCONCLUSIVE",
+                  "reasons": [
+                    "REQUIRED_BASIS_NOTE_MISSING"
+                  ],
+                  "sources": [],
+                  "requirement": {
+                    "kind": "scalar",
+                    "unit": "CNY",
+                    "scope": "consolidated",
+                    "period": "FY2024",
+                    "entity_id": "sample:holdings",
+                    "concept_id": "fin:net_profit"
+                  },
+                  "requirement_key": "b7528ff5ec2184b79ef55774cde982454e6cfce1cc2871239ed36a458b71d77d"
+                }
+              ],
+              "policy": "financial-supported-v1",
+              "status": "INCONCLUSIVE",
+              "publication": "QUERY_CLAIMS_NOT_PUBLISHED",
+              "question_reasons": []
+            }
+          },
+          "error": null,
+          "created_at": "2026-09-23T12:29:59.181409Z",
+          "deadline_at": "2026-09-23T12:31:59.184793Z",
+          "finished_at": "2026-09-23T12:29:59.298655Z",
+          "calls": [
+            {
+              "amount_cny": null,
+              "attempt_id": "00a45173-e146-4654-80bb-fad8368bc1f7",
+              "cost_reconciliation": null,
+              "created_at": "2026-09-23T12:29:59.275017Z",
+              "experiment_id": "m3-live-v1",
+              "finished_at": "2026-09-23T12:29:59.291614Z",
+              "provider": "mock",
+              "record": {
+                "attempt_id": "00a45173-e146-4654-80bb-fad8368bc1f7",
+                "automatic_retries": 0,
+                "batch_id": null,
+                "budget_reservation": {
+                  "upper_cny": "0",
+                  "observed_at": "2026-09-23T12:29:59.280035613Z",
+                  "snapshot_id": "ac9cef41-1fa0-4d2b-84c5-7107bc0d2bbe"
+                },
+                "cache": {
+                  "source": "usage.prompt_cache_hit_tokens/prompt_cache_miss_tokens",
+                  "status": "miss",
+                  "reusable_at": null,
+                  "cache_location": "unknown",
+                  "coverage_reason": "aggregate usage does not locate cached document token spans",
+                  "coverage_status": "unknown",
+                  "input_hit_ratio": 0,
+                  "provider_cache_key": null,
+                  "provider_expires_at": null,
+                  "document_shared_prefix_coverage": null
+                },
+                "completion_id": "mock-completion-00a45173-e146-4654-80bb-fad8368bc1f7",
+                "cost": {
+                  "amount": null,
+                  "reason": "no paid model request; local mock compute cost unmetered",
+                  "status": "simulated",
+                  "currency": "CNY",
+                  "billing_confirmed": false
+                },
+                "finished_at": "2026-09-23T12:29:59.288923+00:00",
+                "http_status": 200,
+                "latency_ms": 0.826,
+                "model": "deepseek-flash",
+                "normalized_usage": {
+                  "issues": [],
+                  "output": 100,
+                  "cache_read": 0,
+                  "cache_write": 0,
+                  "input_fresh": 1000,
+                  "input_total": 1000,
+                  "inferred_fields": [],
+                  "total_tokens_reported": 1100,
+                  "reasoning_tokens_in_output": null
+                },
+                "prompt_version": "financial-shared-prefix-v1",
+                "provider": "mock",
+                "raw_usage": {
+                  "total_tokens": 1100,
+                  "prompt_tokens": 1000,
+                  "completion_tokens": 100,
+                  "prompt_cache_hit_tokens": 0,
+                  "prompt_cache_miss_tokens": 1000
+                },
+                "request_id_source": "response.body.id (completion identifier fallback, not a transport request id)",
+                "run_id": "3f1ff180-0991-4667-b5c2-07262e7a1c27",
+                "schema_version": "financial-answer-v1",
+                "simulated": true,
+                "stage": "answer",
+                "started_at": "2026-09-23T12:29:59.288809+00:00"
+              },
+              "reserved_upper_cny": "0.00000000",
+              "stage": "answer",
+              "state": "SETTLED"
+            }
+          ],
+          "cost": {
+            "billing_confirmed": false,
+            "currency": "CNY",
+            "ingestion_included": false,
+            "known_estimated_subtotal": "0",
+            "query_local_compute_cost": "unknown",
+            "status": "simulated_no_paid_model_calls",
+            "unknown_calls": 0,
+            "unresolved_reserved_upper": "0"
+          },
+          "diagnostics": {
+            "batches": [],
+            "local_validation_cost": "unmetered",
+            "m3": {
+              "foreground_done_is_independent": true,
+              "jobs": [],
+              "pending_jobs": 0
+            },
+            "m4": {
+              "authoritative_store": "postgresql",
+              "dead_letters": 0,
+              "delivery_attempts": 0,
+              "durable_receipts": 0,
+              "enabled": true,
+              "external_exactly_once": false,
+              "outbox_events": 0,
+              "reconciled_calls": 0,
+              "redis_role": "reference_notifications",
+              "status": "available",
+              "unknown_calls": 0,
+              "unnotified_events": 0
+            },
+            "mapping": "deterministic_scoped_aliases_no_model_call"
+          }
+        }
+      ],
+      "regions": {}
+    }
+  ],
+  "history": {
+    "queries": [
+      {
+        "answer_status": "SUPPORTED",
+        "created_at": "2026-09-16T13:29:11.839349Z",
+        "id": "a5f2aaa0-b787-400d-9f5e-1b51c4523698",
+        "known_estimated_cny": "0.00811900",
+        "model_calls": 1,
+        "provider": "deepseek",
+        "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+        "state": "COMPLETED"
+      },
+      {
+        "answer_status": "SUPPORTED",
+        "created_at": "2026-09-16T13:30:21.239881Z",
+        "id": "4aba39f1-8d98-42d6-8646-205112dc95af",
+        "known_estimated_cny": "0.00177792",
+        "model_calls": 2,
+        "provider": "deepseek",
+        "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+        "state": "COMPLETED"
+      },
+      {
+        "answer_status": "SUPPORTED",
+        "created_at": "2026-09-16T13:31:03.736234Z",
+        "id": "c834c46d-6ab7-463f-a151-0e07ee03d08d",
+        "known_estimated_cny": "0",
+        "model_calls": 0,
+        "provider": "deepseek",
+        "question": "松霖科技2024年合并口径营业收入是多少人民币元？",
+        "state": "COMPLETED"
+      },
+      {
+        "answer_status": "SUPPORTED",
+        "created_at": "2026-09-16T13:31:28.469978Z",
+        "id": "f83327f5-6e1b-4073-9837-88642dc4a365",
+        "known_estimated_cny": "0",
+        "model_calls": 0,
+        "provider": "deepseek",
+        "question": "请给出松霖科技2024年度合并营业收入，单位为人民币元。",
+        "state": "COMPLETED"
+      },
+      {
+        "answer_status": "INCONCLUSIVE",
+        "created_at": "2026-09-23T12:29:59.181409Z",
+        "id": "3f1ff180-0991-4667-b5c2-07262e7a1c27",
+        "known_estimated_cny": "0",
+        "model_calls": 1,
+        "provider": "mock",
+        "question": "样例控股2024年净利润是多少？",
+        "state": "COMPLETED"
+      }
+    ],
+    "next_cursor": ""
+  },
+  "sources": {
+    "dab42da9-dd45-44c1-ad44-5faa8c4a96fe/e08075dd-c629-4678-835a-fc95c68b6a81": "samples/ambiguous.pdf",
+    "dfa1a82e-7d68-445c-a282-3c17c929c4c4/6a404e07-9099-4797-a48a-6c648ae461ef": "samples/demo-annual-report.pdf"
+  }
+}

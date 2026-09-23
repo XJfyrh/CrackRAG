@@ -1,0 +1,53 @@
+name: demo-site
+
+# Publishes the static replay build to https://xjfyrh.github.io/CrackRAG/demo/
+# It uses no secrets and calls no model. The release deployment is unaffected:
+# this workflow only builds web/ and never touches the release artifacts.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'web/**'
+      - '.github/workflows/demo-site.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24.19.0'
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - name: Install locked web dependencies
+        run: npm ci --prefix web
+      - name: Refuse to publish a demo without a captured replay session
+        run: python3 scripts/check_demo_session.py web/src/demo/session.json
+      - name: Build the static replay bundle
+        run: npm run build:demo --prefix web
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: web/dist-demo
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

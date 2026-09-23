@@ -1,16 +1,17 @@
 import {useEffect,useRef,useState} from 'react';
 import {getDocument,GlobalWorkerOptions,RenderTask} from 'pdfjs-dist';
 import worker from 'pdfjs-dist/build/pdf.worker.min.mjs?url';
+import {assetUrl} from './urls';
 
 GlobalWorkerOptions.workerSrc=worker;
 
-export function PDFSource({url,page,bbox}:{url:string;page:number;bbox:number[]}){
+export function PDFSource({url,page,bbox,displayPage=page}:{url:string;page:number;bbox:number[];displayPage?:number}){
  const canvas=useRef<HTMLCanvasElement>(null);
  const [status,setStatus]=useState('loading'),[error,setError]=useState('');
  useEffect(()=>{
   let active=true;let render:RenderTask|undefined;
   setStatus('loading');setError('');
-  const loading=getDocument({url:url.split('#')[0],cMapUrl:'/pdfjs/cmaps/',cMapPacked:true,standardFontDataUrl:'/pdfjs/standard_fonts/',wasmUrl:'/pdfjs/wasm/',enableXfa:false});
+  const loading=getDocument({url:url.split('#')[0],cMapUrl:assetUrl('pdfjs/cmaps/'),cMapPacked:true,standardFontDataUrl:assetUrl('pdfjs/standard_fonts/'),wasmUrl:assetUrl('pdfjs/wasm/'),enableXfa:false});
   void(async()=>{
    try{
     const doc=await loading.promise;if(!active)return;
@@ -28,5 +29,5 @@ export function PDFSource({url,page,bbox}:{url:string;page:number;bbox:number[]}
   })();
   return()=>{active=false;render?.cancel();void loading.destroy()};
  },[url,page,bbox.join(',')]);
- return <div className="pdf-preview"><div className="section-line"><span className="hint">原 PDF 第 {page} 页 · 金色框为证据区域</span><a href={url.split('#')[0]} download="source.pdf">下载原 PDF</a></div>{status==='loading'&&<p className="hint">正在渲染原页…</p>}{error&&<p role="alert" className="inline-error">{error}</p>}<canvas ref={canvas} aria-label={`PDF 来源页 ${page}`} data-status={status}/></div>;
+ return <div className="pdf-preview"><div className="section-line"><span className="hint">原报告第 {displayPage} 页 · 金色框为证据区域</span><a href={url.split('#')[0]} download={displayPage===page?'source.pdf':'source-page.pdf'}>{displayPage===page?'下载原 PDF':'下载引用页'}</a></div>{status==='loading'&&<p className="hint">正在渲染原页…</p>}{error&&<p role="alert" className="inline-error">{error}</p>}<canvas ref={canvas} aria-label={`PDF 来源页 ${displayPage}`} data-status={status}/></div>;
 }

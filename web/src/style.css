@@ -8,3 +8,31 @@
 .login{max-width:640px;padding-top:10vh}.login>.brand{display:block;margin-bottom:26px}.login h1{font-size:30px}.login .card>p{color:#61766b}.login form{margin:25px 0}.history-card{margin-top:20px}.history-item{display:block;width:100%;text-align:left;background:#f6f8f3;color:#365346;border:1px solid transparent;margin-top:8px;padding:12px;font-weight:400}.history-item:hover,.history-item.selected{background:#ecf3ed;border-color:#a5c4ac}.history-item strong{display:block;font-size:12px;font-weight:600}.history-item span{display:block;font-size:10px;color:#708474;margin-top:4px}.demo-guide{background:#f1f6ee;border-color:#d6e3d0}.demo-guide ol{padding-left:21px;font-size:13px;color:#556d58}.demo-guide a{color:#23654d;margin:0 3px;text-underline-offset:3px}.suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}.suggestions button{font-size:12px;padding:8px 12px}.answer-verdict{display:flex;flex-direction:column;padding:12px 15px;border-radius:6px;background:#f2f4ef;color:#526b56;margin-top:16px}.answer-verdict strong{font-size:13px}.answer-verdict span{font-size:11px;margin-top:3px}.answer-verdict[data-status="SUPPORTED"]{background:#e9f4eb;color:#2f7046}.answer-verdict[data-status="INCONCLUSIVE"],.answer-verdict[data-status="PARTIAL"]{background:#fff7e4;color:#8c6c27}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:3px 0 23px}.metrics>div{background:#f6f8f4;border:1px solid #e3e9e0;border-radius:7px;padding:12px;min-width:0}.metrics strong{display:block;font-size:18px;overflow-wrap:anywhere}.metrics span{font-size:10px;color:#768874}@media(max-width:900px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(prefers-reduced-motion:reduce){.pulse{animation:none}}
 
 .pdf-preview{margin-top:24px}.pdf-preview canvas{display:block;width:100%;height:auto;border:1px solid #dce5dc;background:white}.pdf-preview a{font-size:12px;color:#23654d}.pdf-preview canvas[data-status="loading"]{min-height:120px;max-height:240px}
+
+/* Static replay build only: notice card and hidden write controls. */
+.demo-hidden{display:none!important}
+.replay-notice{margin-bottom:22px;background:#f1f6ee;border-color:#d6e3d0}
+.replay-notice p{margin:10px 0}
+.replay-badge{display:inline-block;background:#123b32;color:#fff;font-size:12px;letter-spacing:.08em;padding:5px 12px;border-radius:999px}
+.replay-actions{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-top:14px}
+.replay-actions .text-button{color:#23654d;text-decoration:underline}
+
+/* Keep the public walkthrough focused on the answer and its source. */
+.replay-notice{padding:28px 32px;background:linear-gradient(135deg,#edf5ec,#f9fbf4)}
+.replay-notice>p{max-width:900px;font-size:14px;color:#385345}
+.replay-notice .replay-proof{display:inline-block;background:#fff;border:1px solid #d9e5d7;border-radius:8px;padding:10px 14px;font-size:13px;font-weight:600;color:#225540}
+.replay-layout .demo-guide{background:#fff;border-color:#dce7d9}
+.replay-layout .suggestions button:disabled{opacity:.6}
+.replay-layout .query-card textarea[readonly]{background:#f6f8f5;resize:none}
+.evidence-item{font-size:13px;color:#3e6853;background:#f6f9f4;padding:9px 12px;border-radius:6px}
+.source-text{max-height:220px}
+.usage .call strong{font-size:12px}
+.run-id{font-size:12px;color:#728779}
+@media(max-width:680px){
+ .replay-layout{display:flex;flex-direction:column}
+ .replay-layout .workspace{order:0;width:100%}
+ .replay-layout aside{order:1;width:100%}
+ .replay-notice{padding:20px}
+ .replay-actions{gap:12px}
+ .replay-notice .replay-proof{display:block}
+}

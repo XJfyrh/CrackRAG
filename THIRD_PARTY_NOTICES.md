@@ -36,15 +36,26 @@ respective licenses; image digests identify the build inputs.
 
 ## Documents and evaluation evidence
 
-`web/public/samples/` contains original, visibly synthetic PDFs released under
-MIT. They are not actual issuer disclosures and must not be presented as real
-financial data.
+`web/public/samples/financial.pdf` and `ambiguous.pdf` are original, visibly
+synthetic PDFs released under MIT. They are not actual issuer disclosures and
+must not be presented as real financial data.
+
+The static replay demo (`web/src/demo/`, published at `/demo/`) additionally ships
+the **single cited page** of one publicly disclosed annual report as
+`web/public/samples/demo-annual-report.pdf`. It exists because the demo shows the
+highlighted evidence rectangle that the product drew on the original page, which
+requires the page itself to render offline. It remains the issuer's material: it
+is not relicensed by this repository's MIT grant, it must not be presented as
+CrackRAG output, and it is used only to display a citation region that the
+issuer's own public filing already contains. Remove that file and the demo build
+falls back to synthetic samples only.
 
 Real annual reports are obtained by the operator from official source links
-and verified against the evaluation source manifest. This repository does not
-redistribute their full PDFs, page screenshots, or original extracted bodies.
-Source links, file hashes, evaluation methodology, independently recorded
-numeric checks, and aggregated results do not relicense the original reports.
+and verified against the evaluation source manifest. Apart from the single
+replay page above, this repository does not redistribute their full PDFs, page
+screenshots, or original extracted bodies. Source links, file hashes, evaluation
+methodology, independently recorded numeric checks, and aggregated results do
+not relicense the original reports.
 
 PDF.js (`pdfjs-dist`, locked in `web/package-lock.json`) renders authorized source
 pages locally in the browser. It is licensed under Apache-2.0. Its original

@@ -11,7 +11,14 @@ patterns = {
     'private key': re.compile(rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----'),
     'host user path': re.compile(rb'[A-Za-z]:[\\/]Users[\\/](?!Public[\\/])[^\s"\r\n]+', re.I),
 }
-allowed_pdf = {'web/public/samples/financial.pdf', 'web/public/samples/ambiguous.pdf'}
+# Two synthetic fixtures plus the single cited page the static replay demo
+# renders. The replay page is the same issuer PDF page the product displayed;
+# it exists so the demo can show the highlighted evidence region offline.
+allowed_pdf = {
+    'web/public/samples/financial.pdf',
+    'web/public/samples/ambiguous.pdf',
+    'web/public/samples/demo-annual-report.pdf',
+}
 blocked_dirs = {'.release', 'backups', 'evidence', 'archive', 'node_modules', '.venv', '__pycache__'}
 blocked_suffixes = {'.zip', '.dump', '.sqlite', '.sqlite3', '.docx', '.bundle', '.exe', '.dll', '.tar', '.webm', '.mp4'}
 
