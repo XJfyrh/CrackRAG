@@ -37,10 +37,15 @@ jobs:
         run: python3 scripts/check_demo_session.py web/src/demo/session.json
       - name: Build the static replay bundle
         run: npm run build:demo --prefix web
+      - name: Place the replay at the published /demo/ path
+        run: |
+          mkdir -p web/pages-artifact/demo
+          cp -R web/dist-demo/. web/pages-artifact/demo/
+          cp web/dist-demo/index.html web/pages-artifact/index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: web/dist-demo
+          path: web/pages-artifact
 
   deploy:
     needs: build

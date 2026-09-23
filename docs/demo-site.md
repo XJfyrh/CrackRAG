@@ -65,5 +65,6 @@ node scripts/record_demo_gif.mjs
 本次制作静态站没有新增付费请求。修改快照后，应重录动图、重新核对单页引用、运行发布守卫及浏览器检查。
 
 GitHub Pages 由 [demo-site 工作流](../.github/workflows/demo-site.yml)从 `main` 的静态构建发布。
-Pages 只部署 `web/dist-demo`，不部署 API 或数据库。正式版本 `v0.1.0` 的源码、录像和验收记录
+构建产物放在站点的 `/demo/` 子目录，根路径也提供同一入口；不部署 API 或数据库。
+正式版本 `v0.1.0` 的源码、录像和验收记录
 由 GitHub Release 固定；后续对演示站的改动记录在 `main` 上。
