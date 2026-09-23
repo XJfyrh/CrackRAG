@@ -14,6 +14,10 @@
 
 ## 检查
 
+前端入口位于 `web/src/main.tsx`，文档与历史、提问、回答与来源、页眉分别放在 `document-history.tsx`、`query-ui.tsx`、`answer-ui.tsx`、`workspace-header.tsx`；`workspace-ui.tsx` 只统一导出组件。用户可读状态与费用口径位于 `workspace-model.ts`，历史、查询监听和本地 PDF 预检在独立 hook 中。`npm test` 覆盖追问补全、可比费用、选页校验等纯逻辑；`npm run build:demo` 检查静态回放仍能使用相同界面。
+
+界面只在 Go 提交并验证回答后显示正文；SSE 到达前展示真实的等待状态，不逐字展示未经核验的模型输出。追问只补全明确的年份或指标，先填入完整问题供用户确认，不自动派发。历史改名仅保存在当前登录会话，退出时清除，服务端原问题仍是审计依据。超过 32 页的 PDF 会在浏览器本地扫描文字层并建议页面，用户仍需核对表头、单位及附注；扫描件和复杂跨页表格不因此获得支持。累计费用是该租户历次查询的已知模型费用估算，包含已撤销文档的历史调用，不含本地处理；单次同题对照也不推断总体节省。
+
 ```sh
 python scripts/check_public_source.py
 python scripts/check_python.py

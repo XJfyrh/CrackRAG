@@ -267,7 +267,7 @@ if (fromDump) {
   await beat(3);
   await reveal('.pdf-preview canvas', 'center');
   await beat(2);
-  await page.getByRole('button', {name: '关闭', exact: true}).click();
+  await page.getByRole('button', {name: '关闭此来源', exact: true}).click();
   await beat(0.5);
 
   // Beat 3 — explicitly save a validated number for later questions.

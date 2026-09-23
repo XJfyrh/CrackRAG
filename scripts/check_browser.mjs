@@ -35,7 +35,7 @@ async function clearCaption(){if(record)await page.evaluate(()=>document.getElem
 async function upload(name){
  await clearCaption();
  await page.getByLabel('选择 PDF').setInputFiles(path.join(root,'web/public/samples',name));
- await page.getByRole('textbox',{name:'页码范围'}).fill('1');
+ // A one-page PDF should upload without making the user locate its table first.
  const received=page.waitForResponse(r=>new URL(r.url()).pathname==='/api/v1/documents'&&r.request().method()==='POST');
  await page.getByRole('button',{name:'上传文档',exact:true}).click();
  const response=await received;if(response.status()!==202)throw new Error('upload failed');
@@ -76,7 +76,7 @@ try{
  await page.locator('.source-card').scrollIntoViewIfNeeded();
  await page.screenshot({path:path.join(output,'02-source.png')});
  await caption('3 / 打开来源。可以查看逐字引文、区域原文、页码与原 PDF；答案不是只给一串不可核对的文本。',20);
- await page.getByRole('button',{name:'关闭',exact:true}).click();
+ await page.getByRole('button',{name:'关闭此来源',exact:true}).click();
  const built=await ask('② 保存可复用数字','SUPPORTED');
  expect(built.diagnostics.m3.jobs.some(j=>j.state==='COMMITTED')).toBeTruthy();
  await page.getByRole('heading',{name:'为下次提问准备数字',exact:true}).scrollIntoViewIfNeeded();

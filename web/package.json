@@ -8,6 +8,7 @@
     "build": "node scripts/copy-pdf-assets.mjs && tsc --noEmit && vite build",
     "dev:demo": "node scripts/copy-pdf-assets.mjs && vite --config vite.demo.config.ts --host 127.0.0.1",
     "build:demo": "node scripts/copy-pdf-assets.mjs && tsc --noEmit && vite build --config vite.demo.config.ts",
+    "test": "node --test tests/workspace-model.test.mjs tests/pdf-page-suggestions.test.mjs",
     "test:e2e": "node ../scripts/check_browser.mjs"
   },
   "dependencies": {
