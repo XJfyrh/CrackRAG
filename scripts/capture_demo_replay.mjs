@@ -142,6 +142,8 @@ async function waitForTerminal(queryId, timeoutMs = 600000) {
 
 async function uploadDocument(filePath, pages, year, label) {
   await page.getByLabel('选择 PDF').setInputFiles(filePath);
+  if ((pages || year) && !(await page.locator('.upload-options').evaluate(element => element.open)))
+    await page.locator('.upload-options summary').click();
   if (pages) await page.getByRole('textbox', {name: '页码范围'}).fill(String(pages));
   if (year) await page.getByRole('textbox', {name: '报告年份'}).fill(String(year));
   const received = page.waitForResponse((r) => new URL(r.url()).pathname === '/api/v1/documents' && r.request().method() === 'POST');

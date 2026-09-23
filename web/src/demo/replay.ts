@@ -98,7 +98,22 @@ export class ReplayScope {
     }
 
     if (route === '/queries' && method === 'GET') {
-      return {kind: 'json', status: 200, body: this.session.history};
+      const all = this.session.history.queries.map(raw => {
+        const item = raw as {id?: string; question?: string; provider?: string; state?: string; answer_status?: string; model_calls?: number; known_estimated_cny?: string};
+        const captured = this.session.queries.find(query => this.queryId(query) === item.id);
+        const final = captured?.run_steps.at(-1) as {document_version_ids?: string[]} | undefined;
+        return {...item, document_version_ids: final?.document_version_ids || []};
+      });
+      const term = (url.searchParams.get('q') || '').trim().toLocaleLowerCase();
+      const filtered = term ? all.filter(item => item.question?.toLocaleLowerCase().includes(term)) : all;
+      const summary = {
+        total_queries: all.length,
+        real_queries: all.filter(item => item.provider === 'deepseek').length,
+        zero_model_supported_answers: all.filter(item => item.provider === 'deepseek' && item.state === 'COMPLETED' && item.answer_status === 'SUPPORTED' && item.model_calls === 0).length,
+        known_estimated_cny: all.reduce((sum,item) => sum + Number(item.provider === 'deepseek' ? item.known_estimated_cny || 0 : 0), 0).toFixed(8),
+        unknown_calls: 0,
+      };
+      return {kind: 'json', status: 200, body: {queries: filtered, next_cursor: '', summary}};
     }
 
     if (route === '/queries' && method === 'POST') {
