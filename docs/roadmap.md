@@ -25,7 +25,7 @@ v0.1.0 是财报数字问答与可验证复用的产品原型，不是该论文�
 用户已确认：文件系统式搜索/整页读取（超长页面确定性分页），Luna 主实验、Flash 复核。规模修订为从 dev 的 310 题中确定性选取 **210 题：12 题试点 + 198 题独立主实验**；剩余 100 题保留，不用于调参或自动追加。每题另生成 1 道相关题，因此 210 指原始目标题数，不是调用数。
 
 - 模型入口：OpenRouter；Luna 使用 `openai/gpt-6-luna`，Flash 使用 `deepseek/deepseek-v4.1-flash`，不是官方直连的 `deepseek-flash` 标识。
-- 评审：`openai/gpt-4o-2024-11-20`；相关题生成：`anthropic/claude-opus-5`。同一 OpenRouter key 可作为这些调用的认证入口，但目录可见不等于账户已通过真实调用验收。
+- 相关题生成改为 `anthropic/claude-opus-5.5`；评审候选为 `google/gemini-3.8-flash`、`qwen/qwen3.8-flash`，GPT-4o 保留为上游兼容性对照。先用试点和人工标签校准，再冻结主 judge，不凭价格或通用榜单确定可靠性。详见[模型选型调研](replication/model-selection-v1.md)。同一 OpenRouter key 可认证，但目录可见不等于账户通过真实调用验收。
 - 独立 Python 研究 harness + SQLite 对象库，不先改 Go API 或产品数据库。先把因果比较和计费观测做清楚，再移植到产品。
 - 核心对照：B0（无 cracking）、T0（只抽当前需求）、T1（推测性 cracking）。Flash 的同模型复核与跨模型读库是两个不同实验。
 

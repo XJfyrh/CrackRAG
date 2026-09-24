@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Updated the draft generator to OpenRouter Claude Opus 5.5 and researched Gemini 3.8 Flash/Qwen3.8 Flash judges; added human-calibrated selection and GPT-4o compatibility checks without authorizing paid calls.
 - Added a research-first roadmap, v0.2 development plan, and draft M0 FanOutQA protocol for 210 target questions (12 pilot, 198 main), with OpenRouter Luna and Flash, pinned data, and machine-readable parameters; no paid runs or runtime changes.
 - Added a clickable, offline replay of the recorded real-model demonstration, with a separately labeled mock abstention example.
 - Moved scheduler terminology and raw diagnostics out of the normal demo path; added actionable messages, a README animation, and a source-first mobile layout.

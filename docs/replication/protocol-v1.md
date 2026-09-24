@@ -22,8 +22,11 @@
 | --- | --- | --- |
 | Luna | `openai/gpt-6-luna` | 试点 B0/T0/T1，主集 198 组三臂 |
 | Flash | `deepseek/deepseek-v4.1-flash` | 试点 B0/T1；主集复核规模在 M4 后、M5 前固定 |
-| 生成器 | `anthropic/claude-opus-5` | 仅相关题生成，不接触回答/cracking 运行 |
-| judge | `openai/gpt-4o-2024-11-20` | 按固定 FanOutQA 评分提示词和解析规则 |
+| 生成器 | `anthropic/claude-opus-5.5` | 根据新调研替换 Opus 5；仅生成相关题，仍人工核验 |
+| judge 候选 | `google/gemini-3.8-flash`、`qwen/qwen3.8-flash` | 先按人工标签校准，M5 前冻结一名主 judge；目前未选定 |
+| judge 兼容性对照 | `openai/gpt-4o-2024-11-20` | 保留上游默认模型作为桥接，不是真值或自动仲裁 |
+
+调研、endpoint 价格、参数差异与校准方案见[模型选型补充](model-selection-v1.md)。新增候选不增加或授权预算；210/12/198 划分及 Luna/DeepSeek 回答模型不变。
 
 公开[模型目录](https://openrouter.ai/api/v1/models)可查这些 ID，且 [Luna endpoints](https://openrouter.ai/api/v1/models/openai/gpt-6-luna/endpoints)不止一个。目录可见、参数 advertised 不代表账户可用或网关完整透传；M2 才验收真实调用。研究只用环境中的 `OPENROUTER_API_KEY`，不要求把 key 发到聊天或写进仓库。
 
@@ -39,6 +42,7 @@ M0 现在交付草案，M2/M3/M4 需要各自阶段授权；**M5 前必须填齐
 - 价格快照、费用上界算法、请求数/金额上限、批准人/日期、续跑流程；
 - Flash 主集 ID/规模、是否启用跨模型 X；若未启用，明确 0，不留“视结果追加”；
 - 210 道相关题的人工核验及许可，审计抽样规则、报告所用统计代码；
+- judge 人工校准记录、主 judge ID、复核/桥接的启用与规模、各自 prompt/端点/参数、评分成本和独立报告规则；
 - 默认每臂每题 1 次，主实验不自动重试；如需重复实验，在首次主集调用前固定重复次数并以题为聚类单位分析。
 
 JSON 中未决字段为 null，`execution_ready=false` 指 **M5 主实验尚未可执行**。M2/M3/M4 使用独立阶段 manifest：先批准本阶段金额/请求数/并发，固定本阶段路由、输入范围和安全准入配置，才可真实调用；不要求它们提前具备由自身产出的全部 M5 科学冻结材料。任何阶段无授权都不得调用；全套科学冻结门禁只用于 M5，不能循环阻止用于解除未决项的探测。
@@ -133,7 +137,8 @@ RAG top-5/top-10、人工核验的 oracle store、累计跨组 store、Hitchcock
 ### 6.1 质量与对象
 
 - `acc.loose`：FanOutQA `answer_in_text` 得分的均值；`acc.strict`：完全命中题目的比例。沿用上游规范化，记录空答/弃答/拒绝；它们不是正确弃答的专门基准，不能将空答作为正确拒答奖励。
-- GPT judge：固定 `gpt-4o-2024-11-20`、temperature=0、seed=31415（支持情况 M2 验收）；上游 A–F 规则中的 B/C/E 为正确，答案按上游 4000 字符处理。gold 只到 judge；隐藏臂标签并打乱评分顺序。没调用/失败记缺失，不把默认 0 当已测分数。
+- 主 judge：模型尚未选定，按[试点校准方案](model-selection-v1.md)在 M5 前冻结；拟 temperature=0、seed=31415（逐 endpoint 实测支持），固定 reasoning 和输出上限。保留上游 A–F 规则、B/C/E→1 和 4000 字符处理，不因换模型改变评分语义。gold 只进隔离评测；隐藏臂标签并打乱顺序。没调用/失败记缺失，不把默认 0 当已测分数。替代 judge 的分数须注明模型，不与论文绝对准确率直接等同。
+- Judge 稳健性：拟由第二名通过校准的 Flash 全量独立复核，并按固定 salt 从主集选 40 题的全部 Luna 三臂作 GPT-4o 桥接/人工审查；主模型、复核启用、覆盖与 manifest 均在 M5 前冻结。不得事后只替换分歧题标签或对 T1 有利的评分；报告各 judge 的配对差，C2 结论类别改变则标记 judge 敏感。校准≥90% 一致率的诊断门槛不证明误差低于 5pp。
 - 工程/机制：每题文档打开数、成功对象读取数、实际返回对象/列表、fallback、无打开即答、fork 状态、cached/write/miss/reasoning token、完成时间。对象返回不等于被最终答案真实使用；需要可追踪引用或人工审计。
 - 审计：**按模型、cracking 臂分别建抽样框，不混池 T0/T1/X**。单位为去重的 singular 对象或完整 list group，不把展开后的列表边当独立样本。每框分“被返回/未被返回 × singular/list”四层，每层均匀无放回抽 50 个单位，不足则全查（seed=20260926，抽样实现/hash 在冻结时确定）。保存每层总体数 N、样本数 n、纳入概率 n/N、题/来源和抽样 manifest；按题聚类评估区间限制。分别报告 singular 语义错误率、列表整组语义错误/不完整率；若合并 returned/unreturned，只对同种单位按 N 加权，不直接混合对象与列表组分母。检查关系、值/单位/日期和证据，成员级统计必须保留列表聚类，不因展开列表虚增有效 n。GROUNDED 通过率不是对象正确率。
 

@@ -1,7 +1,7 @@
 {
   "protocol_id": "adc-fanoutqa-v1",
   "schema_version": 1,
-  "draft_revision": 1,
+  "draft_revision": 2,
   "status": "PLANNED",
   "drafted_at": "2026-09-24",
   "execution_ready": false,
@@ -119,19 +119,86 @@
         "cache_configuration": null
       },
       "generator": {
-        "model_id": "anthropic/claude-opus-5",
+        "model_id": "anthropic/claude-opus-5.5",
+        "recommended_endpoint_tag": "anthropic",
         "frozen_endpoint": null,
-        "decoding_configuration": null
+        "decoding_configuration": null,
+        "temperature_or_seed_support_must_not_be_assumed": true
       },
       "judge": {
-        "model_id": "openai/gpt-4o-2024-11-20",
+        "model_id": null,
+        "selection_status": "pending_pilot_calibration",
+        "candidate_model_ids": ["google/gemini-3.8-flash", "qwen/qwen3.8-flash", "openai/gpt-4o-2024-11-20"],
+        "compatibility_reference_model_id": "openai/gpt-4o-2024-11-20",
+        "candidate_endpoint_tags": {
+          "google/gemini-3.8-flash": "google-ai-studio",
+          "qwen/qwen3.8-flash": "alibaba",
+          "openai/gpt-4o-2024-11-20": "openai"
+        },
         "frozen_endpoint": null,
         "temperature": 0,
         "seed": 31415,
+        "parameter_passthrough_verified": false,
+        "reasoning_configuration": null,
         "answer_truncation_characters": 4000,
-        "correct_grades": ["B", "C", "E"]
+        "correct_grades": ["B", "C", "E"],
+        "external_tools_enabled": false
       }
     }
+  },
+  "judge_evaluation": {
+    "status": "PROPOSED_NOT_CALIBRATED",
+    "selection_note": "docs/replication/model-selection-v1.md",
+    "rubric": "pinned_fanoutqa_A_to_F_with_B_C_E_correct; do_not_change_with_model",
+    "calibration_stage": "M4",
+    "calibration_population": "final_frozen_pilot_round_target_answers_only",
+    "natural_answer_slots_max": 60,
+    "diagnostic_answer_variants": 30,
+    "new_fanoutqa_target_questions": 0,
+    "human_reference_required_before_model_grading": true,
+    "human_reviewer_count": null,
+    "calibration_repetitions": 2,
+    "maximum_calibration_scoring_requests": 540,
+    "first_pass_for_accuracy_second_pass_for_repeatability": true,
+    "pilot_group_clustered_uncertainty": true,
+    "proposed_diagnostic_gates": {
+      "valid_output_rate": 1.0,
+      "binary_repeat_agreement": 0.95,
+      "human_binary_agreement_natural": 0.90,
+      "human_binary_agreement_diagnostic": 0.90,
+      "guarantees_judge_error_below_noninferiority_margin": false
+    },
+    "eligible_model_selection_order": [
+      "fewest_first_pass_natural_human_disagreements",
+      "fewest_natural_false_accepts",
+      "fewest_diagnostic_errors",
+      "fewest_repeat_disagreements",
+      "lowest_observed_cost"
+    ],
+    "selection_must_not_use_T1_minus_B0_effect": true,
+    "all_candidates_fail_policy": "stop_judge_freeze; explicit_human_scoring_or_revised_plan",
+    "calibration_manifest_sha256": null,
+    "secondary_judge": {
+      "recommended_scope": "all_main_answers_if_another_Flash_candidate_passes_calibration",
+      "model_id": null,
+      "enabled": null,
+      "frozen_endpoint": null
+    },
+    "compatibility_bridge": {
+      "model_id": "openai/gpt-4o-2024-11-20",
+      "proposed_target_count": 40,
+      "source_population": "198_main_target_ids",
+      "salt": "adc-fanoutqa-v1:judge-bridge:",
+      "selection": "sort sha256(UTF8(salt + id)) hex ascending; tie-break by id; take first 40",
+      "answer_arms": ["luna_B0", "luna_T0", "luna_T1"],
+      "maximum_additional_scoring_requests": 120,
+      "reuse_if_reference_is_primary_judge": true,
+      "human_blind_review_of_all_selected_answers_proposed": true,
+      "enabled": null,
+      "target_ids": null,
+      "manifest_sha256": null
+    },
+    "main_judge_disagreement_policy": "report_each_judge_separately; no_posthoc_label_replacement; flag_C2_verdict_sensitivity"
   },
   "arms": {
     "B0": {"cracking": false, "object_reads": false, "run_both_questions": true},
@@ -182,7 +249,7 @@
     "primary_cost_test_view": "answer_plus_cracking_on_target_question",
     "primary_cost_sequence_view": "all_related_and_target_answer_plus_cracking_costs",
     "cost_estimator": "ratio_of_sums_paired_by_question",
-    "accuracy_primary": "fanoutqa_gpt_judge",
+    "accuracy_primary": "fanoutqa_rubric_frozen_primary_judge",
     "accuracy_secondary": ["acc.loose", "acc.strict"],
     "judge_noninferiority_margin_absolute": 0.05,
     "confidence_level": 0.95,
@@ -231,6 +298,7 @@
     "missing_retrieval_policy_and_initial_cache_manifest_hashes",
     "unverified_cache_namespace_isolation",
     "missing_statistical_and_audit_sampling_implementation_hashes",
+    "missing_human_judge_calibration_primary_model_and_secondary_bridge_scope",
     "unverified_real_provider_routes_api_semantics_cache_and_usage",
     "unfrozen_context_pagination_fork_allocation_and_generation_limits",
     "missing_verified_workload_and_licensing_review",
