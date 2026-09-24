@@ -1,0 +1,240 @@
+{
+  "protocol_id": "adc-fanoutqa-v1",
+  "schema_version": 1,
+  "draft_revision": 1,
+  "status": "PLANNED",
+  "drafted_at": "2026-09-24",
+  "execution_ready": false,
+  "execution_ready_scope": "M5_main_experiment",
+  "paid_calls_authorized": false,
+  "phase_admission": {
+    "M2_M3_M4": "separate_stage_manifest_with_approved_budget_requests_concurrency_routes_inputs_and_safety_limits",
+    "M5": "all_scientific_freeze_items_plus_stage_authorization_required",
+    "current_stage_authorizations": []
+  },
+  "description_zh": "M0 参数草案：210 道原始目标题 = 12 试点 + 198 主集；100 道保留题不调参、不自动追加。运行字段未冻结，不能直接执行。",
+  "scope": "documentation_and_planning_only",
+  "source_branch": "XJfyrh/experiment-adc-replication",
+  "baseline_commit": "50d4b7dbb5e77aa6266d6684197c90333cb66539",
+  "execution_commit": null,
+  "paper": {
+    "url": "https://arxiv.org/abs/2608.31082v2",
+    "version": "v2",
+    "pdf_sha256": "b3e85837702d01b89f77ea86e0ebeee79776d63e424f72b18c4b07d2c9d78e63"
+  },
+  "dataset": {
+    "repository": "https://github.com/zhudotexe/fanoutqa",
+    "commit": "989f4c40d9deea1ecb0897d7a17a9c0fe20d5c33",
+    "declared_package_version": "1.3.0",
+    "license": "CC-BY-SA-4.0",
+    "dev": {
+      "path": "fanoutqa/data/fanout-final-dev.json",
+      "count": 310,
+      "sha256": "b62a9797732c716e6b17ba4086f277d154d747ce2fa01614cb76a3372e7fb88c",
+      "sorted_id_set_sha256": "8ff3f869bd674da915d9e414e5b6be83b4e470739b2a4159b2cd5e0140b0da13"
+    },
+    "test": {
+      "path": "fanoutqa/data/fanout-final-test.json",
+      "count": 724,
+      "sha256": "e823838ab00d4fe875e0f9921ce07a7abe8806e8b380ffee17438d4bf76a68c5",
+      "used_in_this_experiment": false
+    }
+  },
+  "selection": {
+    "algorithm": "sort by sha256(UTF8(salt + id)) hex ascending; tie-break by id ascending; take first 210; first 12 pilot, next 198 main",
+    "salt": "adc-fanoutqa-v1:",
+    "id_set_hash_format": "sha256(UTF8(LF.join(lexicographically_sorted_ids))); no trailing newline",
+    "selected_count": 210,
+    "selected_id_set_sha256": "5528f9818de9429e9c02f39096b3918204eb32b724d37121753ab3fd1f7fdbfe",
+    "pilot_count": 12,
+    "pilot_id_set_sha256": "df01e1e64a6d47e27eb7db0c9c96f8127e243d76a6ed08197cd620e4da094cb3",
+    "pilot_ids_in_selection_order": [
+      "a284cc925636d80b", "d69d3c78f0e57713", "d648ac0aeada9c7f", "28c4715bc3cf75aa",
+      "0a950dfa942cf3ad", "5aa09932011c8fcd", "c6707339a044ae15", "6eabcceb8e365b7c",
+      "e082a9732cc2a366", "5e660d80b1608a8a", "c58ac65553f24640", "542983d2cb1630e0"
+    ],
+    "main_count": 198,
+    "main_id_set_sha256": "d4ee29259a20bc6faf3a1cb244d643b171cc758da135ac5b0f55eab7f7bedc78",
+    "held_out_count": 100,
+    "held_out_id_set_sha256": "ae69fdffe0f1c50200695e1efc1f57f0970487d2067cfb8a7ad113c2939f3256",
+    "held_out_usage": "none; no tuning, replacement or automatic extension",
+    "evidence_page_count_filter": null,
+    "automatic_sample_extension": false,
+    "sample_size_or_membership_change_requires_new_user_approval": true,
+    "arm_order_seed": 20260924
+  },
+  "workload": {
+    "sequence": ["related_question", "target_question"],
+    "related_questions_per_target": 1,
+    "related_question_count": 210,
+    "maximum_generation_attempts_per_target": 3,
+    "generator_inputs": ["target_question_text", "generation_criteria", "corpus_epoch"],
+    "human_verification_required": true,
+    "unverified_pair_policy": "blocks_freeze; no silent replacement or exclusion",
+    "reset_conversation_and_notes_between_questions": true,
+    "gold_available_to": ["isolated_evaluation_process"],
+    "workload_sha256": null,
+    "verification_manifest_sha256": null,
+    "licensing_review_completed": false
+  },
+  "corpus": {
+    "backend": "mediawiki_live_search_with_dated_content",
+    "epoch": "2023-11-20T00:00:00Z",
+    "document_identity": ["pageid", "revid", "part", "content_sha256"],
+    "search_cache_policy": "first_seen_query_result_record_and_replay_shared_across_arms",
+    "search_top_k": 10,
+    "model_visible_search_fields": ["title", "pageid", "url"],
+    "current_factual_snippets_exposed_to_model": false,
+    "content_policy": "whole_page_or_deterministic_paragraph_parts; no query-dependent BM25 filtering",
+    "gold_evidence_retrieval_hints_allowed": false,
+    "parser_version": null,
+    "pagination_policy": null,
+    "retrieval_policy_sha256": null,
+    "initial_corpus_manifest_sha256": null,
+    "initial_search_manifest_sha256": null,
+    "final_corpus_manifest_sha256": null,
+    "final_search_manifest_sha256": null,
+    "final_manifest_hashes_available_only_after_run": true
+  },
+  "provider": {
+    "gateway": "openrouter",
+    "api_base": "https://openrouter.ai/api/v1",
+    "secret_environment_variable": "OPENROUTER_API_KEY",
+    "allow_fallbacks": false,
+    "actual_route_must_match_frozen_route": true,
+    "api_surface": null,
+    "request_encoding_version": null,
+    "models": {
+      "luna": {
+        "model_id": "openai/gpt-6-luna",
+        "recommended_route": "OpenAI Standard; exact endpoint identifier must be verified",
+        "frozen_endpoint": null,
+        "reasoning_configuration": null,
+        "cache_configuration": null
+      },
+      "flash": {
+        "model_id": "deepseek/deepseek-v4.1-flash",
+        "frozen_endpoint": null,
+        "reasoning_configuration": null,
+        "cache_configuration": null
+      },
+      "generator": {
+        "model_id": "anthropic/claude-opus-5",
+        "frozen_endpoint": null,
+        "decoding_configuration": null
+      },
+      "judge": {
+        "model_id": "openai/gpt-4o-2024-11-20",
+        "frozen_endpoint": null,
+        "temperature": 0,
+        "seed": 31415,
+        "answer_truncation_characters": 4000,
+        "correct_grades": ["B", "C", "E"]
+      }
+    }
+  },
+  "arms": {
+    "B0": {"cracking": false, "object_reads": false, "run_both_questions": true},
+    "T0": {"cracking": true, "object_reads": true, "query_history": true, "scope": "current_query_requirements_only"},
+    "T1": {"cracking": true, "object_reads": true, "query_history": true, "scope": "speculative_related_structure"},
+    "luna_pilot": ["B0", "T0", "T1"],
+    "luna_main": ["B0", "T0", "T1"],
+    "flash_pilot": ["B0", "T1"],
+    "flash_main_arms_if_enabled": ["B0", "T1"],
+    "flash_main_count": null,
+    "flash_main_ids": null,
+    "cross_model_X_enabled": null,
+    "cross_model_X_definition": "Luna T1 post-related-question snapshot read by Flash; allocate source-build cost in workload view",
+    "cross_model_X_ids": null,
+    "excluded_from_main": ["RAG_top5", "RAG_top10", "oracle", "global_accumulating_store", "Hitchcock_case"]
+  },
+  "mechanism": {
+    "store_scope": "experiment_model_arm_group",
+    "query_visibility": "current_and_already_started_queries_only",
+    "object_read_visibility": "question_start_snapshot",
+    "related_to_target_fork_barrier": true,
+    "trigger": "agent_open_only",
+    "hot_only_gate": false,
+    "fork_schedule": "background_after_normal_answer_continuation_with_document_returns",
+    "cracking_output_tokens_per_question": 4096,
+    "reasoning_tokens_in_cracking_budget": true,
+    "atomic_fork_token_reservation": true,
+    "cache_namespace": {
+      "scope": ["experiment", "model", "arm", "group"],
+      "placement": "earliest_application_controlled_prefix",
+      "parent_and_fork_share_namespace": true,
+      "all_arms_include_namespace_overhead": true,
+      "encoding_and_token_length_control": null,
+      "isolation_verified_by_M2": false
+    },
+    "fork_allocation_policy": null,
+    "output_schema_sha256": null,
+    "output_constraint_mode": null,
+    "invalid_or_truncated_json_policy": "reject_entire_invocation_no_publication",
+    "list_publication_policy": "atomic_complete_group_or_none; model-declared completeness requires audit",
+    "trust_tier": "GROUNDED_not_semantically_validated",
+    "prompt_hashes": null
+  },
+  "statistics": {
+    "analysis_unit": "target_question_group",
+    "default_repetitions_per_arm_question": 1,
+    "primary_comparison": "luna_T1_vs_luna_B0",
+    "primary_cost_test_view": "answer_plus_cracking_on_target_question",
+    "primary_cost_sequence_view": "all_related_and_target_answer_plus_cracking_costs",
+    "cost_estimator": "ratio_of_sums_paired_by_question",
+    "accuracy_primary": "fanoutqa_gpt_judge",
+    "accuracy_secondary": ["acc.loose", "acc.strict"],
+    "judge_noninferiority_margin_absolute": 0.05,
+    "confidence_level": 0.95,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 20260925,
+    "judge_secondary_test": "two_sided_exact_McNemar",
+    "failed_answer_policy": "retain_in_denominator_as_incorrect_with_incurred_cost",
+    "missing_judge_policy": "missing_with_bounds_not_measured_zero",
+    "unexecuted_group_policy": "not_zero_cost_or_completed; report_incomplete",
+    "object_audit": {
+      "seed": 20260926,
+      "frame_scope": "model_and_cracking_arm_separately",
+      "units": ["deduplicated_singular_object", "complete_list_group"],
+      "strata": ["returned_singular", "not_returned_singular", "returned_list", "not_returned_list"],
+      "target_units_per_stratum": 50,
+      "sampling": "uniform_without_replacement_within_stratum",
+      "shortfall_policy": "audit_all_available_in_stratum",
+      "inclusion_probability": "min(50, population_size) / population_size for nonempty strata",
+      "aggregation": "singular_and_list_rates_separate; population_weight_returned_vs_not_returned_within_same_unit_type",
+      "dependence": "retain_question_and_list_clusters; no_list_edge_pseudoreplication",
+      "implementation_hash": null
+    }
+  },
+  "budget": {
+    "currency": "USD",
+    "proposed_stage_caps": {"M0": "0", "M1": "0", "M2": "3", "M3": "10", "M4": "15", "M5": "100", "M6": "0"},
+    "proposed_total_cap": "128",
+    "maximum_pilot_rounds": 3,
+    "caps_are_approved": false,
+    "authorization_record": null,
+    "price_snapshot_sha256": null,
+    "maximum_requests_by_stage": null,
+    "maximum_concurrency_by_role": null,
+    "maximum_question_steps": null,
+    "maximum_context_tokens": null,
+    "maximum_answer_output_tokens": null,
+    "automatic_retries": 0,
+    "unknown_usage_policy": "retain_upper_reservation_and_stop_all_dispatch",
+    "key_credit_limit_is_only_secondary_guard": true,
+    "all_roles_and_selected_extensions_share_stage_cap": true,
+    "historical_project_spend_reported_separately": true,
+    "credit_purchase_fees_and_fx_reported_separately": true
+  },
+  "freeze_blockers": [
+    "missing_execution_commit_dependency_lock_and_prompt_schema_hashes",
+    "missing_retrieval_policy_and_initial_cache_manifest_hashes",
+    "unverified_cache_namespace_isolation",
+    "missing_statistical_and_audit_sampling_implementation_hashes",
+    "unverified_real_provider_routes_api_semantics_cache_and_usage",
+    "unfrozen_context_pagination_fork_allocation_and_generation_limits",
+    "missing_verified_workload_and_licensing_review",
+    "undecided_flash_main_and_cross_model_scope",
+    "missing_price_snapshot_stage_authorizations_request_and_concurrency_caps"
+  ]
+}

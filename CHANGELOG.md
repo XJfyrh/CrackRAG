@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Added a research-first roadmap, v0.2 development plan, and draft M0 FanOutQA protocol for 210 target questions (12 pilot, 198 main), with OpenRouter Luna and Flash, pinned data, and machine-readable parameters; no paid runs or runtime changes.
 - Added a clickable, offline replay of the recorded real-model demonstration, with a separately labeled mock abstention example.
 - Moved scheduler terminology and raw diagnostics out of the normal demo path; added actionable messages, a README animation, and a source-first mobile layout.
 
