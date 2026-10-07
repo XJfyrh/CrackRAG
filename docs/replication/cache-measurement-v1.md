@@ -2,6 +2,8 @@
 
 **状态：设计草案，未执行；2026-10-07。** 本文接续 P0，规定未来 M2 要观察什么。没有发送模型请求，也没有修改阶段授权。先读[研究入口](../../research/adc/README.md)，接口字段见 [provider 契约](provider-contract-v1.md)。
 
+现已提供[探针对离线审计器](cache-evidence-v1.md)和 `python -B -m research.adc.cache_review` 合成案例。它检查输入记录的请求/关联/时序与 reported 字段，不产生真实测量、账户结算或付费授权。
+
 ## 要回答的问题
 
 1. 同一正常回答请求完成后，追加 cracking 后缀的请求，是否报告了可计费缓存读取？
