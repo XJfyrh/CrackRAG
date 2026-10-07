@@ -75,6 +75,11 @@ class CLITests(unittest.TestCase):
                 with self.assertRaisesRegex(InvariantError, 'ALREADY_ACTIVE'):
                     with account_owner(Path(temp) / 'account.db'):
                         pass
+            # Closing the first owner must permit a new controller to recover.
+            with account_owner(Path(temp) / 'account.db'):
+                with self.assertRaisesRegex(InvariantError, 'ALREADY_ACTIVE'):
+                    with account_owner(Path(temp) / 'account.db'):
+                        pass
 
     def test_script_responses_are_bound_to_request_hash_not_sequence(self):
         with tempfile.TemporaryDirectory() as temp:

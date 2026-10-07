@@ -164,6 +164,12 @@ class AgentRunner:
         await asyncio.sleep(0)
         payload = prefix.fork(document_key, self.scope, history)
         key = "fork:" + str(step) + ":" + document_key
+        context_characters = len(canonical(payload))
+        if context_characters > self.policy.max_context_characters:
+            self.store.event(self.scope, question.id, key, "fork_context_limit", {
+                "document_key": document_key, "context_characters": context_characters,
+                "max_context_characters": self.policy.max_context_characters})
+            return "context_limit"
         try:
             attempt, normalized, response = self.invoke(question, key, payload, role="cracking", document_key=document_key,
                                                         parent=parent, prefix=prefix)
@@ -255,11 +261,15 @@ class AgentRunner:
                 self.store.event(self.scope, question.id, "tool:" + str(step), call.name, result)
                 messages.append({"role": "tool", "tool_call_id": call.id, "content": canonical(result)})
                 await asyncio.sleep(0)
-            self.store.save_answer(self.scope, question.id, answer)
             results = await asyncio.gather(*tasks, return_exceptions=True)
             for result in results:
                 if isinstance(result, BaseException):
                     raise result
+            if "context_limit" in results:
+                answer = {"text": None, "status": "context_limit"}
+            # Forks can exhaust the same context budget after the answer has
+            # returned, so persist the final outcome only after the barrier.
+            self.store.save_answer(self.scope, question.id, answer)
             self.store.complete_question(self.scope, question.id)
             return answer
         except BaseException:

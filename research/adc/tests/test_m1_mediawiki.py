@@ -3,6 +3,7 @@ import copy
 from dataclasses import asdict, replace
 from importlib import metadata
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -184,6 +185,29 @@ class MediaWikiImportTests(unittest.TestCase):
             self.assertEqual(list(Path(directory).iterdir()), [])
         with self.assertRaisesRegex(InvariantError, "OUTSIDE_REPOSITORY"):
             import_bundle(fixture_bundle(), ROOT / "data")
+
+    def test_windows_publication_syncs_file_without_opening_directory(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "artifact.json"
+            with patch("research.adc.mediawiki.os", wraps=os) as windows_os:
+                windows_os.name = "nt"
+                windows_os.open.side_effect = PermissionError("Windows cannot open directories")
+                _write_immutable(path, b"complete bytes")
+                windows_os.fsync.assert_called_once()
+            self.assertEqual(path.read_bytes(), b"complete bytes")
+            self.assertEqual(list(Path(directory).iterdir()), [path])
+
+    def test_posix_directory_sync_error_is_not_suppressed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "artifact.json"
+            with patch("research.adc.mediawiki.os", wraps=os) as posix_os:
+                posix_os.name = "posix"
+                posix_os.open.side_effect = OSError("directory sync failed")
+                with self.assertRaisesRegex(OSError, "directory sync failed"):
+                    _write_immutable(path, b"complete bytes")
+                posix_os.fsync.assert_called_once()
+            self.assertEqual(path.read_bytes(), b"complete bytes")
+            self.assertEqual(list(Path(directory).iterdir()), [path])
 
 
 @unittest.skipUnless(has_converter(), "optional exact corpus converter dependencies unavailable")

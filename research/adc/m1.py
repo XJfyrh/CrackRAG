@@ -48,14 +48,15 @@ def account_owner(path):
         if os.name == 'nt':
             import msvcrt
             stream.seek(0)
-            if not stream.read(1):
-                stream.write(b'0')
-                stream.flush()
-            stream.seek(0)
             try:
                 msvcrt.locking(stream.fileno(), msvcrt.LK_NBLCK, 1)
             except OSError as exc:
                 raise InvariantError('ACCOUNT_CONTROLLER_ALREADY_ACTIVE') from exc
+            # Windows byte-range locks also deny reads from another handle.
+            # Acquire ownership before reading or initializing the locked byte.
+            if not stream.read(1):
+                stream.write(b'0')
+                stream.flush()
         else:
             import fcntl
             try:

@@ -72,7 +72,7 @@ python3.12 -m venv /tmp/crackrag-corpus
   --bundle /path/to/local-bundle.json --output-dir /tmp/imported-corpus
 ```
 
-bundle schema 位于 `import_bundle` 文档字符串；输出是可直接供 `OfflineCorpus.from_manifest` 使用的 manifest。Markdown、acquisition sidecar、import seal 以临时文件/fsync/排他原子发布写入，manifest 最后可见；中断可续导入，不覆盖不一致既有文件。没有下载 Wikipedia 正文或获取当前搜索；`network_verified=false`、`latest_revision_observed=false` 始终显式保留。`oldid` 的 parse 仍受上游模板/transclusion/rendering 语义限制，不能据此声称每项模板事实都是历史快照。
+bundle schema 位于 `import_bundle` 文档字符串；输出是可直接供 `OfflineCorpus.from_manifest` 使用的 manifest。Markdown、acquisition sidecar、import seal 以临时文件/fsync/排他原子发布写入，manifest 最后可见；中断可续导入，不覆盖不一致既有文件。POSIX 还同步父目录；Windows 保留文件 fsync 和排他原子发布，不执行不受支持的目录 fsync。没有下载 Wikipedia 正文或获取当前搜索；`network_verified=false`、`latest_revision_observed=false` 始终显式保留。`oldid` 的 parse 仍受上游模板/transclusion/rendering 语义限制，不能据此声称每项模板事实都是历史快照。
 
 ## 数据与工具边界
 
@@ -82,7 +82,7 @@ bundle schema 位于 `import_bundle` 文档字符串；输出是可直接供 `Of
 - `search/open/catalogue/read_objects/notes_read/notes_write/close` 通过严格参数 allowlist 执行，无任意 SQL/shell。基础工具表相同；每响应最多一个工具调用。notes 仅当题；close 替换当题原文上下文并记录操作。
 - `CurrentQuestion.view()` 仅 id/text。调度器的 RQSequence 持久化 workload 哈希，R 的所有 forks 完成后才开放 Q。R/Q 会话、笔记、回答不继承；仅历史文档查询和已发布对象跨题。
 - 每题开始固定对象 snapshot；本题新对象不能帮助本题。open 当下的历史单独冻结并持久化，重启不得让后来 read_objects 污染早先 fork suffix。
-- `AgentPolicy` 冻结最大步数、字符上下文上限、输出上限及对象读取上限；超限成为明确未答，不偷偷压缩治疗臂或丢弃分母。CLI 默认是离线验收版本，不是 M4/M5 已冻结科学参数。
+- `AgentPolicy` 冻结最大步数、字符上下文上限、输出上限及对象读取上限；回答请求与追加指令/历史后的完整 cracking 请求均检查字符上限。超限 fork 在账户预留前停止，记录 `fork_context_limit`，题目最终为 `context_limit` 未答，不压缩治疗臂或丢弃分母。CLI 默认是离线验收版本，不是 M4/M5 已冻结科学参数。
 
 可提供 `--corpus-manifest`、`--questions`（恰好两条 id/text，先 R 后 Q）、`--transport-scripts` 运行另一组离线 replay，三项必须一起给出。脚本目录含 `B0.json/T0.json/T1.json`，每个是 `{canonical_request_sha256: synthetic_response}` 映射；拒绝位置数组，避免重启跳过已结算请求后脚本错位。manifest 的 cache_path 必须在其 cache root 内。代理进程不读取 gold；FanOutQA 拆分工具仅把投影交给代理，证据分解不会进入 corpus 导航。
 

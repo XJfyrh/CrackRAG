@@ -291,11 +291,14 @@ def _write_immutable(path, data):
         except FileExistsError:
             if path.read_bytes() != data:
                 raise InvariantError("CORPUS_IMPORT_FILE_ALREADY_DIFFERENT")
-        directory_fd = os.open(path.parent, os.O_RDONLY)
-        try:
-            os.fsync(directory_fd)
-        finally:
-            os.close(directory_fd)
+        # Windows cannot open directories through os.open. The file has already
+        # been fsynced and atomically linked; additionally sync its name on POSIX.
+        if os.name != "nt":
+            directory_fd = os.open(path.parent, os.O_RDONLY)
+            try:
+                os.fsync(directory_fd)
+            finally:
+                os.close(directory_fd)
     finally:
         temporary.unlink(missing_ok=True)
 

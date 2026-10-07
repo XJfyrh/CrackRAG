@@ -150,6 +150,56 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(result['status'], 'step_limit')
         self.assertEqual(runner.store.question(runner.scope, 'R')['state'], 'COMPLETED')
 
+    def test_cracking_context_limit_precedes_reservation_and_survives_restart(self):
+        def scripted(payload):
+            last = payload['messages'][-1]
+            if last['role'] == 'user' and json.loads(last['content']).get('branch') == 'CRACKING':
+                return policy(payload)
+            if last['role'] == 'tool':
+                return completion(payload, text='Aster: 10')
+            return completion(payload, tool='open', arguments={'page_id': '1'})
+
+        question = CurrentQuestion('R', 'Return points for Aster.')
+        for arm in ('T0', 'T1'):
+            reference = self.runner(arm, group='reference', transport=FakeTransport(scripted))
+            reference.run(question)
+            parent_size = len(canonical(reference.transport.calls[1]))
+            fork_size = len(canonical(reference.transport.calls[2]))
+            self.assertGreater(fork_size, parent_size)
+            for limit in (parent_size, fork_size - 1, fork_size):
+                with self.subTest(arm=arm, limit=limit):
+                    group = 'context-' + str(limit)
+                    agent_policy = AgentPolicy(max_context_characters=limit)
+                    runner = self.runner(arm, group=group, transport=FakeTransport(scripted),
+                                         agent_policy=agent_policy)
+                    rejected = limit < fork_size
+                    expected = ({'text': None, 'status': 'context_limit'} if rejected else
+                                {'text': 'Aster: 10', 'status': 'answered'})
+                    if rejected:
+                        with patch.object(runner.store, 'complete_question', side_effect=RuntimeError('power loss')):
+                            with self.assertRaisesRegex(RuntimeError, 'power loss'):
+                                runner.run(question)
+                        saved = runner.store.question(runner.scope, question.id)
+                        self.assertEqual(json.loads(saved['answer']), expected)
+                    self.assertEqual(runner.run(question), expected)
+                    self.assertTrue(all(len(canonical(request)) <= limit for request in runner.transport.calls))
+                    rows = self.account.db.execute('SELECT role,state FROM account_calls WHERE scope_key=?',
+                                                   (runner.scope.key,)).fetchall()
+                    self.assertEqual(len(rows), 2 if rejected else 3)
+                    self.assertTrue(all(row['state'] == 'SETTLED' for row in rows))
+                    self.assertEqual(sum(row['role'] == 'cracking' for row in rows), 0 if rejected else 1)
+                    events = [e for e in runner.store.trace(runner.scope) if e['kind'] == 'fork_context_limit']
+                    self.assertEqual(len(events), int(rejected))
+                    if rejected:
+                        self.assertEqual(events[0]['context_characters'], fork_size)
+                        self.assertEqual(events[0]['max_context_characters'], limit)
+                        self.assertEqual(runner.store.db.execute('SELECT COUNT(*) FROM publications').fetchone()[0], 0)
+                    before = self.account.summary()
+                    restarted = self.runner(arm, group=group, transport=FakeTransport([]), agent_policy=agent_policy)
+                    self.assertEqual(restarted.run(question), expected)
+                    self.assertEqual(restarted.transport.calls, [])
+                    self.assertEqual(self.account.summary(), before)
+
     def test_notes_are_question_local_and_close_removes_document_text(self):
         actions = [('notes_write', {'text': 'private-R-note'}), ('notes_read', {}), ('open', {'page_id': '1'}),
                    ('close', {})]
