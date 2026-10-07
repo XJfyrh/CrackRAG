@@ -1,0 +1,6 @@
+# Optional exact HTML-to-Markdown conversion environment, Python 3.12.
+# Pinned FanOutQA MDConverter semantics; installation is separate from offline execution.
+beautifulsoup4==4.12.3
+markdownify==0.11.6
+six==1.16.0
+soupsieve==2.6
