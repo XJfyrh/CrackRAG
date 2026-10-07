@@ -1,6 +1,6 @@
 # M1 离线闭环验收记录
 
-2026-10-07。实现与离线检查完成，待维护者验收。代码阶段提交：`8593d49`（账户/语料/评分）、`ad12e6d`（通用代理/独立命令/恢复回归）。本页不是 M2 真实 API 通过证明、付费授权或论文结果报告。运行说明见 [M1 离线闭环](m1-offline-v1.md)。
+2026-10-07。实现与离线检查完成，待维护者验收。代码阶段提交：`8593d49`（账户/语料/评分）、`ad12e6d`（通用代理/独立命令/恢复回归）、`c79a720`（封存前对象库到账户绑定）。本页不是 M2 真实 API 通过证明、付费授权或论文结果报告。运行说明见 [M1 离线闭环](m1-offline-v1.md)。
 
 ## 本次补齐
 
@@ -15,8 +15,8 @@
 
 | 检查 | 结果 | 范围 |
 | --- | --- | --- |
-| `python -B -m unittest discover -s research/adc/tests -v` | **186 passed，0 skipped** | P0、provider、cache 和新增 M1 全部 ADC 测试 |
-| `scripts/check_python.py` | **427 passed，0 skipped** | 全仓 Python 入口，使用下述隔离测试环境 |
+| `python -B -m unittest discover -s research/adc/tests -v` | **187 passed，0 skipped** | P0、provider、cache 和新增 M1 全部 ADC 测试 |
+| `scripts/check_python.py` | **428 passed，0 skipped** | 全仓 Python 入口，使用下述隔离测试环境 |
 | 真进程中断矩阵 | **32 个 os._exit 子场景**通过 | 上述 ADC 测试中的两个用例；10 reserve、10 settle、2 publish、10 dispatch |
 | M1 三臂 CLI 两次同库运行 | JSON 完全一致；**30→30** 调用 | 同库重放，无新派发 |
 | 独立 synthetic judge | **30→32**；重复仍32 | 所有角色同账户，固定 C 明确标 synthetic |
@@ -44,6 +44,7 @@
 3. 位置型 synthetic 脚本在跳过已结算调用后错位；CLI 改为 request-hash 绑定
 4. 多 judge 模型共享同一 attempt ID；现按 artifact 与模型隔离，并仍归同账户
 5. 评分输出覆盖 sealed 输入/账户、另建账户绕开历史预算、同 ID 换题干误评；现提前拒绝路径/硬链接别名、绑定账户与完整 question manifest
+6. 封存前给既有对象 store 换一个账户会重置准入历史；现在 run manifest 同样绑定持久 account UUID，构造代理时即拒绝
 
 ## 解释边界
 

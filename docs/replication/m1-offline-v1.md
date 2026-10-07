@@ -56,7 +56,7 @@ python3.12 -m venv /tmp/crackrag-scoring
 
 ## 单账户与对象事务
 
-`accounting.py` 的独立 SQLite 是所有 answer/cracking/generator/judge/probe、模型、实验和对象库的**唯一准入权威**。每个账户持久 UUID，不能通过换对象 store 重置额度。多个实验必须传同一 `--account-path`；评分密封件绑定账户 ID，并拒绝无绑定、不同账户或新账户。复制/篡改数据库不是受支持的重置办法。
+`accounting.py` 的独立 SQLite 是所有 answer/cracking/generator/judge/probe、模型、实验和对象库的**唯一准入权威**。每个账户持久 UUID，不能通过换对象 store 重置额度；每个对象 store 的 run manifest 也绑定此 UUID，封存前就拒绝更换账户。多个实验必须传同一 `--account-path`；评分密封件绑定账户 ID，并拒绝无绑定、不同账户或新账户。复制/篡改数据库不是受支持的重置办法。
 
 金额按精确 Decimal 保存为 **completion-reported credits**，不暗当 USD。默认离线额度 1 credit、200 请求、4096 cracking 输出 tokens/题；单调用预留 0.01 credit、512 输出 tokens，仅是可测试上界。冷价/tokenizer、价格档、credits/USD/最终平台计费关系要靠 M2 冻结。状态与历史总占用跨重启持久化：
 
