@@ -66,7 +66,7 @@ class AgentRunner:
         self.contract = contract or RouteContract(scope.model, ("offline-fixture",))
         self.policy = policy or AgentPolicy()
         self.checkpoint = checkpoint
-        manifest = canonical({"policy": asdict(self.policy), "corpus": corpus.manifest_sha256,
+        manifest = canonical({"account_id": account.account_id, "policy": asdict(self.policy), "corpus": corpus.manifest_sha256,
                               "contract": asdict(self.contract), "tools": TOOLS, "system": SYSTEM,
                               "objects": OBJECT_SCHEMA})
         with store.transaction() as db:

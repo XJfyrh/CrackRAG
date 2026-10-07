@@ -223,6 +223,17 @@ class AgentTests(unittest.TestCase):
         self.assertEqual(len(runner.transport.calls), 1)
         self.assertEqual(runner.store.question(runner.scope, 'R')['state'], 'COMPLETED')
 
+    def test_existing_object_store_cannot_switch_account_before_sealing(self):
+        runner = self.runner()
+        runner.run(self.sequence(runner).start_related())
+        foreign = AccountLedger(self.path / 'foreign-account.db')
+        try:
+            with self.assertRaisesRegex(InvariantError, 'RUN_MANIFEST_CHANGED'):
+                AgentRunner(runner.store, foreign, runner.scope, fixture_corpus(), fixture_transport())
+            self.assertEqual(foreign.summary()['requests'], 0)
+        finally:
+            foreign.close()
+
     def test_legacy_p0_document_request_metadata_is_byte_compatible(self):
         from research.adc.fixtures import documents
         for document in documents():
