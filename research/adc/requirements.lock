@@ -2,4 +2,5 @@
 # Python >=3.11 standard-library only (including sqlite3). No pip install needed.
 # The tested reference interpreter is CPython 3.12. See requirements-scoring.lock
 # for the separate, exactly pinned optional authentic FanOutQA string scorer.
+# requirements-corpus.lock pins the optional genuine HTML-to-Markdown importer.
 # No provider SDK, HTTP dispatch, credential handler or runtime model download.

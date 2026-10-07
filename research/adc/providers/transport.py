@@ -14,6 +14,8 @@ class TransportResponse:
     response: Mapping[str, Any]
     generation_metadata: Mapping[str, Any] | None = None
     http_status: int = 200
+    # Optional bounded synthetic HTTP evidence; never authentication data.
+    transport_evidence: Mapping[str, Any] | None = None
 
 
 class FakeTransport:
@@ -24,13 +26,22 @@ class FakeTransport:
     """
     is_offline = True
 
-    def __init__(self, script_or_callable: Iterable | Callable):
+    def __init__(self, script_or_callable: Iterable | Callable, *, validate_request: Callable | None = None):
+        if validate_request is not None and not callable(validate_request):
+            raise TypeError("REQUEST_VALIDATOR_MUST_BE_CALLABLE")
+        self._validator = validate_request
         self._handler = script_or_callable if callable(script_or_callable) else None
         self._script = None if self._handler else iter(script_or_callable)
         self._lock = Lock()
         self.calls: list[dict] = []
 
+    def validate(self, payload: Mapping[str, Any]) -> None:
+        """Pure local preflight, before reservation; never performs an exchange."""
+        if self._validator is not None:
+            self._validator(deepcopy(dict(payload)))
+
     def complete(self, payload: Mapping[str, Any]) -> TransportResponse:
+        self.validate(payload)
         request = deepcopy(dict(payload))
         with self._lock:
             self.calls.append(deepcopy(request))

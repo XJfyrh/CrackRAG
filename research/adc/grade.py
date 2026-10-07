@@ -11,7 +11,7 @@ from .accounting import AccountLedger
 from .evaluation import (FanOutQAStringScorer, GoldRecord, diagnostic_normalize, evaluate_answers,
                          verify_sealed_answers)
 from .m1 import account_owner, atomic_json
-from .offline_fixture import completion
+from .offline_fixture import completion, wire_transport
 from .providers.openrouter import RouteContract
 from .providers.transport import FakeTransport
 from .schema import InvariantError, canonical, digest
@@ -24,7 +24,8 @@ class AccountJudge:
         self.artifact_sha256, self.model, self.upper_bound = artifact_sha256, model, upper_bound
 
     def __call__(self, request):
-        payload = {'model': self.model, 'max_output_tokens': 512, 'stream': False,
+        payload = {'model': self.model, 'max_tokens': 512, 'stream': False,
+                   'provider': {'order': ['offline-fixture'], 'allow_fallbacks': False},
                    'messages': [{'role': 'system', 'content': request['system']},
                                 {'role': 'user', 'content': request['prompt']}]}
         _, result = self.account.invoke(self.transport, 'evaluation:' + digest([self.artifact_sha256, self.model]),
@@ -85,7 +86,7 @@ def main():
                 if not artifact.get('account_id') or artifact['account_id'] != account.account_id:
                     raise InvariantError('SEALED_ACCOUNT_IDENTITY_MISMATCH')
                 account.recover_inflight()
-                judge = AccountJudge(account, FakeTransport(lambda payload: completion(payload, text='C')),
+                judge = AccountJudge(account, wire_transport(lambda payload: completion(payload, text='C'), model='offline-judge-v1'),
                                      artifact_sha256=artifact['sha256'])
                 result = evaluate_answers(artifact, gold, judge=judge, judge_model='offline-judge-v1', **kwargs)
                 result['account_all_roles'] = account.summary()

@@ -30,6 +30,11 @@ class CLITests(unittest.TestCase):
             self.call('research.adc.m1', '--run-dir', temp)
             first = json.loads((directory / 'summary.json').read_text())
             self.assertEqual(first['account']['requests'], 30)
+            calls = [call for arm in first['arms'] for q in arm['questions'] for call in q['calls']]
+            self.assertEqual(len(calls), 30)
+            self.assertTrue(all(call['transport_evidence']['synthetic'] for call in calls))
+            self.assertTrue(all(call['transport_evidence']['request_body_sha256'] for call in calls))
+            self.assertTrue(all('response_body_base64' not in call['transport_evidence'] for call in calls))
             self.call('research.adc.m1', '--run-dir', temp)
             self.assertEqual(first, json.loads((directory / 'summary.json').read_text()))
             self.assertTrue(all(pair['pair_status'] == 'consistent' for arm in first['arms'] for pair in arm['cache_pairs']))
@@ -74,13 +79,14 @@ class CLITests(unittest.TestCase):
     def test_script_responses_are_bound_to_request_hash_not_sequence(self):
         with tempfile.TemporaryDirectory() as temp:
             path = Path(temp) / 'responses.json'
-            one = {'model': 'fixture', 'max_output_tokens': 512, 'messages': [{'role': 'user', 'content': 'one'}]}
+            one = {'model': 'fixture', 'max_tokens': 512, 'stream': False,
+                   'provider': {'order': ['offline-fixture'], 'allow_fallbacks': False}, 'messages': [{'role': 'user', 'content': 'one'}]}
             two = {**one, 'messages': [{'role': 'user', 'content': 'two'}]}
             atomic_json(path, {digest(one): completion(one, text='first').response,
                                digest(two): completion(two, text='second').response})
-            transport = scripted_transport(path)
+            transport = scripted_transport(path, model="fixture")
             self.assertEqual(transport.complete(two).response['choices'][0]['message']['content'], 'second')
-            self.assertEqual(scripted_transport(path).complete(one).response['choices'][0]['message']['content'], 'first')
+            self.assertEqual(scripted_transport(path, model="fixture").complete(one).response['choices'][0]['message']['content'], 'first')
             atomic_json(path, [completion(one, text='first').response])
             with self.assertRaisesRegex(InvariantError, 'REQUEST_HASH_RESPONSE_MAP_REQUIRED'):
                 scripted_transport(path)

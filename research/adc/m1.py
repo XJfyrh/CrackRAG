@@ -131,7 +131,7 @@ def offline_run(directory, *, account_path=None, corpus=None, questions=None, tr
             account.close()
 
 
-def scripted_transport(path):
+def scripted_transport(path, *, model=MODEL):
     """Bind every synthetic envelope to a canonical request, never list position."""
     from .providers.transport import FakeTransport
     responses = json.loads(Path(path).read_text(encoding='utf-8'))
@@ -143,7 +143,8 @@ def scripted_transport(path):
         if key not in responses:
             raise InvariantError('OFFLINE_REQUEST_NOT_IN_SCRIPT')
         return responses[key]
-    return FakeTransport(dispatch)
+    from .offline_fixture import wire_transport
+    return wire_transport(dispatch, model=model)
 
 
 def main():
@@ -154,15 +155,25 @@ def main():
     parser.add_argument('--questions', help='two id/text records, related then target; no gold fields')
     parser.add_argument('--transport-scripts', help='directory with B0.json,T0.json,T1.json request-hash to synthetic-response maps')
     parser.add_argument('--model', default=MODEL)
+    parser.add_argument('--import-fixture', action='store_true',
+                        help='convert self-authored MediaWiki HTML through pinned local converter before running')
     args = parser.parse_args()
     custom = (args.corpus_manifest, args.questions, args.transport_scripts)
     if any(custom) and not all(custom):
         parser.error('custom replay requires corpus, questions and transport scripts together')
     kwargs = {}
+    if args.import_fixture:
+        if any(custom):
+            parser.error('--import-fixture cannot be combined with custom replay inputs')
+        from .mediawiki import import_bundle
+        from .corpus import OfflineCorpus
+        from .offline_fixture import mediawiki_fixture_bundle
+        manifest = import_bundle(mediawiki_fixture_bundle(), Path(args.run_dir) / 'imported-corpus')
+        kwargs['corpus'] = OfflineCorpus.from_manifest(manifest)
     if all(custom):
         from .corpus import OfflineCorpus
         kwargs = {'corpus': OfflineCorpus.from_manifest(args.corpus_manifest), 'questions': load_questions(args.questions),
-                  'transport_factory': lambda arm: scripted_transport(Path(args.transport_scripts) / (arm + '.json'))}
+                  'transport_factory': lambda arm: scripted_transport(Path(args.transport_scripts) / (arm + '.json'), model=args.model)}
     result = offline_run(args.run_dir, account_path=args.account_path, model=args.model, **kwargs)
     print(json.dumps(result, ensure_ascii=False, indent=2))
 

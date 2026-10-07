@@ -18,7 +18,7 @@ def completion(payload, *, text=None, tool=None, arguments=None, cost="0"):
     if tool:
         message["tool_calls"] = [{"id": "tool-" + digest([payload, tool])[:16], "type": "function",
                                   "function": {"name": tool, "arguments": canonical(arguments or {})}}]
-    output_tokens = min(payload["max_output_tokens"], max(1, (len(canonical(message)) + 3) // 4))
+    output_tokens = min(payload.get("max_tokens", payload.get("max_completion_tokens", payload.get("max_output_tokens"))), max(1, (len(canonical(message)) + 3) // 4))
     prompt_tokens = (len(canonical(payload)) + 3) // 4
     return TransportResponse({"id": "synthetic-" + digest(payload), "model": payload["model"],
         "provider": "offline-fixture", "choices": [{"index": 0, "finish_reason": "tool_calls" if tool else "stop", "message": message}],
@@ -62,8 +62,19 @@ def policy(payload):
     return completion(payload, text=answer)
 
 
+def wire_transport(callback, *, model=MODEL):
+    from .providers.http_boundary import FakeHTTPExchange, HTTPResponse, fake_http_transport
+    def exchange(request):
+        envelope = callback(json.loads(request.body))
+        if isinstance(envelope, dict):
+            envelope = TransportResponse(envelope)
+        return HTTPResponse(status=envelope.http_status, headers={"Content-Type": "application/json"},
+                            body=canonical(envelope.response).encode("utf-8"))
+    return fake_http_transport(FakeHTTPExchange(exchange), model=model, provider="offline-fixture")
+
+
 def fixture_transport():
-    return FakeTransport(policy)
+    return wire_transport(policy)
 
 
 def fixture_corpus():
@@ -79,3 +90,26 @@ def fixture_corpus():
     search = SearchRecord(query="athletes", retrieved_at="2026-10-07T00:00:00Z", results=hits,
                           results_sha256=digest([h.view() for h in hits]))
     return OfflineCorpus(tuple(pages), (search,))
+
+
+def mediawiki_fixture_bundle():
+    """Self-authored HTML/API envelopes, not retrieved Wikipedia material."""
+    from dataclasses import asdict
+    from .corpus import CORPUS_EPOCH, PaginationPolicy
+    from .mediawiki import ResponseEnvelope, revision_request, parse_request, search_request
+    pages, hits = [], []
+    def envelope(request, body):
+        return ResponseEnvelope.create(request, body, retrieved_at='2026-10-07T00:00:00Z',
+                                       acquisition_status='synthetic_fixture').view()
+    for pageid, title, points, rebounds in (('1', 'Aster', 10, 4), ('2', 'Beryl', 20, 7)):
+        revision = envelope(revision_request(pageid), {'query': {'pages': [{
+            'pageid': int(pageid), 'title': title, 'revisions': [{'revid': int(pageid), 'timestamp': '2023-11-19T00:00:00Z'}]}]}})
+        html = f'<div>{title} | points | {points}</div><div>{title} | rebounds | {rebounds}</div>'
+        parsed = envelope(parse_request(pageid), {'parse': {'pageid': int(pageid), 'revid': int(pageid),
+                                 'title': title, 'text': html}})
+        pages.append({'page_id': pageid, 'revision': revision, 'parse': parsed})
+        hits.append({'pageid': int(pageid), 'title': title, 'ns': 0,
+                     'snippet': 'This synthetic snippet must never reach the agent'})
+    return {'schema_version': 1, 'epoch': CORPUS_EPOCH, 'pagination': asdict(PaginationPolicy()),
+            'pages': pages, 'searches': [{'query': 'athletes', 'response': envelope(search_request('athletes'),
+                                                                                   {'query': {'search': hits}})}]}

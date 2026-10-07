@@ -69,9 +69,10 @@ Public evaluation summaries report methodology, results, and limitations.
 ## FanOutQA scoring adapter
 
 `research/adc/evaluation.py` adapts the string algorithm, normalization, answer rendering,
-and judge rubric from [FanOutQA](https://github.com/zhudotexe/fanoutqa/tree/989f4c40d9deea1ecb0897d7a17a9c0fe20d5c33),
+and judge rubric; `research/adc/mediawiki.py` adapts the Markdown converter and the dated
+revision/parse request semantics from [FanOutQA](https://github.com/zhudotexe/fanoutqa/tree/989f4c40d9deea1ecb0897d7a17a9c0fe20d5c33),
 commit `989f4c40d9deea1ecb0897d7a17a9c0fe20d5c33`. Copyright (c) 2024 Andrew Zhu, MIT.
-The complete MIT notice is retained in that module; source SHA-256 values are recorded there.
+The complete MIT notice is retained in both modules; source SHA-256 values are recorded there.
 No FanOutQA dataset rows are redistributed by the new harness; dataset licensing remains
 CC-BY-SA-4.0. The optional spaCy English model is downloaded explicitly from its official
 release using the URL and SHA-256 in `research/adc/requirements-scoring.lock`, never bundled

@@ -345,7 +345,7 @@ class ProviderContractTests(unittest.TestCase):
 
     def test_package_has_no_network_or_credential_imports(self):
         package = Path(__file__).parents[1] / "providers"
-        permitted = {"dataclasses", "decimal", "json", "math", "types", "typing", "openrouter", "copy", "threading"}
+        permitted = {"dataclasses", "decimal", "json", "math", "types", "typing", "openrouter", "copy", "threading", "base64", "hashlib", "re", "schema", "transport"}
         for source in package.glob("*.py"):
             for node in ast.walk(ast.parse(source.read_text())):
                 if isinstance(node, ast.Import):

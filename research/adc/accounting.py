@@ -49,7 +49,7 @@ CREATE TABLE account_calls(
     raw_response TEXT, raw_generation_metadata TEXT, raw_usage TEXT, usage TEXT,
     usage_states TEXT, route_status TEXT, reported_model TEXT, reported_provider TEXT,
     reported_cost TEXT, reported_cost_unit TEXT, generation_id TEXT,
-    http_status INTEGER, usable_output INTEGER, issues TEXT, amount TEXT,
+    http_status INTEGER, usable_output INTEGER, issues TEXT, transport_evidence TEXT, amount TEXT,
     completion_tokens INTEGER, unknown_reason TEXT, reconciliation TEXT,
     reconciled_response TEXT, reconciled_generation_metadata TEXT, reconciled_http_status INTEGER,
     clock_domain TEXT, completed_clock_domain TEXT,
@@ -136,6 +136,9 @@ class AccountLedger:
                 version = db.execute("SELECT value FROM account_metadata WHERE key='schema_version'").fetchone()
                 if version is None or version[0] != "m1-account-v1":
                     raise InvariantError("FOREIGN_DATABASE_OR_SCHEMA")
+                columns = {column[1] for column in db.execute("PRAGMA table_info(account_calls)")}
+                if "transport_evidence" not in columns:
+                    db.execute("ALTER TABLE account_calls ADD COLUMN transport_evidence TEXT")
                 row = db.execute("SELECT * FROM account_config WHERE id=1").fetchone()
                 settings = (limit, unit, max_requests, fork_budget)
                 if row and tuple(row[k] for k in ("max_amount", "unit", "max_requests", "fork_budget")) != settings:
@@ -337,6 +340,7 @@ class AccountLedger:
             result = self._normalize(row, envelope)
             raw = canonical(_plain(result.raw_response))
             generation = canonical(_plain(result.raw_generation_metadata))
+            transport = canonical(_plain(envelope.transport_evidence)) if envelope.transport_evidence is not None else None
         except (ValueError, TypeError, RecursionError):
             self.mark_unknown(attempt, "INVALID_RESPONSE_EVIDENCE")
             raise
@@ -363,8 +367,8 @@ class AccountLedger:
         with self.transaction() as db:
             current = db.execute("SELECT * FROM account_calls WHERE attempt_id=?", (attempt,)).fetchone()
             if current["state"] == "SETTLED":
-                if (current["raw_response"], current["raw_generation_metadata"], current["http_status"]) != (
-                        raw, generation, envelope.http_status):
+                if (current["raw_response"], current["raw_generation_metadata"], current["http_status"], current["transport_evidence"]) != (
+                        raw, generation, envelope.http_status, transport):
                     raise InvariantError("SETTLEMENT_IDENTITY_CHANGED")
                 return result
             if current["state"] != "DISPATCHED":
@@ -372,12 +376,12 @@ class AccountLedger:
             db.execute("""UPDATE account_calls SET raw_response=?,raw_generation_metadata=?,raw_usage=?,
                 usage=?,usage_states=?,route_status=?,reported_model=?,reported_provider=?,reported_cost=?,
                 reported_cost_unit=?,generation_id=?,http_status=?,usable_output=?,issues=?,
-                completed_monotonic_ns=?,completed_clock_domain=? WHERE attempt_id=?""",
+                completed_monotonic_ns=?,completed_clock_domain=?,transport_evidence=? WHERE attempt_id=?""",
                        (raw, generation, canonical(_plain(result.usage.raw)), canonical(usage),
                         canonical(dict(result.usage.states)), result.route_status, result.reported_model,
                         result.reported_provider, result.usage.cost, result.usage.cost_unit, generation_id,
                         envelope.http_status, int(result.usable_output), canonical([asdict(i) for i in result.issues]),
-                        time.monotonic_ns(), _CLOCK_DOMAIN, attempt))
+                        time.monotonic_ns(), _CLOCK_DOMAIN, transport, attempt))
             if reason:
                 self._unknown(db, attempt, reason)
             else:
@@ -408,6 +412,7 @@ class AccountLedger:
         # No duck-typed live adapter or subclass can quietly replace this seam.
         if type(transport) is not FakeTransport:
             raise InvariantError("ONLY_OFFLINE_FAKE_TRANSPORT_ALLOWED")
+        transport.validate(payload)
         row = self.reserve(scope, question_id, call_key, role, payload, upper_bound=upper_bound,
                            contract=contract, prefix_sha256=prefix_sha256, document_key=document_key,
                            parent=parent, price_snapshot=price_snapshot)
@@ -466,7 +471,8 @@ class AccountLedger:
                     or original["generation_id"] and original["generation_id"] != body["id"]):
                 raise InvariantError("RECONCILIATION_GENERATION_ID_MISMATCH")
             recovered = {"response": body, "generation_metadata": _plain(result.raw_generation_metadata),
-                         "http_status": response_evidence.http_status}
+                         "http_status": response_evidence.http_status,
+                         "transport_evidence": _plain(response_evidence.transport_evidence)}
         decision = canonical({"evidence": json.loads(proof), "amount": charged,
                               "completion_tokens": completion_tokens, "not_dispatched": not_dispatched,
                               "response_evidence": recovered})

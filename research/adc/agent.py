@@ -68,7 +68,7 @@ class AgentRunner:
         self.checkpoint = checkpoint
         manifest = canonical({"account_id": account.account_id, "policy": asdict(self.policy), "corpus": corpus.manifest_sha256,
                               "contract": asdict(self.contract), "tools": TOOLS, "system": SYSTEM,
-                              "objects": OBJECT_SCHEMA})
+                              "objects": OBJECT_SCHEMA, "request_format": "openrouter-chat-wire-v1"})
         with store.transaction() as db:
             key = "m1-run:" + scope.key
             row = db.execute("SELECT value FROM metadata WHERE key=?", (key,)).fetchone()
@@ -77,7 +77,8 @@ class AgentRunner:
             db.execute("INSERT OR IGNORE INTO metadata VALUES(?,?)", (key, manifest))
 
     def request(self, question, messages):
-        return {"model": self.scope.model, "max_output_tokens": self.policy.max_output_tokens,
+        return {"model": self.scope.model, "max_tokens": self.policy.max_output_tokens,
+                "provider": {"order": list(self.contract.allowed_providers), "allow_fallbacks": False},
                 "stream": False, "parallel_tool_calls": False, "tools": json.loads(canonical(TOOLS)),
                 "messages": [{"role": "system", "content": self.scope.namespace + "\n" + SYSTEM + "\n" + canonical(OBJECT_SCHEMA)},
                              {"role": "user", "content": canonical(question.view())}, *messages]}
@@ -286,8 +287,10 @@ class AgentRunner:
                 "answer": json.loads(row["answer"]) if row["answer"] else None,
                 "document_opens": sum(e["kind"] == "open" and "document" in e for e in events),
                 "object_reads": sum(e["kind"] == "read_objects" and e.get("status") == "HIT" for e in events),
-                "calls": [{key: call[key] for key in ("attempt_id", "role", "state", "parent_attempt",
-                           "prefix_sha256", "amount", "reported_cost", "reported_cost_unit", "generation_id")}
+                "calls": [{**{key: call[key] for key in ("attempt_id", "role", "state", "parent_attempt",
+                           "prefix_sha256", "amount", "reported_cost", "reported_cost_unit", "generation_id")},
+                           "transport_evidence": {key: value for key, value in json.loads(call["transport_evidence"]).items()
+                                                  if key != "response_body_base64"} if call.get("transport_evidence") else None}
                           for call in calls]})
         def costs(selected):
             known = all(row["state"] in {"SETTLED", "RELEASED"} and row["amount"] is not None for row in selected)
