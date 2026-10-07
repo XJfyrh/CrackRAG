@@ -46,7 +46,9 @@ fork 必须在完全相同的 parent messages 后追加恰好一条非空 user �
 - 不允许重复 attempt/generation ID、错误 parent 引用，或 parent 本身携带另一个 parent
 - 两条记录都要求 completion 不早于 dispatch，fork dispatch 不早于 parent completion；只根据输入时间判断，不声称实际观察到了调度或持久化屏障
 - 纳秒字段必须由调用者保证同一时钟域。相等时间允许，不能从非流式耗时推出 TTFT，也不把间隔视为缓存 TTL
+- 时间戳缺失或 null 标为未知；已提供的负数、布尔值或其他非整数标为非法，同时存在缺失值也不能掩盖非法值
 - 预期 model/provider 名称直接使用 `RouteContract`。本审计版本要求请求 model 同样等于 `expected_reported_model`，尚不支持请求别名与返回 model 的显式映射
+- parent/fork 归一化后的实际 provider 必须相同，即使两者分别属于允许集合；沿用响应或 ID 匹配的 generation metadata 中的名称证据
 - `pair_status=consistent`：本地检查没有已识别的问题；`inconsistent`：至少一个不一致/非法字段；`incomplete`：仅存在未知/缺失证据
 - 只有 consistent 才将 fork 的有效 cached tokens 标为 `reported_positive` 或 `reported_zero`；其他情况统一 `inconclusive`，同时保留已知 cached tokens 与每字段状态
 

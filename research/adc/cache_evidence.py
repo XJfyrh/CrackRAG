@@ -106,6 +106,7 @@ def audit_pair(parent: Mapping[str, Any], fork: Mapping[str, Any], contract: Rou
     snapshots = []
     observations = []
     generation_ids = []
+    reported_providers = []
     for name, record in zip(("parent", "fork"), records):
         try:
             snapshot = RequestSnapshot.freeze(record.get("request"))
@@ -117,6 +118,7 @@ def audit_pair(parent: Mapping[str, Any], fork: Mapping[str, Any], contract: Rou
         normalized = normalize_response(response, contract,
             generation_metadata=record.get("generation_metadata"),
             http_status=record.get("http_status"))
+        reported_providers.append(normalized.reported_provider)
         generation_id = response.get("id") if isinstance(response, dict) else None
         generation_ids.append(generation_id)
         if not _label(generation_id):
@@ -152,6 +154,8 @@ def audit_pair(parent: Mapping[str, Any], fork: Mapping[str, Any], contract: Rou
     if _label(generation_ids[0]) and generation_ids[0] == generation_ids[1]:
         issue("duplicate_generation", "fork.response.id")
         identity_ok = False
+    if all(_label(provider) for provider in reported_providers) and reported_providers[0] != reported_providers[1]:
+        issue("reported_provider_changed", "fork.response")
 
     prefix_matches = parameters_match = None
     shared_hash = None
@@ -173,7 +177,8 @@ def audit_pair(parent: Mapping[str, Any], fork: Mapping[str, Any], contract: Rou
     for name, record in zip(("parent", "fork"), records):
         pair = [record.get(key) for key in ("dispatched_ns", "completed_ns")]
         if any(type(value) is not int or value < 0 for value in pair):
-            issue("timing_missing_or_invalid", name, "unknown")
+            invalid = any(value is not None and (type(value) is not int or value < 0) for value in pair)
+            issue("timing_missing_or_invalid", name, "invalid" if invalid else "unknown")
             times.append(None)
         elif pair[0] > pair[1]:
             issue("completion_before_dispatch", name)

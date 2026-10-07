@@ -156,6 +156,51 @@ class CacheEvidenceTests(unittest.TestCase):
                 self.assertIsNone(result['recorded_completion_to_dispatch_ns'])
                 self.assertIn('timing_missing_or_invalid', self.codes(result))
 
+    def test_missing_and_null_timestamps_remain_incomplete(self):
+        for name in ('parent', 'fork'):
+            for key in ('dispatched_ns', 'completed_ns'):
+                for missing in (True, False):
+                    with self.subTest(name=name, key=key, missing=missing):
+                        self.setUp()
+                        record = getattr(self, name)
+                        record.pop(key) if missing else record.update({key: None})
+                        result = self.audit()
+                        self.assertEqual(result['pair_status'], 'incomplete')
+                        self.assertEqual(result['cache_observation'], 'inconclusive')
+                        self.assertIn({'code': 'timing_missing_or_invalid', 'path': name,
+                                       'state': 'unknown'}, result['issues'])
+
+    def test_invalid_timestamps_are_inconsistent(self):
+        for name in ('parent', 'fork'):
+            for key in ('dispatched_ns', 'completed_ns'):
+                for value in (True, False, -1, '220', 220.0, [], {}):
+                    with self.subTest(name=name, key=key, value=value):
+                        self.setUp()
+                        getattr(self, name)[key] = value
+                        result = self.audit()
+                        self.assertEqual(result['pair_status'], 'inconsistent')
+                        self.assertEqual(result['cache_observation'], 'inconclusive')
+                        self.assertIsNone(result['parent_completed_before_fork'])
+                        self.assertIsNone(result['recorded_completion_to_dispatch_ns'])
+                        self.assertIn({'code': 'timing_missing_or_invalid', 'path': name,
+                                       'state': 'invalid'}, result['issues'])
+
+    def test_missing_timestamp_does_not_mask_invalid_partner(self):
+        for missing_key, invalid_key in (('dispatched_ns', 'completed_ns'),
+                                         ('completed_ns', 'dispatched_ns')):
+            with self.subTest(missing_key=missing_key):
+                self.setUp()
+                self.fork.pop(missing_key)
+                self.fork[invalid_key] = -1
+                self.assertEqual(self.audit()['pair_status'], 'inconsistent')
+
+    def test_zero_timestamps_are_valid(self):
+        for record in (self.parent, self.fork):
+            record.update(dispatched_ns=0, completed_ns=0)
+        result = self.audit()
+        self.assertEqual(result['pair_status'], 'consistent')
+        self.assertEqual(result['recorded_completion_to_dispatch_ns'], 0)
+
     def test_cached_zero_null_missing_and_invalid_are_separate(self):
         for value, state, observation in [(0, 'known', 'reported_zero'), (None, 'null', 'inconclusive'),
                                           (True, 'invalid', 'inconclusive'), (21, 'invalid', 'inconclusive')]:
@@ -216,6 +261,33 @@ class CacheEvidenceTests(unittest.TestCase):
         result = audit_pair(self.parent, self.fork, RouteContract())
         self.assertEqual(result['pair_status'], 'incomplete')
         self.assertEqual(result['cache_observation'], 'inconclusive')
+
+    def test_pair_providers_must_match_even_when_both_allowed(self):
+        contract = RouteContract(CONTRACT.expected_reported_model, ('Provider A', 'Provider B'))
+        for parent_source, fork_source in (('response', 'response'), ('response', 'generation'),
+                                            ('generation', 'response'), ('generation', 'generation')):
+            for fork_provider in contract.allowed_providers:
+                with self.subTest(parent_source=parent_source, fork_source=fork_source,
+                                  fork_provider=fork_provider):
+                    self.setUp()
+                    for record, source, provider in ((self.parent, parent_source, 'Provider A'),
+                                                     (self.fork, fork_source, fork_provider)):
+                        record['request']['provider'] = {'order': list(contract.allowed_providers)}
+                        if source == 'response':
+                            record['response']['provider'] = provider
+                        else:
+                            record['response'].pop('provider')
+                            record['generation_metadata'] = {'data': {
+                                'id': record['response']['id'], 'provider_name': provider}}
+                    result = audit_pair(self.parent, self.fork, contract)
+                    same_provider = fork_provider == 'Provider A'
+                    self.assertEqual(result['parent']['reported_identity_status'], 'matched')
+                    self.assertEqual(result['fork']['reported_identity_status'], 'matched')
+                    self.assertEqual(result['pair_status'], 'consistent' if same_provider else 'inconsistent')
+                    self.assertEqual(result['cache_observation'], 'reported_positive' if same_provider else 'inconclusive')
+                    self.assertEqual('reported_provider_changed' in self.codes(result), not same_provider)
+                    self.assertEqual(result['fork']['reported_cached_tokens'], 10)
+                    self.assertEqual(result['reported_cost_sum'], '0.00250')
 
     def test_requested_model_must_also_match(self):
         for record in (self.parent, self.fork):
