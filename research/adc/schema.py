@@ -62,10 +62,20 @@ class Document:
     revision: str
     title: str
     text: str
+    part: int = 0
+    part_count: int = 1
+    source_url: str | None = None
+    parser_version: str | None = None
 
     def __post_init__(self):
-        for value in asdict(self).values():
+        for value in (self.id, self.revision, self.title, self.text):
             normalize(value)
+        if (type(self.part) is not int or type(self.part_count) is not int
+                or not 0 <= self.part < self.part_count):
+            raise InvariantError("DOCUMENT_PART_INVALID")
+        for value in (self.source_url, self.parser_version):
+            if value is not None:
+                normalize(value)
 
     @property
     def content_sha256(self):
@@ -73,12 +83,17 @@ class Document:
 
     @property
     def key(self):
-        return digest({"id": self.id, "revision": self.revision, "part": 0,
+        return digest({"id": self.id, "revision": self.revision, "part": self.part,
                        "content_sha256": self.content_sha256})
 
     def metadata(self):
-        return {"document_key": self.key, "id": self.id, "revision": self.revision,
-                "part": 0, "title": self.title, "content_sha256": self.content_sha256}
+        base = {"document_key": self.key, "id": self.id, "revision": self.revision,
+                "part": self.part, "title": self.title, "content_sha256": self.content_sha256}
+        # Preserve old P0 request bytes so durable attempts remain replayable.
+        if (self.part, self.part_count, self.source_url, self.parser_version) == (0, 1, None, None):
+            return base
+        return {**base, "part_count": self.part_count, "source_url": self.source_url,
+                "parser_version": self.parser_version}
 
     def view(self):
         return {**self.metadata(), "text": self.text}
