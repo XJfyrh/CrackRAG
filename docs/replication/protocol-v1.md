@@ -2,11 +2,13 @@
 
 **PLANNED / 未冻结 / 未执行。** 2026-09-24；按最新决定缩为 **210 道原始目标题（12 试点 + 198 主集）**。这是[实验记录模板](../experiments/template.md)的研究版实例。工程设计见[开发计划](v0.2-plan.md)，固定参数见 [`protocol.json`](../../eval/replication/fanoutqa-v1/protocol.json)。本文与 JSON 冲突时停止冻结，修订一致后再执行，不任选一份。
 
+工程进展补记（2026-10-07）：[P0 与离线 provider 契约](../../research/adc/README.md)已实现，使用自制数据和合成响应；这不表示本 FanOutQA 科学实验已运行或冻结。M2 准备见[契约](provider-contract-v1.md)与[缓存测量方案](cache-measurement-v1.md)，下列科学参数和 JSON 授权状态不变。
+
 ## 1. 目标与身份
 
 | 字段 | 内容 |
 | --- | --- |
-| 实验 ID / 状态 | `adc-fanoutqa-v1` / PLANNED；本轮只有文档与参数，无真实调用 |
+| 实验 ID / 状态 | `adc-fanoutqa-v1` / PLANNED；本科学实验尚未执行，已有工程夹具不计作真实调用 |
 | 负责人 | 仓库维护者负责付费批准、人工核验和运行；具体 run owner 在执行记录补齐 |
 | 分支 / 基线 | `XJfyrh/experiment-adc-replication` / `50d4b7dbb5e77aa6266d6684197c90333cb66539`；执行提交尚未冻结 |
 | 假设与决策 | 推测性结构化复用能减少后续文档读取和费用，且质量损失在预声明界限内；结果决定领域验证及产品化范围 |

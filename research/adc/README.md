@@ -1,8 +1,25 @@
-# ADC P0 离线最小闭环
+# ADC 研究：离线机制与 provider 契约
+
+## 当前可以做什么
+
+- **运行 P0 机制演示**：B0/T0/T1、自制文档、SQLite 对象库和 mock 账本
+- **检查 provider 响应契约**：非流式结构、usage 的零/空/缺失、返回模型/provider 身份；只有合成输入
+- **审阅 M2 准备方案**：[响应契约](../../docs/replication/provider-contract-v1.md)与[最小缓存测量](../../docs/replication/cache-measurement-v1.md)
+
+当前是完整 M1 的一部分，不是 FanOutQA 复现结果；没有真实模型派发器或缓存/费用实测。Python 3.11+ 标准库即可运行这里的检查。
+
+```sh
+python -B -m unittest discover -s research/adc/tests -v
+python -B -m research.adc.provider_review
+```
+
+`provider_review` 只输出 10 组手写合成响应的报告，`all_expected=true` 是夹具契约检查通过，不是供应商验收。完整本次验收与限制见[离线工作记录](../../docs/replication/offline-contracts-acceptance.md)。
+
+## P0 机制验证
 
 这是 `v0.2-plan.md` 的 P0 机制验证，使用 Python 标准库和 SQLite，无 SDK、网络请求或模型费用。论文 v1 称 ADC，v2 称 ACC；目录沿用 `research/adc`。这里的成功不能视为论文结果复现、真实 prompt cache 命中或成本收益。
 
-## 运行与副作用
+## P0 运行与副作用
 
 从仓库根目录运行，要求 Python 3.11+，无需安装依赖：
 
@@ -49,4 +66,4 @@ python -B -m research.adc --run-dir "$env:TEMP\crackrag-adc-p0"
 
 列表只支持非空组；`model_declared_complete` 是模型声明，不证明语义上的完整性。grounding 校验引文和值，不能证明语义正确性或解决别名。失败候选会被拒绝且不影响原文回答；SQL、身份不一致、未知调用等基础设施错误仍停止实验。无需据此扩展到生产调度框架或付费适配器。
 
-下一步应先审阅真实 provider 的响应/usage 契约和最小缓存测量方案，再另行批准付费验证。本 P0 没有修改科学主实验 manifest、授权标记或产品主线。
+响应/usage 已有上述离线契约检查与测量草案，仍需审查、补齐真实传输与账户准入，再另行批准付费验证。P0 和这次离线契约工作都没有修改科学主实验 manifest、授权标记或产品运行路径。

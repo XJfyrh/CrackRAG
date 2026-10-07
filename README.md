@@ -37,7 +37,7 @@ CrackRAG 针对明确的财务数字提问：把答案连到原 PDF 的引用区
 **不能声称什么**：不承诺通用财报准确率、任意问题降本、供应商缓存必然命中、OCR 或跨页表格理解。
 样本量小且来源是目的性选取；上述数字只适用于对应场景与冻结输入。
 
-**研发方向**：先复现与验证 cracking 机制，再基于证据产品化。v0.2 的 FanOutQA 计划为 210 道原始目标题（12 试点 + 198 主集），采用 OpenRouter Luna 主实验与 Flash 复核；目前仅有[协议草案](docs/replication/protocol-v1.md)，尚未运行，不能把上述 v0.1.0 数字称为论文复现结果。
+**研发方向**：先复现与验证 cracking 机制，再基于证据产品化。v0.2 的 FanOutQA 计划为 210 道原始目标题（12 试点 + 198 主集），采用 OpenRouter Luna 主实验与 Flash 复核；目前已有[协议草案](docs/replication/protocol-v1.md)、[P0 离线机制与 provider 契约检查](research/adc/README.md)；真实 FanOutQA 实验尚未运行，不能把上述 v0.1.0 数字或合成夹具结果称为论文复现结果。
 
 ## 支持范围
 
