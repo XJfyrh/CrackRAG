@@ -1,3 +1,5 @@
-# P0, offline provider contracts and cache-pair evidence audits use only Python >=3.11 standard-library modules, including sqlite3.
-# No third-party packages, provider SDK, model download, or install step.
-# Real M1 adapters will need a separate dependency lock before execution.
+# M1 agent/corpus/accounting/transport/sealing and diagnostic evaluation are
+# Python >=3.11 standard-library only (including sqlite3). No pip install needed.
+# The tested reference interpreter is CPython 3.12. See requirements-scoring.lock
+# for the separate, exactly pinned optional authentic FanOutQA string scorer.
+# No provider SDK, HTTP dispatch, credential handler or runtime model download.

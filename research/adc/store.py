@@ -1,5 +1,6 @@
 """SQLite authority for scoped snapshots, atomic groups and durable traces."""
 from contextlib import contextmanager
+from dataclasses import asdict
 import json
 from pathlib import Path
 import sqlite3
@@ -43,11 +44,10 @@ class Store:
             raise
 
     def add_document(self, document):
-        body = canonical({"id": document.id, "revision": document.revision,
-                          "title": document.title, "text": document.text})
+        body = canonical(asdict(document))
         with self.transaction() as db:
             row = db.execute("SELECT body FROM documents WHERE key=?", (document.key,)).fetchone()
-            if row and row[0] != body:
+            if row and Document(**json.loads(row[0])) != document:
                 raise InvariantError("DOCUMENT_IDENTITY_CHANGED")
             db.execute("INSERT OR IGNORE INTO documents VALUES(?,?)", (document.key, body))
 
