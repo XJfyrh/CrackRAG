@@ -42,9 +42,41 @@ python3.12 -m venv /tmp/crackrag-scoring
 
 适配源码来自 FanOutQA `989f4c40d9deea1ecb0897d7a17a9c0fe20d5c33`。保留递归字符串评分、答案渲染、A–F rubric、4000 字符截断及末字符解析；B/C/E 映射为 1，A/D/F 为 0。源码摘要在 `evaluation.py`，MIT 通知保留。没有导入上游会初始化引擎的 llm/scorer，也不调用 BLEURT/ROUGE。真实 judge 的选择和校准仍属于 M4。
 
+## API 前的真实格式接线
+
+默认 M1 和 synthetic judge 已通过 `providers/http_boundary.py`：OpenRouter 原生 `max_tokens`、固定 `provider.order`、`allow_fallbacks=false`、非流式请求，先纯 preflight 校验，再统一预留/派发意图，最后把相同 canonical payload 编成 HTTP body。没有在 ledger hash 之后偷偷改参数。
+
+`PreparedRequest` 固定 chat/completions URL、方法、限额和无效 redacted Authorization 占位，`executable=false`；只允许 `FakeHTTPExchange` 返回 bytes。没有网络 client、socket、真实 Bearer 参数或环境变量读取。返回 body 有大小/depth/UTF-8/重复键/数值精度/content-type/状态/超时等边界检查；坏响应经原账户 UNKNOWN 停派，确定本地无效的请求则在预留之前拒绝。敏感回显不会写入 raw bytes 日志。
+
+原 provider JSON 不被注入自定义字段。wire 请求/响应哈希、有限原始 HTTP bytes、状态和解码失败信息另存 `transport_evidence`；已有账户数据库只新增可空证据列，不重置 account UUID/费用。报告只显示 wire 摘要，完整 bytes 留在私有账户。HTTP 字节 roundtrip 是合成测试，不等于实际 endpoint/provider 服务层验收。
+
+### 本地 MediaWiki envelopes → 真 converter → 同一代理
+
+新增 `mediawiki.py` 准备与校验三类真实格式请求：截止 epoch 最新修订、指定 oldid 的 HTML parse、当前 top-10 搜索。仅导入本地响应，校验 request/pageid/revid/timestamp/HTTP/error/warnings；search snippets 不交给模型。HTML converter 精确适配 pinned FanOutQA，已与原纯函数对照；不是一个手写近似 Markdown 转换器。
+
+可从全新输出目录运行完整导入链：
+
+```sh
+python3.12 -m venv /tmp/crackrag-corpus
+/tmp/crackrag-corpus/bin/python -m pip install -r research/adc/requirements-corpus.lock
+/tmp/crackrag-corpus/bin/python -B -m research.adc.m1 \
+  --run-dir /tmp/crackrag-preapi --import-fixture
+/tmp/crackrag-corpus/bin/python -B -m research.adc.m1 \
+  --run-dir /tmp/crackrag-preapi --import-fixture
+```
+
+这两次使用自制 HTML/API envelopes：首次30次合成调用、全部具有 wire evidence；第二次仍30。若已有本地 captured/synthetic bundle：
+
+```sh
+/tmp/crackrag-corpus/bin/python -B -m research.adc.mediawiki \
+  --bundle /path/to/local-bundle.json --output-dir /tmp/imported-corpus
+```
+
+bundle schema 位于 `import_bundle` 文档字符串；输出是可直接供 `OfflineCorpus.from_manifest` 使用的 manifest。Markdown、acquisition sidecar、import seal 以临时文件/fsync/排他原子发布写入，manifest 最后可见；中断可续导入，不覆盖不一致既有文件。没有下载 Wikipedia 正文或获取当前搜索；`network_verified=false`、`latest_revision_observed=false` 始终显式保留。`oldid` 的 parse 仍受上游模板/transclusion/rendering 语义限制，不能据此声称每项模板事实都是历史快照。
+
 ## 数据与工具边界
 
-- `corpus.py` 接受明确提供的本地解析 Markdown、pageid/revid、修订/取得时间、来源、parser version 与 SHA-256。拒绝 epoch 之后的修订；没有声称仅凭时间戳就证明“截止时最新修订”。实际 MediaWiki 取得、上游转换语义和真实 corpus 证据须另行验证。
+- `corpus.py` 接受明确提供的本地解析 Markdown、pageid/revid、修订/取得时间、来源、parser version 与 SHA-256。拒绝 epoch 之后的修订；没有声称仅凭时间戳就证明“截止时最新修订”。上述 importer 已做 pinned 转换语义离线对照；实际 MediaWiki 取得与真实 corpus 证据仍须验证。
 - 正文 lossless 按空白段落边界、Unicode 字符数分页；默认超大单段拒绝整页，或显式 `keep_whole` 并记录超限。每个 part 独立文档键/证据位置。`open` 返回完整 part 及前后分页指针，不按问题过滤正文。
 - 搜索只重放规范化 query 的首条已冻结记录，最多 10 个标题/pageid/链接；不暴露 snippets、gold 页清单或正文缓存命中标记。缺失记录显式报错，不虚构搜索结果。治疗臂额外附带可见 snapshot 中的目录；缺对象仍可原文回退。
 - `search/open/catalogue/read_objects/notes_read/notes_write/close` 通过严格参数 allowlist 执行，无任意 SQL/shell。基础工具表相同；每响应最多一个工具调用。notes 仅当题；close 替换当题原文上下文并记录操作。
@@ -82,6 +114,6 @@ CLI 对共用 account path 持有 OS advisory owner lock，避免两个控制器
 
 ## 下一道真实验证边界
 
-离线 fake transport、typed response、ledger、loop、seal、scorer 已连接。下一阶段需要单独批准的 M2：真实 HTTP/endpoint/服务层和无 fallback 路由、账户权限、tokenizer/schema/tool/reasoning 参数、cache read/write usage、TTFT/时序、冷价上界与账单对账、真实 corpus 取得证据。当前故意不带 HTTP/credential 实现，不能通过传入一个 duck-typed live transport 越过边界。
+离线 fake transport、typed response、ledger、loop、seal、scorer 已连接。请求构造、wire 编解码与本地语料导入已经完成，不再因阶段标签推迟这些可离线工作。下一阶段需要单独批准的 M2：在真实网络/凭证边界验证 HTTP/endpoint/服务层和无 fallback 路由、账户权限、tokenizer/schema/tool/reasoning 参数、cache read/write usage、TTFT/时序、冷价上界与账单对账、真实 corpus 取得证据。当前故意不带 HTTP/credential 实现，不能通过传入一个 duck-typed live transport 越过边界。
 
 M3 的 210 道 R 生成与人工核验、M4 人工标签/judge 校准、M5 运行和 M6 科学统计均未执行。未改变产品运行路径、旧财务账本或科学协议授权字段。

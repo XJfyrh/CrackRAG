@@ -2,7 +2,7 @@
 
 ## 当前入口
 
-M1 离线工程闭环已接通，待维护者验收：本地 dated corpus/确定性分页、统一工具代理循环、单账户金额预留与对账恢复、fake transport、R/Q 隔离、答案封存和独立 FanOutQA scorer adapter。真实 API/缓存/费用验收仍属于 M2；没有 M3 相关题生成核验或 M4 judge 校准结果。
+M1 离线工程闭环已接通，待维护者验收：本地 dated corpus/确定性分页、统一工具代理循环、单账户金额预留与对账恢复、序列化 fake HTTP transport、MediaWiki envelope/真正 HTML converter 导入、R/Q 隔离、答案封存和独立 FanOutQA scorer adapter。真实 API/缓存/费用验收仍属于 M2；没有 M3 相关题生成核验或 M4 judge 校准结果。
 
 完整运行、依赖、账户与封存边界见 [M1 使用说明](../../docs/replication/m1-offline-v1.md)，检查与限制见 [M1 验收记录](../../docs/replication/m1-offline-acceptance.md)。
 
@@ -11,7 +11,7 @@ python -B -m research.adc.m1 --run-dir /tmp/crackrag-m1
 python -B -m unittest discover -s research/adc/tests -v
 ```
 
-基础闭环无需第三方依赖或 key；真实字符串 normalizer 的完整独立锁在 `requirements-scoring.lock`。所有合成输出都显式标注，不能称为 FanOutQA 实验或论文复现结果。
+基础闭环无需第三方依赖或 key；真实字符串 normalizer 的完整独立锁在 `requirements-scoring.lock`，HTML importer 锁在 `requirements-corpus.lock`。未安装后者时4个 genuine-converter 测试明确跳过；安装后可运行完整覆盖。所有合成输出都显式标注，不能称为 FanOutQA 实验或论文复现结果。
 
 原 P0、10 组 provider 合成契约与 16 组缓存证据审计继续保留：
 
