@@ -25,7 +25,7 @@ cd api && go test ./...
 cd ../web && npm ci && npm run build
 ```
 
-独立 ADC 离线机制与 provider 契约不需要产品服务：`python -B -m unittest discover -s research/adc/tests -v`；`python -B -m research.adc.provider_review` 查看合成案例。仅此子集通过不能代表产品全量回归通过，详见 [研究入口](../research/adc/README.md)。
+独立 ADC 离线机制与 provider 契约不需要产品服务：`python -B -m unittest discover -s research/adc/tests -v`；`python -B -m research.adc.provider_review` 查看合成响应；`python -B -m research.adc.cache_review` 查看合成缓存探针对与完整复核输入。仅此子集通过不能代表产品全量回归通过，详见 [研究入口](../research/adc/README.md)。
 
 Python 运行时依赖在 `ai-runtime/requirements-m1.lock`，Go/npm 使用各自 lockfile。名称中的 M1/M2/M3/M4 是实现演进来源，非不同公开产品。
 

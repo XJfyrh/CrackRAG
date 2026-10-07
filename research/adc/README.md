@@ -4,6 +4,7 @@
 
 - **运行 P0 机制演示**：B0/T0/T1、自制文档、SQLite 对象库和 mock 账本
 - **检查 provider 响应契约**：非流式结构、usage 的零/空/缺失、返回模型/provider 身份；只有合成输入
+- **审计缓存探针对**：冻结请求哈希、parent/fork 关联、记录时序和 reported cache/cost，16 组合成案例；[口径与边界](../../docs/replication/cache-evidence-v1.md)
 - **审阅 M2 准备方案**：[响应契约](../../docs/replication/provider-contract-v1.md)与[最小缓存测量](../../docs/replication/cache-measurement-v1.md)
 
 当前是完整 M1 的一部分，不是 FanOutQA 复现结果；没有真实模型派发器或缓存/费用实测。Python 3.11+ 标准库即可运行这里的检查。
@@ -11,9 +12,10 @@
 ```sh
 python -B -m unittest discover -s research/adc/tests -v
 python -B -m research.adc.provider_review
+python -B -m research.adc.cache_review
 ```
 
-`provider_review` 只输出 10 组手写合成响应的报告，`all_expected=true` 是夹具契约检查通过，不是供应商验收。完整本次验收与限制见[离线工作记录](../../docs/replication/offline-contracts-acceptance.md)。
+`provider_review` 只输出 10 组手写合成响应的报告，`all_expected=true` 是夹具契约检查通过，不是供应商验收。后续 `cache_review` 输出 16 组可人工复核的合成输入与审计；它不做真实 dispatch、endpoint 验收或结算。缓存证据增量见[验收记录](../../docs/replication/cache-evidence-acceptance.md)。原 provider 契约验收与限制见[离线工作记录](../../docs/replication/offline-contracts-acceptance.md)。
 
 ## P0 机制验证
 
@@ -52,6 +54,7 @@ python -B -m research.adc --run-dir "$env:TEMP\crackrag-adc-p0"
 - `prefix.py`：冻结正常 parent 请求的完整 JSON，fork 仅追加 cracking 后缀。相同 scope 的 namespace 在最早 system 内容中，分支输入只使用当下实际文档查询历史。先持久化正常 parent 的响应，才准许派发 fork；不为 cracking 额外打开文档。
 - `runner.py`：脚本化工具控制器，目录查询先于原文回退；用后台任务派生 fork。当前题起始快照屏蔽本题新对象，题末等待分支持久化后才允许下一题。T1 的预测由 mock 确定性输出已打开文档的两种属性。
 - `store.py`：列表成员先全部校验，再在显式 `BEGIN IMMEDIATE` 中一次发布。任一成员无效或写入失败，整次发布回滚。读取不返回半列表，超过上限返回 `UNAVAILABLE`。同一对象重复产生会去重，相互冲突的来源不会强行合并。
+- `cache_evidence.py` / `cache_review.py`：独立审计一对已提供的非流式记录；消息与全部其他参数分开哈希，保留未知与零，不驱动 runner。hash 不证明真实 token 前缀，合计仅为 completion-reported credits。
 - `ledger.py`：同一个 SQLite 账本的所有组共用请求上限，每题共用 cracking 输出预算（默认 4096，含 reasoning）。状态为 `RESERVED → DISPATCHED → SETTLED`，派发意图先落盘；确定未派发的 reservation 可以续跑，已结算结果可直接复用。
 
 测试覆盖 B0/T0/T1 的跨题 A→B 复用、未来题/gold DTO 隔离、每题新会话、组别/模型/实验/文档版本隔离、当前题快照、目录与回退顺序、精确 prefix、正常 parent 完成后 fork、列表完整读取与事务回滚、原子准入、去重及中断恢复。
