@@ -1,21 +1,27 @@
-# ADC 研究：离线机制与 provider 契约
+# ADC 研究：M1 离线闭环
 
-## 当前可以做什么
+## 当前入口
 
-- **运行 P0 机制演示**：B0/T0/T1、自制文档、SQLite 对象库和 mock 账本
-- **检查 provider 响应契约**：非流式结构、usage 的零/空/缺失、返回模型/provider 身份；只有合成输入
-- **审计缓存探针对**：冻结请求哈希、parent/fork 关联、记录时序和 reported cache/cost，16 组合成案例；[口径与边界](../../docs/replication/cache-evidence-v1.md)
-- **审阅 M2 准备方案**：[响应契约](../../docs/replication/provider-contract-v1.md)与[最小缓存测量](../../docs/replication/cache-measurement-v1.md)
+M1 离线工程闭环已接通，待维护者验收：本地 dated corpus/确定性分页、统一工具代理循环、单账户金额预留与对账恢复、fake transport、R/Q 隔离、答案封存和独立 FanOutQA scorer adapter。真实 API/缓存/费用验收仍属于 M2；没有 M3 相关题生成核验或 M4 judge 校准结果。
 
-当前是完整 M1 的一部分，不是 FanOutQA 复现结果；没有真实模型派发器或缓存/费用实测。Python 3.11+ 标准库即可运行这里的检查。
+完整运行、依赖、账户与封存边界见 [M1 使用说明](../../docs/replication/m1-offline-v1.md)，检查与限制见 [M1 验收记录](../../docs/replication/m1-offline-acceptance.md)。
 
 ```sh
+python -B -m research.adc.m1 --run-dir /tmp/crackrag-m1
 python -B -m unittest discover -s research/adc/tests -v
+```
+
+基础闭环无需第三方依赖或 key；真实字符串 normalizer 的完整独立锁在 `requirements-scoring.lock`。所有合成输出都显式标注，不能称为 FanOutQA 实验或论文复现结果。
+
+原 P0、10 组 provider 合成契约与 16 组缓存证据审计继续保留：
+
+```sh
+python -B -m research.adc --run-dir /tmp/crackrag-adc-p0
 python -B -m research.adc.provider_review
 python -B -m research.adc.cache_review
 ```
 
-`provider_review` 只输出 10 组手写合成响应的报告，`all_expected=true` 是夹具契约检查通过，不是供应商验收。后续 `cache_review` 输出 16 组可人工复核的合成输入与审计；它不做真实 dispatch、endpoint 验收或结算。缓存证据增量见[验收记录](../../docs/replication/cache-evidence-acceptance.md)。原 provider 契约验收与限制见[离线工作记录](../../docs/replication/offline-contracts-acceptance.md)。
+以下章节只描述历史 P0 runner，不是新 M1 入口的能力清单。
 
 ## P0 机制验证
 
@@ -63,7 +69,7 @@ python -B -m research.adc --run-dir "$env:TEMP\crackrag-adc-p0"
 
 若进程在 `DISPATCHED` 后、结果持久化前中断，结果不确定，重新打开 runner 会标为 `UNKNOWN` 并停止该数据库中的新派发，跨组也不能重置。P0 不提供自动重试或外部请求对账；保留数据库和轨迹用于检查，不应删掉账本把它当作安全恢复。
 
-## 尚未覆盖
+## P0 单独运行的边界
 
 这里没有真实模型决策、FanOutQA 数据/评分、真实 provider、tokenizer、缓存路由/TTL、队列延迟、TTFT/TTFP、计费回执或实测质量与收益。本地 prefix 一致性只验证结构前提。模拟异步任务不能证明缓存会保留到真实 fork 发出时。
 
